@@ -28,7 +28,7 @@ export class SubmitComponent implements OnInit {
     telefono: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9}$")]),
     ciudad: new FormControl(''),
     tarifas: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{1,50}$")]),
-    espacios: new FormControl(''),
+    espacios: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{1,10}$")]),
     fecha_enviado: new FormControl(current_timestamp),
   });
 
@@ -40,6 +40,9 @@ export class SubmitComponent implements OnInit {
   }
   get tarifasNoValido() {
     return this.propertyForm.get("tarifas").invalid && this.propertyForm.get("tarifas").touched;
+  }
+  get EspaciosNoValido() {
+    return this.propertyForm.get("espacios").invalid && this.propertyForm.get("espacios").touched;
   }
 
   constructor(private toastr: ToastrService,private _route:ActivatedRoute,private _router:Router, 
