@@ -94,6 +94,8 @@ export class EditarPropiedadesComponent implements OnInit {
         ciudad: new FormControl('', [Validators.required, Validators.pattern("^[A-Z]{1}[a-z]{1,50}$")]),
         comunidad_autonoma: new FormControl(''),
         telefono: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9}$")]),
+        lat:new FormControl(0.000000),
+        lng: new FormControl(0.000000)
     });
 
     constructor(private _route: ActivatedRoute, private _router: Router, private _propiedadService: PropiedadService,
@@ -202,10 +204,9 @@ export class EditarPropiedadesComponent implements OnInit {
                         this.propertyForm.get('comunidad_autonoma').setValue(this.propiedad[i].comunidad_autonoma);
                         this.propertyForm.get('telefono').setValue(this.propiedad[i].telefono);
                         if (this.propiedad[i].lat){
-                           this.propertyForm.value.lat = this.propiedad[i].lat; 
-                        }
+                            this.propertyForm.get('lat').setValue(this.propiedad[i].lat);                         }
                         if (this.propiedad[i].lng){
-                            this.propertyForm.value.lng = this.propiedad[i].lng; 
+                            this.propertyForm.get('lng').setValue(this.propiedad[i].lng); 
                          }                        
                     }
                 }, error => {
