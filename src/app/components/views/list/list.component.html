@@ -2,12 +2,13 @@
 <div class="page-wrapper">
     <section class="ls-section">
         <div class="ls-cotainer">
-            <div class="container-fluid">
+            <div class="container-fluid" *ngIf="cambiodepagina==false">
                 <div class="row">
                     <div class="col-6">
                         <div class="upper-box">
                             <ul class="top-filters">
                                 <li class="active"><a href="#">Filtros</a></li>
+                                <li><a (click)="cerrarMapa()">Cerrar mapa</a></li>
                             </ul>
 
                             <div class="listing-search-form">
@@ -40,12 +41,12 @@
                             </div>
 
                             <div class="checkbox-outer">
-                                <h4>Etiquetas</h4>
+                                <!--<h4>Etiquetas</h4>-->
                                 <ul class="checkboxes inline">
                                     <li>
                                         <input id="check-a" type="checkbox" name="check" (change)="search()">
                                         <label for="check-a">Oficinas privadas</label>
-                                    </li> 
+                                    </li>
                                     <li>
                                         <input id="check-b" type="checkbox" name="check" (change)="search()">
                                         <label for="check-b">Puestos fijos en espacios abiertos</label>
@@ -129,14 +130,15 @@
                                     *ngFor="let propiedad of propiedadesFiltradas | paginate: { itemsPerPage: 2, currentPage: page }">
                                     <div class="inner-box">
                                         <div class="image-box">
-                                            <figure class="image"><img [src]="propiedad.imgUrl" alt="">
+                                            <figure class="image"><img [src]="propiedad.imgUrl" alt=""
+                                                    class="imgTamano">
                                             </figure>
                                             <div class="tags">
                                                 <!--<span>+{{propiedad.personas}} personas</span>
                                                 <span>Desde: {{propiedad.tarifa}} euros</span>-->
                                             </div>
                                         </div>
-                                        <div class="lower-content">
+                                        <div class="lower-content tamano">
                                             <div class="user-thumb"><img src="images/resource/user-thumb-1.jpg"
                                                     alt="" /></div>
                                             <!--<div class="rating">
@@ -154,24 +156,201 @@
                                             <div class="text">Desde: <b>{{propiedad.tarifa}} euros</b></div>
                                             <div class="text">Iconos servicios:
                                                 <ul class="listing-features1">
-                                                    <li *ngIf="propiedad.access=='true'"><i class="fas fa-stopwatch icon"></i></li>
-                                                    <li *ngIf="propiedad.salas_reuniones=='true'"><i class="fas fa-handshake icon"></i></li>
-                                                    <li *ngIf="propiedad.reception=='true'"><i class="fas fa-concierge-bell icon"></i></li>
-                                                    <li *ngIf="propiedad.eventos_network=='true'"><i class="fas fa-calendar icon"></i></li>
-                                                    <li *ngIf="propiedad.terraza=='true'"><i class="fas fa-cocktail icon"></i></li>
-                                                    <li *ngIf="propiedad.cafe_relax=='true'"><i class="fas fa-coffee icon"></i></li>
-                                                    <li *ngIf="propiedad.seguridad=='true'"><i class="fas fa-shield-alt icon"></i></li>
-                                                    <li *ngIf="propiedad.limpieza=='true'"><i class="fas fa-soap icon"></i></li>
-                                                    <li *ngIf="propiedad.cer_energetica=='true'"><i class="fas fa-stamp icon"></i></li>
-                                                    <li *ngIf="propiedad.paqueteria=='true'"><i class="fas fa-box icon"></i></li>
-                                                    <li *ngIf="propiedad.parking=='true'"><i class="fas fa-parking icon"></i></li>
-                                                    <li *ngIf="propiedad.wifi=='true'"><i class="fas fa-wifi icon"></i></li>
-                                                    <li *ngIf="propiedad.coworking=='true'"><i class="far fa-building icon"></i></li>
+                                                    <li *ngIf="propiedad.access=='true'"><i
+                                                            class="fas fa-stopwatch icon"></i></li>
+                                                    <li *ngIf="propiedad.salas_reuniones=='true'"><i
+                                                            class="fas fa-handshake icon"></i></li>
+                                                    <li *ngIf="propiedad.reception=='true'"><i
+                                                            class="fas fa-concierge-bell icon"></i></li>
+                                                    <li *ngIf="propiedad.eventos_network=='true'"><i
+                                                            class="fas fa-calendar icon"></i></li>
+                                                    <li *ngIf="propiedad.terraza=='true'"><i
+                                                            class="fas fa-cocktail icon"></i></li>
+                                                    <li *ngIf="propiedad.cafe_relax=='true'"><i
+                                                            class="fas fa-coffee icon"></i></li>
+                                                    <li *ngIf="propiedad.seguridad=='true'"><i
+                                                            class="fas fa-shield-alt icon"></i></li>
+                                                    <li *ngIf="propiedad.limpieza=='true'"><i
+                                                            class="fas fa-soap icon"></i></li>
+                                                    <li *ngIf="propiedad.cer_energetica=='true'"><i
+                                                            class="fas fa-stamp icon"></i></li>
+                                                    <li *ngIf="propiedad.paqueteria=='true'"><i
+                                                            class="fas fa-box icon"></i></li>
+                                                    <li *ngIf="propiedad.parking=='true'"><i
+                                                            class="fas fa-parking icon"></i></li>
+                                                    <li *ngIf="propiedad.wifi=='true'"><i class="fas fa-wifi icon"></i>
+                                                    </li>
+                                                    <li *ngIf="propiedad.coworking=='true'"><i
+                                                            class="far fa-building icon"></i></li>
                                                 </ul>
                                             </div>
-                                            <ul class="info">
+                                            <ul class="info listaColocacion">
                                                 <li><span class="flaticon-pin"></span> <b>{{propiedad.ciudad}}</b></li>
-                                                <li><span class="flaticon-phone-call"></span> <b>{{propiedad.telefono}}</b></li>
+                                                <li><span class="flaticon-phone-call"></span>
+                                                    <b>{{propiedad.telefono}}</b></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <nav>
+                                <ul>
+                                    <li>
+                                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+
+                    <!-------------------------------------GOOGLE MAPS------------------------------------------------------------------------------>
+                    <div class="col-6">
+                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="mapTypeId"
+                            [styles]='styles' (mapReady)="mapReadyHandler($event)">
+                            <agm-marker *ngFor="let marker of markers" [latitude]="marker.position.lat"
+                                [longitude]="marker.position.lng" [label]="marker.label" [zoom]="zoom">
+                            </agm-marker>
+                        </agm-map>
+                    </div>
+                </div>
+            </div>
+
+            <!-------------------------------------------------PAGINA SIN MAPA------------------------------------------------->
+            <div class="container-fluid" *ngIf="cambiodepagina==true">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="upper-box">
+                            <ul class="top-filters">
+                                <li class="active"><a href="#">Filtros</a></li>
+                                <li><a (click)="cerrarMapa()">Abrir mapa</a></li>
+                            </ul>
+
+                            <div class="listing-search-form">
+                                <form method="post" action="index.html">
+                                    <div class="row">
+                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location">
+                                            <select id="op" [formControl]="selected">
+                                                <option value="null" id="opts">Todos</option>
+                                                <option value="Salamanca" id="opts">Salamanca</option>
+                                                <option value="Retiro" id="opts">Retiro</option>
+                                                <option value="Chamberi" id="opts">Chamberí</option>
+                                                <option value="Moncloa" id="opts">Moncloa</option>
+                                                <option value="Chamartin" id="opts">Chamartín</option>
+                                                <option value="Cuzco" id="opts">Cuzco-Cuatro Torres</option>
+                                                <option value="Azca" id="opts">Azca</option>
+                                                <option value="Centro" id="opts">Centro</option>
+                                                <option value="Atocha" id="opts">Atocha</option>
+                                                <option value="A1" id="opts">A1</option>
+                                                <option value="A2" id="opts">A2</option>
+                                                <option value="A6" id="opts">A6</option>
+                                                <option value="Periferia" id="opts">Periferia</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location">
+                                            <button (click)="search()" class="estilos">BUSCAR</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="checkbox-outer">
+                                <!--<h4>Etiquetas</h4>-->
+                                <ul class="checkboxes inline">
+                                    <li>
+                                        <input id="check-a" type="checkbox" name="check" (change)="search()">
+                                        <label for="check-a">Oficinas privadas</label>
+                                    </li>
+                                    <li>
+                                        <input id="check-b" type="checkbox" name="check" (change)="search()">
+                                        <label for="check-b">Puestos fijos en espacios abiertos</label>
+                                    </li>
+                                    <li>
+                                        <input id="check-c" type="checkbox" name="check" (change)="search()">
+                                        <label for="check-c">Puestos flexibles no fijos</label>
+                                    </li>
+                                    <li>
+                                        <input id="check-d" type="checkbox" name="check" (change)="search()">
+                                        <label for="check-d">Salas de reuniones</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="ls-outer">
+                            <div class="ls-switcher">
+                                <div class="showing-result">
+                                    <div class="arrange">
+                                        <a href="#" class="active"><span class="icon flaticon-squares"></span></a>
+                                    </div>
+                                    <div class="text">{{contador}} Resultados encontrados</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="listing-block col-lg-3 col-md-6"
+                                    *ngFor="let propiedad of propiedadesFiltradas | paginate: { itemsPerPage: 4, currentPage: page }">
+                                    <div class="inner-box">
+                                        <div class="image-box">
+                                            <figure class="image"><img [src]="propiedad.imgUrl" alt=""
+                                                    class="imgTamano">
+                                            </figure>
+                                            <div class="tags">
+                                                <!--<span>+{{propiedad.personas}} personas</span>
+                                                <span>Desde: {{propiedad.tarifa}} euros</span>-->
+                                            </div>
+                                        </div>
+                                        <div class="lower-content tamano">
+                                            <div class="user-thumb"><img src="images/resource/user-thumb-1.jpg"
+                                                    alt="" /></div>
+                                            <!--<div class="rating">
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                            </div>-->
+                                            <h3><a [routerLink]="['/view/office',propiedad.id]">{{propiedad.nombre}}<span
+                                                        class="icon icon-verified"></span></a></h3>
+
+                                            <!--<div class="text">{{propiedad.descripcion | slice:0:200}}...</div>-->
+                                            <div class="text">Puestos disponibles: <b>+{{propiedad.personas}}</b></div>
+                                            <div class="text">Desde: <b>{{propiedad.tarifa}} euros</b></div>
+                                            <div class="text">Iconos servicios:
+                                                <ul class="listing-features1">
+                                                    <li *ngIf="propiedad.access=='true'"><i
+                                                            class="fas fa-stopwatch icon"></i></li>
+                                                    <li *ngIf="propiedad.salas_reuniones=='true'"><i
+                                                            class="fas fa-handshake icon"></i></li>
+                                                    <li *ngIf="propiedad.reception=='true'"><i
+                                                            class="fas fa-concierge-bell icon"></i></li>
+                                                    <li *ngIf="propiedad.eventos_network=='true'"><i
+                                                            class="fas fa-calendar icon"></i></li>
+                                                    <li *ngIf="propiedad.terraza=='true'"><i
+                                                            class="fas fa-cocktail icon"></i></li>
+                                                    <li *ngIf="propiedad.cafe_relax=='true'"><i
+                                                            class="fas fa-coffee icon"></i></li>
+                                                    <li *ngIf="propiedad.seguridad=='true'"><i
+                                                            class="fas fa-shield-alt icon"></i></li>
+                                                    <li *ngIf="propiedad.limpieza=='true'"><i
+                                                            class="fas fa-soap icon"></i></li>
+                                                    <li *ngIf="propiedad.cer_energetica=='true'"><i
+                                                            class="fas fa-stamp icon"></i></li>
+                                                    <li *ngIf="propiedad.paqueteria=='true'"><i
+                                                            class="fas fa-box icon"></i></li>
+                                                    <li *ngIf="propiedad.parking=='true'"><i
+                                                            class="fas fa-parking icon"></i></li>
+                                                    <li *ngIf="propiedad.wifi=='true'"><i class="fas fa-wifi icon"></i>
+                                                    </li>
+                                                    <li *ngIf="propiedad.coworking=='true'"><i
+                                                            class="far fa-building icon"></i></li>
+                                                </ul>
+                                            </div>
+                                            <ul class="info listaColocacion">
+                                                <li><span class="flaticon-pin"></span> <b>{{propiedad.ciudad}}</b></li>
+                                                <li><span class="flaticon-phone-call"></span>
+                                                    <b>{{propiedad.telefono}}</b></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -186,15 +365,6 @@
                                 </ul>
                             </nav>
                         </div>
-                    </div>
-
-                    <!-------------------------------------GOOGLE MAPS------------------------------------------------------------------------------>
-                    <div class="col-6">
-                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="mapTypeId" [styles]='styles' (mapReady)="mapReadyHandler($event)">
-                            <agm-marker *ngFor="let marker of markers" [latitude]="marker.position.lat"
-                                [longitude]="marker.position.lng" [label]="marker.label" [zoom]="zoom">
-                            </agm-marker>
-                        </agm-map>
                     </div>
                 </div>
             </div>

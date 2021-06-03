@@ -47,8 +47,7 @@ section {
 
 .uploading-outer {
     position: relative;
-    display: -webkit-box;
-    display: flex;
+    display: block;
     width: 100%;
     padding-bottom: 30px;
     border-bottom: 1px solid #f1f3f7;
@@ -58,7 +57,7 @@ section {
 .uploading-outer .uploadButton {
     position: relative;
     display: -webkit-box;
-    display: flex;
+    display: block;
     -webkit-box-pack: center;
     justify-content: center;
     -webkit-box-align: center;
@@ -126,4 +125,20 @@ section {
 
 .row{
     margin-bottom: 10px;
+}
+
+.previsualizar{
+    width: 100px;
+    height: 100px;
+}
+
+.previsualizar:hover{
+    transform: scale(1.2);
+}
+
+@media (max-width: 767.98px) { 
+    .dashboard-outer {
+        padding-top: 10px;
+        padding-left: 0;
+    }
 }

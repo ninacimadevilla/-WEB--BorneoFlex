@@ -7,6 +7,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Imagenes } from 'src/app/models/images';
 import { MapsAPILoader } from '@agm/core';
 import { GeoService, LocationInfo } from 'src/app/services/geo.service';
+import { elementAt } from 'rxjs/operators';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-administrar-propiedades',
@@ -20,7 +22,8 @@ export class AdministrarPropiedadesComponent implements OnInit {
   public filesToUpload: any = [];
   public img: Imagenes;
   public idPropiedades;
-  //public previsualizacion:string;
+  public previsualizacion: Array<string>=[];
+
   private geoCoder;
   @ViewChild("search") public searchElementRef: ElementRef;
   locationInfo: LocationInfo;
@@ -57,18 +60,18 @@ export class AdministrarPropiedadesComponent implements OnInit {
   constructor(private _route: ActivatedRoute, private _router: Router, private _propiedadService: PropiedadService,
     private fb: FormBuilder, private sanitizer: DomSanitizer, private mapsApi: MapsAPILoader, private ngZone: NgZone) {
   }
-  
+
   ngOnInit(): void {
     this.mapsApi.load().then(() => {
       this.geoCoder = new google.maps.Geocoder;
-      
+
       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           //get the place result
           const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-           //verify result
-           if (place.geometry === undefined || place.geometry === null) {
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
             return;
           }
           let locationInfo: LocationInfo = GeoService.getProvince(place.formatted_address);
@@ -100,10 +103,25 @@ export class AdministrarPropiedadesComponent implements OnInit {
   }
 
   fileChangeEvent(fileInput: any) {
-    /*const archivo= fileInput.target.files[0];
-    this.extraerBase64(archivo).then((imagen:any) =>{
-      this.previsualizacion = imagen.base;
-    });*/
+    //variable para guardar el nombre de las imagenes
+    var archivo = [];
+    //contador para recorrer el array vacio y llenarlo (el array donde se guardan las imagenes)
+    var contadorAyudaImagenes=0;
+
+    //rellenamos la variable con las imagenes que se acaban de enlazar
+    for (let i = 0; i < fileInput.target.files.length; i++) {
+      archivo[i] = fileInput.target.files[i];
+    }
+
+    //recorremos este array y vamos leyendo imagen por imagen para ir previsualizandola
+    archivo.forEach(element=>{
+      this.extraerBase64(element).then((imagen: any) => {
+        //guardamos la base de la imagen para previsualizarla
+        this.previsualizacion[contadorAyudaImagenes] = imagen.base;
+        //aumentamos el contador
+        contadorAyudaImagenes++;
+      });
+    });
 
     //evento para capturar la imagen
     for (let i = 0; i < fileInput.target.files.length; i++) {
@@ -216,8 +234,8 @@ export class AdministrarPropiedadesComponent implements OnInit {
       this.propertyForm.get('puesto_flexible').setValue("false");
     }
 
-    this.propertyForm.value.lat =this.locationInfo.lat;
-    this.propertyForm.value.lng =this.locationInfo.lng;
+    this.propertyForm.value.lat = this.locationInfo.lat;
+    this.propertyForm.value.lng = this.locationInfo.lng;
     //subscribe para añadir la propiedad
     this._propiedadService.addPropiedad(this.propertyForm.value).subscribe(
       result => {
@@ -250,8 +268,8 @@ export class AdministrarPropiedadesComponent implements OnInit {
           if (this.propiedades.length == contador && this.filesToUpload != null) {
             this.idPropiedades = element.id;
 
-            for (let i=0; i < this.filesToUpload.length; i++) {
-              var json= JSON.stringify(this.filesToUpload[i]);
+            for (let i = 0; i < this.filesToUpload.length; i++) {
+              var json = JSON.stringify(this.filesToUpload[i]);
               this.img = new Imagenes(null, json, this.idPropiedades);
               this.guardarImagen();
             }
@@ -276,11 +294,12 @@ export class AdministrarPropiedadesComponent implements OnInit {
     );
   }
 
-  /*extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+  extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
     try {
       const unsafeImg = window.URL.createObjectURL($event);
       const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
       const reader = new FileReader();
+
       reader.readAsDataURL($event);
       reader.onload = () => {
         resolve({
@@ -296,5 +315,6 @@ export class AdministrarPropiedadesComponent implements OnInit {
     } catch (e) {
       return null;
     }
-  })*/
+
+  })
 }

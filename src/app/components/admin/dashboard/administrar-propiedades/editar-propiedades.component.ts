@@ -6,6 +6,7 @@ import { Imagenes } from 'src/app/models/images';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { GeoService, LocationInfo } from 'src/app/services/geo.service';
 import { MapsAPILoader } from '@agm/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-editar-propiedades',
@@ -20,6 +21,9 @@ export class EditarPropiedadesComponent implements OnInit {
     public filesToUpload: any = [];
     public img: Imagenes;
     public imagenesComprobar: Array<Imagenes>;
+    //variable para previsualizar
+    public previsualizacion: Array<string> = [];
+
     private geoCoder;
     @ViewChild("search") public searchElementRef: ElementRef;
     locationInfo: LocationInfo;
@@ -47,25 +51,25 @@ export class EditarPropiedadesComponent implements OnInit {
         this.recogerDato();
 
         this.mapsApi.load().then(() => {
-          this.geoCoder = new google.maps.Geocoder;
-          
-          const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-          autocomplete.addListener("place_changed", () => {
-            this.ngZone.run(() => {
-              //get the place result
-              const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-               //verify result
-               if (place.geometry === undefined || place.geometry === null) {
-                return;
-              }
-              let locationInfo: LocationInfo = GeoService.getProvince(place.formatted_address);
-              locationInfo.lat = place.geometry.location.lat();
-              locationInfo.lng = place.geometry.location.lng();
-              this.locationInfo = locationInfo;
+            this.geoCoder = new google.maps.Geocoder;
+
+            const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+            autocomplete.addListener("place_changed", () => {
+                this.ngZone.run(() => {
+                    //get the place result
+                    const place: google.maps.places.PlaceResult = autocomplete.getPlace();
+                    //verify result
+                    if (place.geometry === undefined || place.geometry === null) {
+                        return;
+                    }
+                    let locationInfo: LocationInfo = GeoService.getProvince(place.formatted_address);
+                    locationInfo.lat = place.geometry.location.lat();
+                    locationInfo.lng = place.geometry.location.lng();
+                    this.locationInfo = locationInfo;
+                });
             });
-          });
         });
-      }
+    }
 
     propertyForm = new FormGroup({
         nombre: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-ZñÑ]{3,50}$")]),
@@ -94,12 +98,12 @@ export class EditarPropiedadesComponent implements OnInit {
         ciudad: new FormControl('', [Validators.required, Validators.pattern("^[A-Z]{1}[a-z]{1,50}$")]),
         comunidad_autonoma: new FormControl(''),
         telefono: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9}$")]),
-        lat:new FormControl(0.000000),
+        lat: new FormControl(0.000000),
         lng: new FormControl(0.000000)
     });
 
     constructor(private _route: ActivatedRoute, private _router: Router, private _propiedadService: PropiedadService,
-        private fb: FormBuilder, private mapsApi: MapsAPILoader, private ngZone: NgZone) {
+        private fb: FormBuilder, private mapsApi: MapsAPILoader, private ngZone: NgZone, private sanitizer: DomSanitizer) {
     }
 
     recogerDato() {
@@ -203,11 +207,12 @@ export class EditarPropiedadesComponent implements OnInit {
                         this.propertyForm.get('ciudad').setValue(this.propiedad[i].ciudad);
                         this.propertyForm.get('comunidad_autonoma').setValue(this.propiedad[i].comunidad_autonoma);
                         this.propertyForm.get('telefono').setValue(this.propiedad[i].telefono);
-                        if (this.propiedad[i].lat){
-                            this.propertyForm.get('lat').setValue(this.propiedad[i].lat);                         }
-                        if (this.propiedad[i].lng){
-                            this.propertyForm.get('lng').setValue(this.propiedad[i].lng); 
-                         }                        
+                        if (this.propiedad[i].lat) {
+                            this.propertyForm.get('lat').setValue(this.propiedad[i].lat);
+                        }
+                        if (this.propiedad[i].lng) {
+                            this.propertyForm.get('lng').setValue(this.propiedad[i].lng);
+                        }
                     }
                 }, error => {
                     console.log(<any>error);
@@ -354,7 +359,7 @@ export class EditarPropiedadesComponent implements OnInit {
                 response => {
                     this.imagenesComprobar = response;
 
-                    if (this.imagenesComprobar.length==0) {
+                    if (this.imagenesComprobar.length == 0) {
                         for (let i = 0; i < this.filesToUpload.length; i++) {
                             var json = JSON.stringify(this.filesToUpload[i]);
                             this.img = new Imagenes(null, json, id);
@@ -401,9 +406,51 @@ export class EditarPropiedadesComponent implements OnInit {
     }
 
     fileChangeEvent(fileInput: any) {
+        //variable para guardar el nombre de las imagenes
+        var archivo = [];
+        //contador para recorrer el array vacio y llenarlo (el array donde se guardan las imagenes)
+        var contadorAyudaImagenes = 0;
+
+        //rellenamos la variable con las imagenes que se acaban de enlazar
+        for (let i = 0; i < fileInput.target.files.length; i++) {
+            archivo[i] = fileInput.target.files[i];
+        }
+
+        //recorremos este array y vamos leyendo imagen por imagen para ir previsualizandola
+        archivo.forEach(element => {
+            this.extraerBase64(element).then((imagen: any) => {
+                //guardamos la base de la imagen para previsualizarla
+                this.previsualizacion[contadorAyudaImagenes] = imagen.base;
+                //aumentamos el contador
+                contadorAyudaImagenes++;
+            });
+        });
+
         for (let i = 0; i < fileInput.target.files.length; i++) {
             this.filesToUpload.push(fileInput.target.files[i]);
         }
     }
+
+    extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
+        try {
+            const unsafeImg = window.URL.createObjectURL($event);
+            const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+            const reader = new FileReader();
+            reader.readAsDataURL($event);
+            reader.onload = () => {
+                resolve({
+                    base: reader.result
+                });
+            };
+            reader.onerror = error => {
+                resolve({
+                    base: null
+                });
+            };
+
+        } catch (e) {
+            return null;
+        }
+    })
 
 }

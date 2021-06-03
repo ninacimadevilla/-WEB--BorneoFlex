@@ -28,6 +28,7 @@ export class ListComponent implements OnInit {
   public contadorComprobador = 0;
   public ciudad: string;
   public id;
+  public cambiodepagina:boolean=false;
   
   public lat: number;
   public lng: number;
@@ -238,6 +239,14 @@ export class ListComponent implements OnInit {
       );
     });
 
+  }
+
+  cerrarMapa(){
+    if(this.cambiodepagina==false){
+      this.cambiodepagina=true;
+    }else if(this.cambiodepagina==true){
+      this.cambiodepagina=false;
+    }
   }
 
   ngOnInit(): void {

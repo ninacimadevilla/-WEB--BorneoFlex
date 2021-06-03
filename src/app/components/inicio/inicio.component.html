@@ -12,10 +12,10 @@
                     <h3>
                         ¿Necesitas un espacio de trabajo flexible?
                     </h3>
-                    <p>Encuentra tu oficina ideal para trabajar, aprender o enseñar 
+                    <p>Encuentra tu oficina ideal para trabajar, aprender o enseñar
                         por el tiempo que necesites y completamente equipada.</p>
                 </div>
-               
+
                 <!-- Listing Search Tabs -->
                 <div class="listing-search-tabs tabs-box">
                     <ul class="tab-buttons">
@@ -28,16 +28,17 @@
                             <div class="listing-search-form">
                                 <form action="view/list">
                                     <div class="row">
+                                        <!--
                                         <div class="form-group col-lg-4 col-md-6 col-sm-12">
                                             <input type="text" name="listing-search" placeholder="Lista de ciudades">
-                                        </div>
+                                        </div>-->
                                         <!-- Form Group -->
-                                        <div class="form-group col-lg-3 col-md-6 col-sm-12 location">
+                                        <div class="form-group col-lg-4 col-md-6 col-sm-12 location">
                                             <!--<input type="text" name="listing-search" placeholder="Lucation">
                                             <span class="icon flaticon-placeholder"
                                                 data-text="Type and hit enter"></span>-->
                                             <select id="op" [formControl]="selected">
-                                                <option value="null" id="opts">Elegir...</option>
+                                                <!--<option value="null" id="opts">Elegir...</option>-->
                                                 <option value="Madrid" id="opts">Madrid</option>
                                                 <option value="Valencia" id="opts">Valencia</option>
                                                 <option value="Malaga" id="opts">Malaga</option>
@@ -49,7 +50,7 @@
                                         </div>
 
                                         <!-- Form Group -->
-                                        <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                                        <div class="form-group col-lg-4 col-md-6 col-sm-12">
                                             <select class="chosen-select">
                                                 <option>Nº plazas:</option>
                                                 <option>0 a 5</option>
@@ -59,7 +60,7 @@
                                         </div>
 
                                         <!-- Form Group -->
-                                        <div class="form-group col-lg-2 col-md-6 col-sm-12 text-right">
+                                        <div class="form-group col-lg-4 col-md-6 col-sm-12 text-right">
                                             <button type="submit" class="theme-btn btn-style-one bg-pink"
                                                 (click)="searchAction()">Buscar</button>
                                         </div>
@@ -140,7 +141,7 @@
                     </div>
                 </div>
 
-                 
+
                 <div class="feature-block col-lg-3 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <figure class="image"><img src="assets/images/inicio/donostia.png" alt=""></figure>
@@ -184,12 +185,13 @@
                 <div class="four-items-carousel owl-carousel owl-theme default-nav">
                     <div class="container-fluir">
                         <div class="row">
-                            <div class="col-12 col-md-4" *ngFor="let propiedad of propiedades | paginate: { itemsPerPage: 3, currentPage: page }">
+                            <!--<div class="col-12 col-md-4" *ngFor="let propiedad of propiedades | paginate: { itemsPerPage: 3, currentPage: page }">-->
+                            <div class="col-12 col-md-6 col-lg-4" *ngFor="let propiedad of propiedadesFiltradas">    
                                 <div class="listing-block">
                                     <div class="inner-box">
                                         <div class="image-box">
-                                            <figure class="image d-block w-100"><img [src]="propiedad.imgUrl"></figure>
-                                        
+                                            <figure class="image d-block w-100"><img [src]="propiedad.imgUrl" class="imagenesTamano"></figure>
+
                                             <div class="tags">
                                                 <span>Desde: {{propiedad.tarifa}} euros</span>
                                                 <!--<select class="seleccionar">
@@ -200,7 +202,7 @@
                                             </div>
                                             <i class="fas fa-exclamation-triangle colocar">Precios Orientativos</i>
                                         </div>
-                                        <div class="lower-content">
+                                        <div class="lower-content tamano">
                                             <!--
                                             <div class="rating">
                                                 <span class="fa fa-star"></span>
@@ -209,19 +211,21 @@
                                                 <span class="fa fa-star"></span>
                                                 <span class="fa fa-star"></span>
                                             </div>-->
-                                            <h3><a [routerLink]="['/view/office',propiedad.id]">{{propiedad.nombre}} <span
-                                                        class="icon icon-verified"></span></a></h3>
-                                            
-                                            <div class="text">{{propiedad.descripcion | slice:0:300}}...</div>
+                                            <h3><a [routerLink]="['/view/office',propiedad.id]">{{propiedad.nombre}}
+                                                    <span class="icon icon-verified"></span></a></h3>
+
+                                            <div class="text">{{propiedad.descripcion | slice:0:150}}...</div>
 
                                             <ul class="info">
                                                 <li><span class="flaticon-pin"></span> {{propiedad.ciudad}}</li>
-                                                <li><span class="flaticon-phone-call"></span> {{propiedad.telefono}} </li>
+                                                <li><span class="flaticon-phone-call"></span> {{propiedad.telefono}}
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="bottom-box">
                                             <div class="places">
-                                                <div class="place"><span class="icon flaticon-user"></span> +{{propiedad.personas}} personas
+                                                <div class="place"><span class="icon flaticon-user"></span>
+                                                    +{{propiedad.personas}} personas
                                                 </div>
                                             </div>
                                         </div>
@@ -232,7 +236,7 @@
                     </div>
 
                 </div>
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                <!--<pagination-controls (pageChange)="page = $event"></pagination-controls>-->
             </div>
         </div>
     </section>

@@ -1,7 +1,7 @@
 <div class="dashboard-outer">
 
     <!--FORMULARIO -->
-    <div class="col-lg-12 col-md-10">
+    <div class="col-12">
         
         <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
             <div class="form-widget ls-widget">
@@ -18,14 +18,12 @@
                             <input class="uploadButton-input" type="file" (change)="fileChangeEvent($event)" 
                             id="upload" multiple/>
 
-                            <!--
-                            <div *ngIf="previsualizacion">
-                                <img [src]="previsualizacion" alt="" width="200px"> 
-                            </div>-->
-
-                            <label class="uploadButton-button ripple-effect" for="upload">Subir foto de
+                            <label class="uploadButton-button" for="upload">Subir foto de
                                 propiedad</label>
                             <span class="uploadButton-file-name"></span>
+                        </div>
+                        <div *ngIf="previsualizacion">
+                            <img [src]="visualizar" alt="" class="previsualizar ml-2" *ngFor="let visualizar of previsualizacion"> 
                         </div>
                     </div>
 
@@ -33,28 +31,28 @@
                     <div class="default-form">
                         <div class="row">
 
-                            <div class="col-md-3 col-12">
+                            <div class="col-lg-3 col-md-4 col-12">
                                 <label>Nombre propiedad</label>
                                 <input type="text" formControlName="nombre" class="form-control"
                                     placeholder="Nombre propiedad" required>
                                 <small *ngIf="nombreNoValido" class="text-danger">Sin espacios ni caracteres especiales, mínimo 3 letras.</small>
                             </div>
 
-                            <div class="col-md-2 col-12">
+                            <div class="col-lg-2 col-md-4 col-12">
                                 <label>Tarifa</label>
                                 <input type="text" formControlName="tarifa" class="form-control" placeholder="Tarifa"
                                     required>
                                 <small *ngIf="tarifaNoValido" class="text-danger">Sin letras ni caracteres especiales</small>
                             </div>
 
-                            <div class="col-md-2 col-12">
+                            <div class="col-lg-2 col-md-4 col-12">
                                 <label>Capacidad</label>
                                 <input type="text" formControlName="personas" class="form-control"
                                     placeholder="Capacidad" required>
                                 <small *ngIf="personasNoValido" class="text-danger">Sin letras ni caracteres especiales</small>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-lg-2">
                                 <label class="mr-sm-2" for="inlineFormCustomSelect">Tipo de propiedad</label>
                                 <select class="custom-select mr-sm-2" formControlName="tipo_propiedad">
                                     <option selected>Escoger...</option>
@@ -68,68 +66,68 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-check-inline col-md-1 col-12">
+                            <div class="col-lg-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="access">
                                     <label class="form-check-label">Acceso 24/7</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="salas_reuniones">
                                     <label class="form-check-label">Reuniones</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="reception">
                                     <label class="form-check-label">Recepción</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="eventos_network">
                                     <label class="form-check-label">Eventos</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="terraza">
                                     <label class="form-check-label">Terraza</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="cafe_relax">
                                     <label class="form-check-label">Zona relax</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="seguridad">
                                     <label class="form-check-label">Seguridad</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="limpieza">
                                     <label class="form-check-label">Limpieza</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="cer_energetica">
                                     <label class="form-check-label">Certificado</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="paqueteria">
                                     <label class="form-check-label">Paqueteria</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="parking">
                                     <label class="form-check-label">Parking</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="wifi">
                                     <label class="form-check-label">Wifi</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="coworking">
                                     <label class="form-check-label">Coworking</label>
                                 </div>
-                                <div class="form-check-inline col-md-1 col-12">
+                                <div class="form-check-inline col-lg-1 col-md-3 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="oficina_privada">
                                     <label class="form-check-label">Oficina privada</label>
                                 </div>
-                                <div class="form-check-inline col-md-2 col-12">
+                                <div class="form-check-inline col-lg-2 col-md-5 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="puesto_fijo">
                                     <label class="form-check-label">Puesto fijo en espacio abierto</label>
                                 </div>
-                                <div class="form-check-inline col-md-2 col-12">
+                                <div class="form-check-inline col-lg-2 col-md-6 col-12">
                                     <input class="form-check-input" type="checkbox" formControlName="puesto_flexible">
                                     <label class="form-check-label">Puesto flexible no fijo</label>
                                 </div>
@@ -137,25 +135,25 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-2 col-12">
+                            <div class="col-lg-2 col-md-4 col-12">
                                 <label>Dirección</label>
                                 <input type="text" #search formControlName="direccion" class="form-control"
                                     placeholder="Dirección" required>
                             </div>
-                            <div class="col-md-3 col-12">
+                            <div class="col-lg-3 col-md-4 col-12">
                                 <label>Barrio</label>
                                 <input type="text" formControlName="barrio" class="form-control"
                                     placeholder="barrio de la ciudad" required>
                                 <small *ngIf="barrioNoValido" class="text-danger">No poner carácteres especiales</small>
                             </div>
-                            <div class="col-md-2 col-12">
+                            <div class="col-lg-2 col-md-4 col-12">
                                 <label>Ciudad</label>
                                 <input type="text" formControlName="ciudad" class="form-control" placeholder="Ciudad"
                                     required>
                                 <small *ngIf="ciudadNoValido" class="text-danger">Sin caracteres especiales ni numeros</small>
                             </div>
 
-                            <div class="col-md-2 col-12">
+                            <div class="col-lg-2 col-md-6 col-12">
                                 <label>Comunidad Autónoma</label>
                                 <select class="custom-select mr-sm-2" formControlName="comunidad_autonoma">
                                     <option value='alava'>Álava</option>
@@ -213,7 +211,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-3 col-12">
+                            <div class="col-lg-3 col-md-6 col-12">
                                 <label>Telefono</label>
                                 <input type="text" formControlName="telefono" class="form-control"
                                     placeholder="Telefono" required>
@@ -228,8 +226,8 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6 col-12">
+                        <div class="row mb-10">
+                            <div class="col-lg-6 col-12">
                                 <button class="theme-btn btn-style-two" type="submit" name="submit-form">Enviar</button>
                             </div>
                         </div>
