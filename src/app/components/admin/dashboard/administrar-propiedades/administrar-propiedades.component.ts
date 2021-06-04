@@ -22,7 +22,8 @@ export class AdministrarPropiedadesComponent implements OnInit {
   public filesToUpload: any = [];
   public img: Imagenes;
   public idPropiedades;
-  public previsualizacion: Array<string>=[];
+  public previsualizacion: Array<string> = [];
+  public barrios:Array<string>= ['Sin barrio'];
 
   private geoCoder;
   @ViewChild("search") public searchElementRef: ElementRef;
@@ -51,8 +52,8 @@ export class AdministrarPropiedadesComponent implements OnInit {
     tarifa: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{1,50}$")]),
     tipo_propiedad: new FormControl(''),
     direccion: new FormControl(''),
-    barrio: new FormControl('', [Validators.required, Validators.pattern("^[A-Z]{1}[a-z0-9\\s]{1,70}$")]),
-    ciudad: new FormControl('', [Validators.required, Validators.pattern("^[A-Z]{1}[a-z]{1,50}$")]),
+    barrio: new FormControl(''),
+    ciudad: new FormControl(''),
     comunidad_autonoma: new FormControl(''),
     telefono: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9}$")]),
   });
@@ -95,9 +96,6 @@ export class AdministrarPropiedadesComponent implements OnInit {
   get barrioNoValido() {
     return this.propertyForm.get("barrio").invalid && this.propertyForm.get("barrio").touched;
   }
-  get ciudadNoValido() {
-    return this.propertyForm.get("ciudad").invalid && this.propertyForm.get("ciudad").touched;
-  }
   get telefonoNoValido() {
     return this.propertyForm.get("telefono").invalid && this.propertyForm.get("telefono").touched;
   }
@@ -106,7 +104,7 @@ export class AdministrarPropiedadesComponent implements OnInit {
     //variable para guardar el nombre de las imagenes
     var archivo = [];
     //contador para recorrer el array vacio y llenarlo (el array donde se guardan las imagenes)
-    var contadorAyudaImagenes=0;
+    var contadorAyudaImagenes = 0;
 
     //rellenamos la variable con las imagenes que se acaban de enlazar
     for (let i = 0; i < fileInput.target.files.length; i++) {
@@ -114,7 +112,7 @@ export class AdministrarPropiedadesComponent implements OnInit {
     }
 
     //recorremos este array y vamos leyendo imagen por imagen para ir previsualizandola
-    archivo.forEach(element=>{
+    archivo.forEach(element => {
       this.extraerBase64(element).then((imagen: any) => {
         //guardamos la base de la imagen para previsualizarla
         this.previsualizacion[contadorAyudaImagenes] = imagen.base;
@@ -292,6 +290,32 @@ export class AdministrarPropiedadesComponent implements OnInit {
         console.log(<any>error);
       }
     );
+  }
+
+  cambiarBarrios(){
+    var ciudad= <HTMLInputElement>document.getElementById("ciudad");
+    if(ciudad.value=='Barcelona'){
+      this.barrios=['Centro Ciudad','Alta Diagonal','Paseo de Gracia','Ciutat Vella','22@','Extrarradio'];
+      this.propertyForm.get('barrio').setValue('Centro Ciudad');
+    }else if(ciudad.value=='Madrid'){
+      this.barrios=['Salamanca','Retiro','Chamberi','Moncloa','Chamartin','Cuzco-Cuatro Torres','Azca','Centro','Atocha','A1','A2','A6','Periferia'];
+      this.propertyForm.get('barrio').setValue('Salamanca');
+    }else if(ciudad.value=='Oviedo'){
+      this.barrios=['Oviedo'];
+      this.propertyForm.get('barrio').setValue('Oviedo');
+    }else if(ciudad.value=='Malaga'){
+      this.barrios=['Malaga'];
+      this.propertyForm.get('barrio').setValue('Malaga');
+    }else if(ciudad.value=='Valencia'){
+      this.barrios=['Valencia'];
+      this.propertyForm.get('barrio').setValue('Valencia');
+    }else if(ciudad.value=='Sevilla'){
+      this.barrios=['Sevilla'];
+      this.propertyForm.get('barrio').setValue('Sevilla');
+    }else if(ciudad.value=='Bilbao'){
+      this.barrios=['Bilbao'];
+      this.propertyForm.get('barrio').setValue('Bilbao');
+    }
   }
 
   extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {

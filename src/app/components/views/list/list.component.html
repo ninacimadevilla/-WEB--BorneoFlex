@@ -7,14 +7,14 @@
                     <div class="col-6">
                         <div class="upper-box">
                             <ul class="top-filters">
-                                <li class="active"><a href="#">Filtros</a></li>
+                                <!--<li class="active"><a href="#">Filtros</a></li>-->
                                 <li><a (click)="cerrarMapa()">Cerrar mapa</a></li>
                             </ul>
 
                             <div class="listing-search-form">
                                 <form method="post" action="index.html">
                                     <div class="row">
-                                        <div class="form-group col-lg-4 col-md-12 col-sm-12 location">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12 location" *ngIf="ciudad=='Madrid'">
                                             <select id="op" [formControl]="selected">
                                                 <option value="null" id="opts">Todos</option>
                                                 <option value="Salamanca" id="opts">Salamanca</option>
@@ -30,6 +30,23 @@
                                                 <option value="A2" id="opts">A2</option>
                                                 <option value="A6" id="opts">A6</option>
                                                 <option value="Periferia" id="opts">Periferia</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12 location" *ngIf="ciudad=='Barcelona'">
+                                            <select id="op" [formControl]="selected">
+                                                <option value="null" id="opts">Todos</option>
+                                                <option value="Centro Ciudad" id="opts">Centro ciudad</option>
+                                                <option value="Alta Diagonal" id="opts">Alta diagonal</option>
+                                                <option value="Paseo de Gracia" id="opts">Paseo de Gracia</option>
+                                                <option value="Ciutat Vella" id="opts">Ciutat Vella</option>
+                                                <option value="22@" id="opts">22@</option>
+                                                <option value="Extrarradio" id="opts">Extrarradio</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12 location" *ngIf="ciudad!='Barcelona' && ciudad!='Madrid'">
+                                            <select id="op" [formControl]="selected">
+                                                <option value="null" id="opts">Todos</option>
                                             </select>
                                         </div>
 
@@ -216,20 +233,20 @@
                 </div>
             </div>
 
-            <!-------------------------------------------------PAGINA SIN MAPA------------------------------------------------->
+<!-----------------------------------------------------------------PAGINA SIN MAPA------------------------------------------------->
             <div class="container-fluid" *ngIf="cambiodepagina==true">
                 <div class="row">
                     <div class="col-12">
                         <div class="upper-box">
                             <ul class="top-filters">
-                                <li class="active"><a href="#">Filtros</a></li>
+                                <!--<li class="active"><a href="#">Filtros</a></li>-->
                                 <li><a (click)="cerrarMapa()">Abrir mapa</a></li>
                             </ul>
 
                             <div class="listing-search-form">
                                 <form method="post" action="index.html">
                                     <div class="row">
-                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location">
+                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location" *ngIf="ciudad=='Madrid'">
                                             <select id="op" [formControl]="selected">
                                                 <option value="null" id="opts">Todos</option>
                                                 <option value="Salamanca" id="opts">Salamanca</option>
@@ -245,6 +262,23 @@
                                                 <option value="A2" id="opts">A2</option>
                                                 <option value="A6" id="opts">A6</option>
                                                 <option value="Periferia" id="opts">Periferia</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location" *ngIf="ciudad=='Barcelona'">
+                                            <select id="op" [formControl]="selected">
+                                                <option value="null" id="opts">Todos</option>
+                                                <option value="Centro Ciudad" id="opts">Centro ciudad</option>
+                                                <option value="Alta Diagonal" id="opts">Alta diagonal</option>
+                                                <option value="Paseo de Gracia" id="opts">Paseo de Gracia</option>
+                                                <option value="Ciutat Vella" id="opts">Ciutat Vella</option>
+                                                <option value="22@" id="opts">22@</option>
+                                                <option value="Extrarradio" id="opts">Extrarradio</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location" *ngIf="ciudad!='Barcelona' && ciudad!='Madrid'">
+                                            <select id="op" [formControl]="selected">
+                                                <option value="null" id="opts">Todos</option>
                                             </select>
                                         </div>
 

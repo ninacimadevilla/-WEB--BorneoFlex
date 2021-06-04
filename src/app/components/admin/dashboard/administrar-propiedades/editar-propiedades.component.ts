@@ -23,6 +23,9 @@ export class EditarPropiedadesComponent implements OnInit {
     public imagenesComprobar: Array<Imagenes>;
     //variable para previsualizar
     public previsualizacion: Array<string> = [];
+    public barrios: Array<string> = [];
+    public barrioBarcelona = ['Centro Ciudad', 'Alta Diagonal', 'Paseo de Gracia', 'Ciutat Vella', '22@', 'Extrarradio'];
+    public barrioMadrid = ['Salamanca', 'Retiro', 'Chamberi', 'Moncloa', 'Chamartin', 'Cuzco-Cuatro Torres', 'Azca', 'Centro', 'Atocha', 'A1', 'A2', 'A6', 'Periferia'];
 
     private geoCoder;
     @ViewChild("search") public searchElementRef: ElementRef;
@@ -203,6 +206,35 @@ export class EditarPropiedadesComponent implements OnInit {
                         this.propertyForm.get('tarifa').setValue(this.propiedad[i].tarifa);
                         this.propertyForm.get('tipo_propiedad').setValue(this.propiedad[i].tipo_propiedad);
                         this.propertyForm.get('direccion').setValue(this.propiedad[i].direccion);
+
+                        //recoger los barrios
+                        //creamos un contador iniciado en 1, la posicion 0 va reservada al dato de la base de datos
+                        var contadorBarrios = 1;
+                        //comprobamos la ciudad en caso de ser barcelona o madrid ya que estas tienen barrios, el resto no
+                        if (this.propiedad[i].ciudad == 'Barcelona') {
+                            //la posicion 0 del barrio va reservada a la bd el resto a las distintos barrios de la ciudad en cuestion
+                            this.barrios[0] = this.propiedad[i].barrio;
+                            //recorremos el array de la ciudad
+                            for (let j = 0; j < this.barrioBarcelona.length; j++) {
+                                //si el barrio de la bd es distinto del barrio de barcelona lo guardamos, asi no repetimos un barrio 
+                                if (this.barrios[0] != this.barrioBarcelona[j]) {
+                                    this.barrios[contadorBarrios] = this.barrioBarcelona[j];
+                                    contadorBarrios++;
+                                }
+                            }
+                        } else if (this.propiedad[i].ciudad == 'Madrid') {
+                            this.barrios[0] = this.propiedad[i].barrio;
+                            for (let j = 0; j < this.barrioMadrid.length; j++) {
+                                if (this.barrios[0] != this.barrioMadrid[j]) {
+                                    this.barrios[contadorBarrios] = this.barrioMadrid[j];
+                                    contadorBarrios++;
+                                }
+                            }
+                        }   else{
+                            //en caso de no ser madrid o barcelona solo existe un barrio por cada ciudad restante por lo que no es necesario
+                            //ningun bucle
+                            this.barrios[0] = this.propiedad[i].barrio;
+                        }
                         this.propertyForm.get('barrio').setValue(this.propiedad[i].barrio);
                         this.propertyForm.get('ciudad').setValue(this.propiedad[i].ciudad);
                         this.propertyForm.get('comunidad_autonoma').setValue(this.propiedad[i].comunidad_autonoma);
@@ -428,6 +460,25 @@ export class EditarPropiedadesComponent implements OnInit {
 
         for (let i = 0; i < fileInput.target.files.length; i++) {
             this.filesToUpload.push(fileInput.target.files[i]);
+        }
+    }
+
+    cambiarBarrios() {
+        var ciudad = <HTMLInputElement>document.getElementById("ciudad");
+        if (ciudad.value == 'Barcelona') {
+            this.barrios = ['Centro Ciudad', 'Alta Diagonal', 'Paseo de Gracia', 'Ciutat Vella', '22@', 'Extrarradio'];
+        } else if (ciudad.value == 'Madrid') {
+            this.barrios = ['Salamanca', 'Retiro', 'Chamberi', 'Moncloa', 'Chamartin', 'Cuzco-Cuatro Torres', 'Azca', 'Centro', 'Atocha', 'A1', 'A2', 'A6', 'Periferia'];
+        } else if (ciudad.value == 'Oviedo') {
+            this.barrios = ['Oviedo'];
+        } else if (ciudad.value == 'Malaga') {
+            this.barrios = ['Malaga'];
+        } else if (ciudad.value == 'Valencia') {
+            this.barrios = ['Valencia'];
+        } else if (ciudad.value == 'Sevilla') {
+            this.barrios = ['Sevilla'];
+        } else if (ciudad.value == 'Bilbao') {
+            this.barrios = ['Bilbao'];
         }
     }
 

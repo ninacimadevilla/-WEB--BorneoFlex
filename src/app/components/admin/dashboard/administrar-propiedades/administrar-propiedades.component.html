@@ -135,22 +135,10 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-2 col-md-4 col-12">
+                            <div class="col-lg-4 col-md-6 col-12">
                                 <label>Dirección</label>
                                 <input type="text" #search formControlName="direccion" class="form-control"
                                     placeholder="Dirección" required>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-12">
-                                <label>Barrio</label>
-                                <input type="text" formControlName="barrio" class="form-control"
-                                    placeholder="barrio de la ciudad" required>
-                                <small *ngIf="barrioNoValido" class="text-danger">No poner carácteres especiales</small>
-                            </div>
-                            <div class="col-lg-2 col-md-4 col-12">
-                                <label>Ciudad</label>
-                                <input type="text" formControlName="ciudad" class="form-control" placeholder="Ciudad"
-                                    required>
-                                <small *ngIf="ciudadNoValido" class="text-danger">Sin caracteres especiales ni numeros</small>
                             </div>
 
                             <div class="col-lg-2 col-md-6 col-12">
@@ -211,7 +199,31 @@
                                 </select>
                             </div>
 
-                            <div class="col-lg-3 col-md-6 col-12">
+                            <div class="col-lg-2 col-md-4 col-12">
+                                <label>Ciudad</label>
+                                <select class="custom-select mr-sm-2" formControlName="ciudad" (change)="cambiarBarrios()" id="ciudad">
+                                    <option value='Barcelona'>Barcelona</option>
+                                    <option value='Madrid'>Madrid</option>
+                                    <option value='Oviedo'>Oviedo</option>
+                                    <option value='Valencia'>Valencia</option>
+                                    <option value='Malaga'>Malaga</option>
+                                    <option value='Sevilla'>Sevilla</option>
+                                    <option value='Bilbao'>Bilbao</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-12">
+                                <label>Barrio</label>
+                                <select class="custom-select mr-sm-2" formControlName="barrio">
+                                    <option value='{{barrio}}' *ngFor="let barrio of barrios">{{barrio}}</option>
+                                </select>
+
+                                <!--<input type="text" formControlName="barrio" class="form-control"
+                                    placeholder="barrio de la ciudad" required>
+                                <small *ngIf="barrioNoValido" class="text-danger">No poner carácteres especiales</small>-->
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-12">
                                 <label>Telefono</label>
                                 <input type="text" formControlName="telefono" class="form-control"
                                     placeholder="Telefono" required>
