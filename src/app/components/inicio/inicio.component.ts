@@ -30,6 +30,7 @@ export class InicioComponent implements OnInit {
   public contadorMalaga = 0;
   public contadorBilbao = 0;
   public contadorMadrid = 0;
+  public contadorBarcelona = 0;
   public images: Array<Imagenes>;
   public imagenesFiltradas: Array<Imagenes> = [];
   public id;
@@ -79,6 +80,10 @@ export class InicioComponent implements OnInit {
     this._router.navigate(['/view/list', "Sevilla"]);
   }
 
+  buscarBarcelona(){
+    this._router.navigate(['/view/list', "Barcelona"]);
+  }
+
   Opciones(opc1) {
     this.opc = opc1;
   }
@@ -101,7 +106,9 @@ export class InicioComponent implements OnInit {
             this.contadorBilbao++;
           } else if (element.ciudad == "Madrid") {
             this.contadorMadrid++;
-          }
+          } else if (element.ciudad == "Barcelona") {
+            this.contadorBarcelona++;
+          } 
 
           if (this.contador < 3) {
             this.id = element.id;
