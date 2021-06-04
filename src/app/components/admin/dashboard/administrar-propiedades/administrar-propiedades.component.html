@@ -136,7 +136,7 @@
 
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12">
-                                <label>Dirección</label>
+                                <label>Calle</label>
                                 <input type="text" #search formControlName="direccion" class="form-control"
                                     placeholder="Dirección" required>
                             </div>
@@ -240,7 +240,8 @@
 
                         <div class="row mb-10">
                             <div class="col-lg-6 col-12">
-                                <button class="theme-btn btn-style-two" type="submit" name="submit-form">Enviar</button>
+                                <button class="theme-btn btn-style-two" type="submit" [disabled]="!propertyForm.valid" name="submit-form" id="submit">Enviar</button>
+                                <small *ngIf="!propertyForm.valid" class="text-danger font-weight-bold">Por favor rellene correctamente el formulario*</small>
                             </div>
                         </div>
                     </div>
