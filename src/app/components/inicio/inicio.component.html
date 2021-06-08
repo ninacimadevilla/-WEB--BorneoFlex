@@ -33,7 +33,7 @@
                                             <input type="text" name="listing-search" placeholder="Lista de ciudades">
                                         </div>-->
                                         <!-- Form Group -->
-                                        <div class="form-group col-lg-4 col-md-6 col-sm-12 location">
+                                        <div class="form-group col-lg-4 col-md-4 col-12 location">
                                             <!--<input type="text" name="listing-search" placeholder="Lucation">
                                             <span class="icon flaticon-placeholder"
                                                 data-text="Type and hit enter"></span>-->
@@ -50,7 +50,7 @@
                                         </div>
 
                                         <!-- Form Group -->
-                                        <div class="form-group col-lg-4 col-md-6 col-sm-12">
+                                        <div class="form-group col-lg-4 col-md-4 col-12">
                                             <select class="chosen-select">
                                                 <option>Nº plazas:</option>
                                                 <option>0 a 5</option>
@@ -60,7 +60,7 @@
                                         </div>
 
                                         <!-- Form Group -->
-                                        <div class="form-group col-lg-4 col-md-6 col-sm-12 text-right">
+                                        <div class="form-group col-lg-4 col-md-4 col-sm-12 text-right">
                                             <button type="submit" class="theme-btn btn-style-one bg-pink"
                                                 (click)="searchAction()">Buscar</button>
                                         </div>
@@ -197,14 +197,14 @@
 
             <div class="carousel-outer">
                 <div class="four-items-carousel owl-carousel owl-theme default-nav">
-                    <div class="container-fluir">
+                    <div class="container-fluid">
                         <div class="row">
                             <!--<div class="col-12 col-md-4" *ngFor="let propiedad of propiedades | paginate: { itemsPerPage: 3, currentPage: page }">-->
                             <div class="col-12 col-md-6 col-lg-4" *ngFor="let propiedad of propiedadesFiltradas">    
                                 <div class="listing-block">
                                     <div class="inner-box">
                                         <div class="image-box">
-                                            <figure class="image d-block w-100"><img [src]="propiedad.imgUrl" class="imagenesTamano"></figure>
+                                            <figure class="image d-block"><img [src]="propiedad.imgUrl" class="imagenesTamano"></figure>
 
                                             <div class="tags">
                                                 <span>Desde: {{propiedad.tarifa}} euros</span>

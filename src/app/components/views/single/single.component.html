@@ -22,10 +22,9 @@
             <!-- Listing Options -->
             <div class="listing-options">
                 <ul class="options-list">    
-                    <li><a href="#"><span class="icon flaticon-compass"></span> Fotos</a></li>
+                    <li><a (click)="scroll(target)"><span class="icon flaticon-compass"></span> Fotos</a></li>
                     <li><a href="#"><span class="icon flaticon-phone-call-1"></span> LLamar ahora</a></li>
-                    <li><a href="#"><span class="icon flaticon-unlink"></span> Ver fotos</a></li>
-                    <li><a href="social-share.html" class="call-modal"><span class="icon flaticon-share"></span> Compartir </a></li>
+                    <li><a href="/contacto"><span class="icon flaticon-unlink"></span> Contratar</a></li>
                     <!--<li><a href="report-listing.html" class="call-modal"><span class="icon flaticon-flag"></span> Reportar </a></li>-->
                 </ul>
             </div>
@@ -222,7 +221,7 @@
                         </div> -->
                         
                         <div class="nearby-widget ls-widget">
-                            <div class="widget-title"><h4><span class="icon flaticon-map"></span> Oficinas similares</h4></div>
+                            <div class="widget-title" #target><h4><span class="icon flaticon-map"></span> Oficinas similares</h4></div>
                             <div class="widget-content">
                                 <div class="listing-block-six" *ngFor="let propiedad of propiedadesFiltradas">
                                     <div class="inner-box">

@@ -18,7 +18,7 @@ export class SingleComponent implements OnInit {
   public propiedadesFiltradas: Array<Owned> = [];
   public id;
   public images: Array<Imagenes>;
-  public contador=0;
+  public contador = 0;
 
   constructor(private _route: ActivatedRoute, private _router: Router, private _propiedadService: PropiedadService) {
   }
@@ -33,12 +33,12 @@ export class SingleComponent implements OnInit {
     );
   }
 
-  listarImagenes(){
+  listarImagenes() {
     this._propiedadService.listarimagenes(this.id).subscribe(
       response => {
         this.images = response;
         this.images.forEach(element => {
-          element.imagen=element.imagen.slice(2,-2);
+          element.imagen = element.imagen.slice(2, -2);
         });
       }, error => {
         console.log(<any>error);
@@ -46,27 +46,31 @@ export class SingleComponent implements OnInit {
     );
   }
 
-  getOwned(){
-    this.contador=0;
+  getOwned() {
+    this.contador = 0;
     this._propiedadService.getOwned().subscribe(
-        result => {
-          this.propiedades=result;
-          this.propiedades.forEach(element =>{
+      result => {
+        this.propiedades = result;
+        this.propiedades.forEach(element => {
 
-            if(this.contador<3){
-              this.propiedadesFiltradas[this.contador]=element;
-            }
-            this.contador++;
-          });
-        },
-        error => {
-            console.log(<any>error);
-        }
+          if (this.contador < 3) {
+            this.propiedadesFiltradas[this.contador] = element;
+          }
+          this.contador++;
+        });
+      },
+      error => {
+        console.log(<any>error);
+      }
     );
   }
 
+  scroll(el: HTMLElement){
+    el.scrollIntoView();
+  }
+
   ngOnInit() {
-    this.id=this._route.snapshot.params['id'];
+    this.id = this._route.snapshot.params['id'];
     this.recogerDato();
     this.listarImagenes();
     this.getOwned();

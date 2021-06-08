@@ -14,7 +14,8 @@
                             <div class="listing-search-form">
                                 <form method="post" action="index.html">
                                     <div class="row">
-                                        <div class="form-group col-lg-4 col-md-12 col-sm-12 location" *ngIf="ciudad=='Madrid'">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12 location"
+                                            *ngIf="ciudad=='Madrid'">
                                             <select id="op" [formControl]="selected">
                                                 <option value="null" id="opts">Todos</option>
                                                 <option value="Salamanca" id="opts">Salamanca</option>
@@ -32,7 +33,8 @@
                                                 <option value="Periferia" id="opts">Periferia</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-lg-4 col-md-12 col-sm-12 location" *ngIf="ciudad=='Barcelona'">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12 location"
+                                            *ngIf="ciudad=='Barcelona'">
                                             <select id="op" [formControl]="selected">
                                                 <option value="null" id="opts">Todos</option>
                                                 <option value="Centro Ciudad" id="opts">Centro ciudad</option>
@@ -44,7 +46,8 @@
                                             </select>
                                         </div>
 
-                                        <div class="form-group col-lg-4 col-md-12 col-sm-12 location" *ngIf="ciudad!='Barcelona' && ciudad!='Madrid'">
+                                        <div class="form-group col-lg-4 col-md-12 col-sm-12 location"
+                                            *ngIf="ciudad!='Barcelona' && ciudad!='Madrid'">
                                             <select id="op" [formControl]="selected">
                                                 <option value="null" id="opts">Todos</option>
                                             </select>
@@ -204,7 +207,8 @@
                                             <ul class="info listaColocacion">
                                                 <li><span class="flaticon-pin"></span> <b>{{propiedad.ciudad}}</b></li>
                                                 <li><span class="flaticon-phone-call"></span>
-                                                    <b>{{propiedad.telefono}}</b></li>
+                                                    <b>{{propiedad.telefono}}</b>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -221,7 +225,7 @@
                         </div>
                     </div>
 
-                    <!-------------------------------------GOOGLE MAPS------------------------------------------------------------------------------>
+                    <!-------------------------------------GOOGLE MAPS------------------------------------------------------------>
                     <div class="col-6">
                         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="mapTypeId"
                             [styles]='styles' (mapReady)="mapReadyHandler($event)">
@@ -246,7 +250,8 @@
                             <div class="listing-search-form">
                                 <form method="post" action="index.html">
                                     <div class="row">
-                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location" *ngIf="ciudad=='Madrid'">
+                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location"
+                                            *ngIf="ciudad=='Madrid'">
                                             <select id="op" [formControl]="selected">
                                                 <option value="null" id="opts">Todos</option>
                                                 <option value="Salamanca" id="opts">Salamanca</option>
@@ -264,7 +269,8 @@
                                                 <option value="Periferia" id="opts">Periferia</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location" *ngIf="ciudad=='Barcelona'">
+                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location"
+                                            *ngIf="ciudad=='Barcelona'">
                                             <select id="op" [formControl]="selected">
                                                 <option value="null" id="opts">Todos</option>
                                                 <option value="Centro Ciudad" id="opts">Centro ciudad</option>
@@ -276,7 +282,8 @@
                                             </select>
                                         </div>
 
-                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location" *ngIf="ciudad!='Barcelona' && ciudad!='Madrid'">
+                                        <div class="form-group col-lg-2 col-md-4 col-sm-12 location"
+                                            *ngIf="ciudad!='Barcelona' && ciudad!='Madrid'">
                                             <select id="op" [formControl]="selected">
                                                 <option value="null" id="opts">Todos</option>
                                             </select>
@@ -384,16 +391,17 @@
                                             <ul class="info listaColocacion">
                                                 <li><span class="flaticon-pin"></span> <b>{{propiedad.ciudad}}</b></li>
                                                 <li><span class="flaticon-phone-call"></span>
-                                                    <b>{{propiedad.telefono}}</b></li>
+                                                    <b>{{propiedad.telefono}}</b>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <nav class="ls-pagination">
+                            <nav>
                                 <ul>
-                                    <li class="next">
+                                    <li>
                                         <pagination-controls (pageChange)="page = $event"></pagination-controls>
                                     </li>
                                 </ul>
