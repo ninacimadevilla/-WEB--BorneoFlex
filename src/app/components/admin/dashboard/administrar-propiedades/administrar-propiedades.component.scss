@@ -136,9 +136,15 @@ section {
     transform: scale(1.2);
 }
 
+.contener{
+    height: 75vh;
+    overflow: auto;
+}
+
 @media (max-width: 767.98px) { 
     .dashboard-outer {
         padding-top: 10px;
         padding-left: 0;
+        width: 80vw;
     }
 }

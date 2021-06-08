@@ -3,7 +3,7 @@
     <!--FORMULARIO -->
     <div class="col-12">
         
-        <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="overflow-auto">
             <div class="form-widget ls-widget">
                 <!--CABECERA-->
                 <div class="widget-title">
@@ -11,7 +11,7 @@
                 </div>
 
                 <!--CONTENIDO-->
-                <div class="widget-content">
+                <div class="widget-content contener">
                     <!--PARTE DEL FORMULARIO PARA AÑADIR UNA IMÁGEN-->
                     <div class="uploading-outer">
                         <div class="uploadButton">

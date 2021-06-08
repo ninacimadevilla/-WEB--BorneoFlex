@@ -251,6 +251,10 @@ export class ListComponent implements OnInit {
     }
   }
 
+  isMobile(): boolean {
+    return window.innerWidth < 768;
+  }
+
   ngOnInit(): void {
     this.selected.valueChanges.subscribe(changes => {
       this.Opciones(changes);
