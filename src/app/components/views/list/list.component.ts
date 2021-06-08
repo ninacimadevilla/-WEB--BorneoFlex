@@ -28,8 +28,8 @@ export class ListComponent implements OnInit {
   public contadorComprobador = 0;
   public ciudad: string;
   public id;
-  public cambiodepagina:boolean=false;
-  
+  public cambiodepagina: boolean = false;
+
   public lat: number;
   public lng: number;
   public zoom: number;
@@ -40,16 +40,16 @@ export class ListComponent implements OnInit {
   mapClickListener: google.maps.MapsEventListener;
   styles = [
     {
-    "featureType": "transit",
-    "stylers": [
-      { "visibility": "off" }
-    ]
+      "featureType": "transit",
+      "stylers": [
+        { "visibility": "off" }
+      ]
     },
     {
       featureType: "poi",
       elementType: "labels",
       stylers: [
-            { visibility: "off" }
+        { visibility: "off" }
       ]
     },
     {
@@ -73,7 +73,7 @@ export class ListComponent implements OnInit {
     this.opc = opc1;
   }
 
-  
+
   public mapReadyHandler(map: google.maps.Map): void {
     this.map = map;
     this.mapClickListener = this.map.addListener('click', (e: google.maps.MouseEvent) => {
@@ -214,25 +214,25 @@ export class ListComponent implements OnInit {
             lat: prop.lat,
             lng: prop.lng
           }
-          ,label: ''
+          , label: ''
         };
-      
+
       }
       return;
     })
   }
 
-  listarImagenes(){
+  listarImagenes() {
     this.propiedadesFiltradas.forEach(prop => {
       this._propiedadService.listarimagenes(prop.id).subscribe(
         response => {
           let images = response;
           images.forEach(element => {
-            element.imagen=element.imagen.slice(2,-2);
+            element.imagen = element.imagen.slice(2, -2);
           });
-          
+
           prop.imgUrl = images[0] && images[0].imagen ? 'http://borneoflex.es/borneo/uploads/' + images[0].imagen : 'assets/images/view/office3.png';
-          
+
         }, error => {
           console.log(<any>error);
         }
@@ -241,11 +241,11 @@ export class ListComponent implements OnInit {
 
   }
 
-  cerrarMapa(){
-    if(this.cambiodepagina==false){
-      this.cambiodepagina=true;
-    }else if(this.cambiodepagina==true){
-      this.cambiodepagina=false;
+  cerrarMapa() {
+    if (this.cambiodepagina == false) {
+      this.cambiodepagina = true;
+    } else if (this.cambiodepagina == true) {
+      this.cambiodepagina = false;
     }
   }
 

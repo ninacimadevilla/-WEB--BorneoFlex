@@ -18,13 +18,14 @@
     </div>
 
     <div class="row separar">
-        <div class="divCampos col-12 " *ngFor="let contacto of contactos">
+        <div class="divCampos col-12 " *ngFor="let contacto of contactos | paginate: { itemsPerPage: 4, currentPage: page }">
             <p class="pTop ">{{contacto.nombre}} <em>({{contacto.email}})</em></p>
             <p><strong>Asunto:</strong> {{contacto.asunto}}</p>
             <p><strong>Mensaje:</strong> {{contacto.mensaje}}</p>
             <p><small>{{contacto.fecha}}</small></p>
             <button type="button" class="eliminar" (click)="abrirModal(contacto.id)"><i class="fas fa-times-circle"></i></button>
         </div>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
     </div>
 
     <!--MODAL-->

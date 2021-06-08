@@ -15,6 +15,7 @@ export class ListarPropiedadesComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   public propiedades:Array<Owned>;
   public idModal;
+  public page=1;
 
   constructor(private toastr: ToastrService, private _route:ActivatedRoute,private _router:Router, 
     private _propiedadService: PropiedadService, private modal: NgbModal) {}

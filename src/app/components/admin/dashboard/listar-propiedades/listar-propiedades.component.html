@@ -26,7 +26,7 @@
             </thead>
 
             <tbody>
-                <tr *ngFor="let propiedad of propiedades">
+                <tr *ngFor="let propiedad of propiedades | paginate: { itemsPerPage: 15, currentPage: page }" >
                     <th scope="row">{{propiedad.id}}</th>
                     <td>{{propiedad.nombre}}</td>
                     <td>{{propiedad.personas}}</td>
@@ -46,6 +46,7 @@
                         </div>
                     </td>
                 </tr>
+                <pagination-controls (pageChange)="page = $event"></pagination-controls>
             </tbody>
         </table>
 

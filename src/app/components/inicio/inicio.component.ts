@@ -80,7 +80,7 @@ export class InicioComponent implements OnInit {
     this._router.navigate(['/view/list', "Sevilla"]);
   }
 
-  buscarBarcelona(){
+  buscarBarcelona() {
     this._router.navigate(['/view/list', "Barcelona"]);
   }
 
@@ -108,7 +108,7 @@ export class InicioComponent implements OnInit {
             this.contadorMadrid++;
           } else if (element.ciudad == "Barcelona") {
             this.contadorBarcelona++;
-          } 
+          }
 
           if (this.contador < 3) {
             this.id = element.id;

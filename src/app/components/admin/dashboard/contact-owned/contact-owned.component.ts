@@ -17,6 +17,7 @@ export class ContactOwnedComponent implements OnInit {
   public contactos: Array<ContactOwned>;
   public idModal;
   public contador;
+  public page=1;
 
   constructor(private toastr: ToastrService, private _route: ActivatedRoute, private _router: Router,
     private _contactoService: ContactOwnedService, private modal: NgbModal) { }
