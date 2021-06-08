@@ -7,50 +7,52 @@
 
     <!------------------------------------------------------------------------------------------------------------------------->
     <!--TABLA-->
-    <div class="table-hover table-responsive-sm">
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col-md-1">Id Propiedad</th>
-                    <th scope="col-1">Nombre</th>
-                    <th scope="col-1">Capacidad</th>
-                    <th scope="col-1">Tarifa</th>
-                    <th scope="col-1">Tipo</th>
-                    <th scope="col-1">Direccion</th>
-                    <th scope="col-1">Barrio</th>
-                    <th scope="col-1">Ciudad</th>
-                    <th scope="col-1">C.autónoma</th>
-                    <th scope="col-1">Telefono</th>
-                    <th></th>
-                </tr>
-            </thead>
 
-            <tbody>
-                <tr *ngFor="let propiedad of propiedades | paginate: { itemsPerPage: 15, currentPage: page }" >
-                    <th scope="row">{{propiedad.id}}</th>
-                    <td>{{propiedad.nombre}}</td>
-                    <td>{{propiedad.personas}}</td>
-                    <td>{{propiedad.tarifa}} euros</td>
-                    <td>{{propiedad.tipo_propiedad}}</td>
-                    <td>{{propiedad.direccion}}</td>
-                    <td>{{propiedad.barrio}}</td>
-                    <td>{{propiedad.ciudad}}</td>
-                    <td>{{propiedad.comunidad_autonoma}}</td>
-                    <td>{{propiedad.telefono}}</td>
-                    <td class="botones">
-                        <div>
-                            <button type="button" class="editar" [routerLink]="['/admin/dashboard/editPropertys',propiedad.id]"><i class="fas fa-pen"></i></button>
-                            <button type="button" class="borrar" (click)="abrirModal(propiedad.id)">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
-            </tbody>
-        </table>
+    <table class="table table-hover table-responsive-md table-responsive-sm table-responsive-lg">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Id Propiedad</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Capacidad</th>
+                <th scope="col">Tarifa</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Barrio</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">C.autónoma</th>
+                <th scope="col">Telefono</th>
+                <th></th>
+            </tr>
+        </thead>
 
-        <!--<table class="table">
+        <tbody>
+            <tr *ngFor="let propiedad of propiedades | paginate: { itemsPerPage: 10, currentPage: page }">
+                <th scope="row">{{propiedad.id}}</th>
+                <td>{{propiedad.nombre}}</td>
+                <td>{{propiedad.personas}}</td>
+                <td>{{propiedad.tarifa}} euros</td>
+                <td>{{propiedad.tipo_propiedad}}</td>
+                <td>{{propiedad.direccion}}</td>
+                <td>{{propiedad.barrio}}</td>
+                <td>{{propiedad.ciudad}}</td>
+                <td>{{propiedad.comunidad_autonoma}}</td>
+                <td>{{propiedad.telefono}}</td>
+                <td class="botones">
+                    <div>
+                        <button type="button" class="editar"
+                            [routerLink]="['/admin/dashboard/editPropertys',propiedad.id]"><i
+                                class="fas fa-pen"></i></button>
+                        <button type="button" class="borrar" (click)="abrirModal(propiedad.id)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </table>
+
+    <!--<table class="table">
             <thead class="thead-light">
                 <tr>
                     <th scope="col-md-1">Nombre Propiedad</th>
@@ -135,7 +137,7 @@
                 </tr>
             </tbody>
         </table>-->
-    </div>
+
     <!------------------------------------------------------------------------------------------------------------------------->
     <!--MODAL-->
     <ng-template #modalContent let-modal>

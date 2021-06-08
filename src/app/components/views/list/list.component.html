@@ -1,11 +1,11 @@
 <app-menu class="no-fix"></app-menu>
 <div class="page-wrapper">
     <section class="ls-section">
-        <div class="ls-cotainer">
+        <div>
             <div class="container-fluid" *ngIf="cambiodepagina==false">
                 <div class="row">
                     <div class="col-6">
-                        <div class="upper-box">
+                        <div>
                             <ul class="top-filters">
                                 <!--<li class="active"><a href="#">Filtros</a></li>-->
                                 <li><a (click)="cerrarMapa()">Cerrar mapa</a></li>
@@ -237,7 +237,7 @@
                 </div>
             </div>
 
-<!-----------------------------------------------------------------PAGINA SIN MAPA------------------------------------------------->
+            <!-----------------------------------------------------------------PAGINA SIN MAPA------------------------------------------------->
             <div class="container-fluid" *ngIf="cambiodepagina==true">
                 <div class="row">
                     <div class="col-12">
