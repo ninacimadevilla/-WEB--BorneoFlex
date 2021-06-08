@@ -26,7 +26,8 @@ const routes: Routes = [
     path: 'admin', component: AdminComponent,
     children: [
       { path: 'login', component: LoginComponent },
-      { path: 'dashboard', component: DashboardComponent,
+      {
+        path: 'dashboard', component: DashboardComponent,
         children: [
           { path: 'adminPropertys', component: AdministrarPropiedadesComponent },
           { path: 'editPropertys/:id', component: EditarPropiedadesComponent },
@@ -38,7 +39,7 @@ const routes: Routes = [
     ]
   },
   { path: 'view/list/:ciudad', component: ListComponent },
-  { path: '**', redirectTo: ''}
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
