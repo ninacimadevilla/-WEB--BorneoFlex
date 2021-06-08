@@ -4,7 +4,7 @@
         <div>
             <div class="container-fluid" *ngIf="cambiodepagina==false">
                 <div class="row">
-                    <div class="col-6">
+                    <div [ngClass]="{'col-6': !isMobile(), 'col-12': isMobile()}">
                         <div>
                             <ul class="top-filters">
                                 <!--<li class="active"><a href="#">Filtros</a></li>-->
@@ -226,7 +226,7 @@
                     </div>
 
                     <!-------------------------------------GOOGLE MAPS------------------------------------------------------------>
-                    <div class="col-6">
+                    <div [ngClass]="{'col-6': !isMobile(), 'col-12 -map-mobile': isMobile()}">
                         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="mapTypeId"
                             [styles]='styles' (mapReady)="mapReadyHandler($event)">
                             <agm-marker *ngFor="let marker of markers" [latitude]="marker.position.lat"

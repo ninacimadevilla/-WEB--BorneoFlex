@@ -178,7 +178,9 @@ export class ListComponent implements OnInit {
     });
     //fin del bucle forEach
   }
-
+  isMobile(): boolean {
+    return window.innerWidth < 768;
+  }
   getOwned() {
     //metodo para sacar todas las propiedades las cuales filtramos por ciudad
     //es necesario porque lo llamamos al ngoninit asi cuando se entra a esta pagina por primera vez ya esta imprimiendo las propiedades que queremos
