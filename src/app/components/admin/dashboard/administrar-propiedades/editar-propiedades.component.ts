@@ -79,6 +79,14 @@ export class EditarPropiedadesComponent implements OnInit {
         descripcion: new FormControl(''),
         personas: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{1,50}$")]),
         access: new FormControl(false),
+        mobiliario: new FormControl(false),
+        suministros: new FormControl(false),
+        networking: new FormControl(false),
+        skype: new FormControl(false),
+        guardabicis: new FormControl(false),
+        cantina: new FormControl(false),
+        impresora: new FormControl(false),
+        gimnasio: new FormControl(false),
         salas_reuniones: new FormControl(false),
         reception: new FormControl(false),
         eventos_network: new FormControl(false),
@@ -127,6 +135,48 @@ export class EditarPropiedadesComponent implements OnInit {
                         } else {
                             this.propertyForm.get('access').setValue(false);
                         }
+                        //---------------------------------------------------
+                        if (this.propiedad[i].mobiliario == "true") {
+                            this.propertyForm.get('mobiliario').setValue(true);
+                        } else {
+                            this.propertyForm.get('mobiliario').setValue(false);
+                        }
+                        if (this.propiedad[i].suministros == "true") {
+                            this.propertyForm.get('suministros').setValue(true);
+                        } else {
+                            this.propertyForm.get('suministros').setValue(false);
+                        }
+                        if (this.propiedad[i].networking == "true") {
+                            this.propertyForm.get('networking').setValue(true);
+                        } else {
+                            this.propertyForm.get('networking').setValue(false);
+                        }
+                        if (this.propiedad[i].skype == "true") {
+                            this.propertyForm.get('skype').setValue(true);
+                        } else {
+                            this.propertyForm.get('skype').setValue(false);
+                        }
+                        if (this.propiedad[i].guardabicis == "true") {
+                            this.propertyForm.get('guardabicis').setValue(true);
+                        } else {
+                            this.propertyForm.get('guardabicis').setValue(false);
+                        }
+                        if (this.propiedad[i].cantina == "true") {
+                            this.propertyForm.get('cantina').setValue(true);
+                        } else {
+                            this.propertyForm.get('cantina').setValue(false);
+                        }
+                        if (this.propiedad[i].impresora == "true") {
+                            this.propertyForm.get('impresora').setValue(true);
+                        } else {
+                            this.propertyForm.get('impresora').setValue(false);
+                        }
+                        if (this.propiedad[i].gimnasio == "true") {
+                            this.propertyForm.get('gimnasio').setValue(true);
+                        } else {
+                            this.propertyForm.get('gimnasio').setValue(false);
+                        }
+                        //-----------------------------------------------------
                         if (this.propiedad[i].salas_reuniones == "true") {
                             this.propertyForm.get('salas_reuniones').setValue(true);
                         } else {
@@ -230,7 +280,7 @@ export class EditarPropiedadesComponent implements OnInit {
                                     contadorBarrios++;
                                 }
                             }
-                        }   else{
+                        } else {
                             //en caso de no ser madrid o barcelona solo existe un barrio por cada ciudad restante por lo que no es necesario
                             //ningun bucle
                             this.barrios[0] = this.propiedad[i].barrio;
@@ -277,6 +327,54 @@ export class EditarPropiedadesComponent implements OnInit {
                 this.propertyForm.get('access').setValue("true");
             } else {
                 this.propertyForm.get('access').setValue("false");
+            }
+
+            if (this.propertyForm.get('mobiliario').value == true) {
+                this.propertyForm.get('mobiliario').setValue("true");
+            } else {
+                this.propertyForm.get('mobiliario').setValue("false");
+            }
+
+            if (this.propertyForm.get('suministros').value == true) {
+                this.propertyForm.get('suministros').setValue("true");
+            } else {
+                this.propertyForm.get('suministros').setValue("false");
+            }
+
+            if (this.propertyForm.get('networking').value == true) {
+                this.propertyForm.get('networking').setValue("true");
+            } else {
+                this.propertyForm.get('networking').setValue("false");
+            }
+
+            if (this.propertyForm.get('skype').value == true) {
+                this.propertyForm.get('skype').setValue("true");
+            } else {
+                this.propertyForm.get('skype').setValue("false");
+            }
+
+            if (this.propertyForm.get('guardabicis').value == true) {
+                this.propertyForm.get('guardabicis').setValue("true");
+            } else {
+                this.propertyForm.get('guardabicis').setValue("false");
+            }
+
+            if (this.propertyForm.get('cantina').value == true) {
+                this.propertyForm.get('cantina').setValue("true");
+            } else {
+                this.propertyForm.get('cantina').setValue("false");
+            }
+
+            if (this.propertyForm.get('impresora').value == true) {
+                this.propertyForm.get('impresora').setValue("true");
+            } else {
+                this.propertyForm.get('impresora').setValue("false");
+            }
+
+            if (this.propertyForm.get('gimnasio').value == true) {
+                this.propertyForm.get('gimnasio').setValue("true");
+            } else {
+                this.propertyForm.get('gimnasio').setValue("false");
             }
 
             if (this.propertyForm.get('salas_reuniones').value == true) {
