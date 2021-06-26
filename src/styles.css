@@ -3469,11 +3469,12 @@ section hr {
   margin: 0;
   -webkit-transform: translate3d(0, 60px, 0);
   transform: translate3d(0, 60px, 0);
-  -webkit-transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out, visibility 0.3s step-end;
-  -webkit-transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s step-end, -webkit-transform 0.3s ease-in-out;
-  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s step-end, -webkit-transform 0.3s ease-in-out;
-  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s step-end;
-  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s step-end, -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out, visibility 0.3s step-end;
+  -webkit-transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s step-end, -webkit-transform 0.3s ease-in-out;
+  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s step-end, -webkit-transform 0.3s ease-in-out;
+  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s step-end;
+  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s step-end, -webkit-transform 0.3s ease-in-out;
+  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s step-end, -webkit-transform 0.3s ease-in-out;
   visibility: hidden;
   opacity: 0;
   -webkit-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.2);
@@ -3485,11 +3486,12 @@ section hr {
 .main-header .cart-btn:hover .shopping-cart {
   -webkit-transform: translate3d(0, 40px, 0);
   transform: translate3d(0, 40px, 0);
-  -webkit-transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out, visibility 0.3s step-start;
-  -webkit-transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s step-start, -webkit-transform 0.3s ease-in-out;
-  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s step-start, -webkit-transform 0.3s ease-in-out;
-  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s step-start;
-  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s step-start, -webkit-transform 0.3s ease-in-out;
+  -webkit-transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out, visibility 0.3s step-start;
+  -webkit-transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s step-start, -webkit-transform 0.3s ease-in-out;
+  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s step-start, -webkit-transform 0.3s ease-in-out;
+  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s step-start;
+  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s step-start, -webkit-transform 0.3s ease-in-out;
+  transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s step-start, -webkit-transform 0.3s ease-in-out;
   visibility: visible;
   opacity: 1;
 }
@@ -5676,7 +5678,6 @@ section hr {
 
 .listing-section.style-two .carousel-outer {
   position: relative;
-  padding: 0 60px;
 }
 
 .listing-section.style-two .owl-prev {
@@ -7556,7 +7557,7 @@ section hr {
 .ls-pagination li.next a,
 .ls-pagination li.prev a {
   position: relative;
-  min-width: 108px;
+  min-width: 75px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -7568,7 +7569,6 @@ section hr {
       align-items: center;
   border-radius: 50px;
   border: 2px solid #d7dbe4;
-  margin: 0 12px;
 }
 
 .ls-pagination li.next i {
@@ -14004,7 +14004,6 @@ img {
 }
 
 .card {
-  height: 840px;
   border-color: #f1f3f7 !important;
 }
 

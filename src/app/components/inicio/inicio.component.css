@@ -1,1 +1,24 @@
-/* No CSS *//*# sourceMappingURL=inicio.component.css.map */
+.colocar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 10px;
+}
+
+i {
+  font-size: 12px;
+  color: #D55000;
+}
+
+.imagenesTamano {
+  height: 300px;
+}
+
+.tamano {
+  height: 220px;
+}
+
+.imagenOviedo {
+  height: 300px;
+}
+/*# sourceMappingURL=inicio.component.css.map */

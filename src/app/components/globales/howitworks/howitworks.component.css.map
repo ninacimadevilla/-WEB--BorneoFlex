@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,aAAa,CAAA;EACT,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;CAChB;;AAED,AAAA,YAAY,CAAA;EACR,MAAM,EAAE,KAAK;CAChB",
     "sources": [
         "howitworks.component.scss"
     ],
