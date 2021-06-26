@@ -34,6 +34,7 @@ import { EditarPropiedadesComponent } from './components/admin/dashboard/adminis
 import {AgmCoreModule} from '@agm/core';
 import { ContactOwnedComponent } from './components/admin/dashboard/contact-owned/contact-owned.component';
 import { LoginComponent } from './components/admin/login/login.component';
+import { FaqsComponent } from './components/faqs/faqs.component';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { LoginComponent } from './components/admin/login/login.component';
     EditarPropiedadesComponent,
     ContactOwnedComponent,
     LoginComponent,
+    FaqsComponent,
   ],
   imports: [
     BrowserModule,
