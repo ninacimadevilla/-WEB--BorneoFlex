@@ -297,6 +297,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="maps-localization" *ngIf='showMaps'>
+                            <div class="how-to-get">Cómo llegar?</div>
+                        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="mapTypeId" id="map"
+                            [styles]='styles' (mapReady)="mapReadyHandler($event)">
+                            <agm-marker *ngFor="let marker of markers" [latitude]="marker.position.lat"
+                                [longitude]="marker.position.lng" [label]="marker.label" [zoom]="zoom">
+                            </agm-marker>
+                        </agm-map>
+
+                        </div>
                     </aside>
                 </div>
             </div>

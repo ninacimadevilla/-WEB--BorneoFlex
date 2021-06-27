@@ -1,0 +1,18 @@
+.maps-localization {
+    height: 500px;
+    .how-to-get {
+        width: 100%;
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #004E59;
+        border-radius: 6px 6px 0 0;
+        color: white;
+        font-size: 26px;
+        font-weight: 600;
+    }
+    agm-map {
+        height: 100%;
+    }
+}
