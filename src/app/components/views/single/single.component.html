@@ -302,33 +302,34 @@
               </div>
               <div class="widget-content prizes-component">
                 <div class="row-types" *ngIf="propiedad.oficina_privada=='true'">
-                    <div class="name">Oficina privada</div>
-                    <div class="range"><i class="fas fa-user-alt icon-mr"></i>1-5</div>
-                    <div class="price">Desde 220€ / mes</div>
+                  <div class="name">Oficina privada</div>
+                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>1-5</div>
+                  <div class="price">Desde 220€ / mes</div>
                 </div>
-                <div class="row-types mt-3" *ngIf="propiedad.puesto_fijo=='true'>
-                    <div class="name">Puesto fijo en open space</div>
-                    <div class="range"><i class="fas fa-user-alt icon-mr"></i>1-5</div>
-                    <div class="price">Desde 220€ / mes</div>
+                <div class="row-types mt-3" *ngIf="propiedad.puesto_fijo=='true'">
+                  <div class="name">Puesto fijo en open space</div>
+                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>1-5</div>
+                  <div class="price">Desde 220€ / mes</div>
                 </div>
                 <div class="row-types mt-3" *ngIf="propiedad.puesto_flexible=='true'">
-                    <div class="name">Puesto flexible</div>
-                    <div class="range"><i class="fas fa-user-alt icon-mr"></i>1-5</div>
-                    <div class="price">Desde 160€ / mes</div>
+                  <div class="name">Puesto flexible</div>
+                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>1-5</div>
+                  <div class="price">Desde 160€ / mes</div>
                 </div>
               </div>
-            <div class="nearby-widget ls-widget">
-              <div class="widget-title" #target>
-                <h4><span class="icon flaticon-map"></span> Oficinas similares</h4>
-              </div>
-              <div class="widget-content">
-                <div class="maps-localization" *ngIf='showMaps'>
-                  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="mapTypeId" id="map"
-                    [styles]='styles' (mapReady)="mapReadyHandler($event)">
-                    <agm-marker *ngFor="let marker of markers" [latitude]="marker.position.lat"
-                      [longitude]="marker.position.lng" [label]="marker.label" [zoom]="zoom">
-                    </agm-marker>
-                  </agm-map>
+              <div class="nearby-widget ls-widget">
+                <div class="widget-title" #target>
+                  <h4><span class="icon flaticon-map"></span> Oficinas similares</h4>
+                </div>
+                <div class="widget-content">
+                  <div class="maps-localization" *ngIf='showMaps'>
+                    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [mapTypeId]="mapTypeId" id="map"
+                      [styles]='styles' (mapReady)="mapReadyHandler($event)">
+                      <agm-marker *ngFor="let marker of markers" [latitude]="marker.position.lat"
+                        [longitude]="marker.position.lng" [label]="marker.label" [zoom]="zoom">
+                      </agm-marker>
+                    </agm-map>
+                  </div>
                 </div>
               </div>
             </div>
