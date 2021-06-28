@@ -1,1 +1,53 @@
-/* No CSS *//*# sourceMappingURL=single.component.css.map */
+.maps-localization {
+  height: 500px;
+}
+
+.maps-localization .how-to-get {
+  width: 100%;
+  padding: 20px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #004E59;
+  border-radius: 6px 6px 0 0;
+  color: white;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.maps-localization agm-map {
+  height: 100%;
+}
+
+.prizes-component .row-types {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.prizes-component .row-types .name {
+  width: 30%;
+}
+
+.prizes-component .row-types .range, .prizes-component .row-types .price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.prizes-component .row-types .icon-mr {
+  margin-right: 10px;
+}
+/*# sourceMappingURL=single.component.css.map */

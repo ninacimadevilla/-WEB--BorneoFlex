@@ -16,3 +16,23 @@
         height: 100%;
     }
 }
+
+.prizes-component {
+    .row-types {
+        display: flex;
+        justify-content: space-between;
+        
+        .name {
+            width: 30%;
+        }
+        .range, .price {
+            display: flex;
+            align-items: center;
+        }
+
+
+        .icon-mr {
+            margin-right: 10px;
+        }
+    }
+}
