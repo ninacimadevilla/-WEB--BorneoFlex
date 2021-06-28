@@ -24,6 +24,9 @@ export class AdministrarPropiedadesComponent implements OnInit {
   public idPropiedades;
   public previsualizacion: Array<string> = [];
   public barrios:Array<string>= ['Sin barrio'];
+  public privada:boolean=false;
+  public fija:boolean=false;
+  public flexible:boolean=false;
 
   private geoCoder;
   @ViewChild("search") public searchElementRef: ElementRef;
@@ -64,6 +67,13 @@ export class AdministrarPropiedadesComponent implements OnInit {
     ciudad: new FormControl(''),
     comunidad_autonoma: new FormControl(''),
     telefono: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9}$")]),
+
+    precio_oficina_privada: new FormControl(),
+    precio_oficina_fija: new FormControl(),
+    precio_puesto_flexible: new FormControl(),
+    rango_oficina_privada: new FormControl(''),
+    rango_oficina_fija: new FormControl(''),
+    rango_puesto_flexible: new FormControl(''),
   });
 
   constructor(private _route: ActivatedRoute, private _router: Router, private _propiedadService: PropiedadService,
@@ -374,6 +384,30 @@ export class AdministrarPropiedadesComponent implements OnInit {
     }
   }
 
+  public datosPrivada(){
+    if(this.privada==false){
+      this.privada=true;
+    }else{
+      this.privada=false;
+    }
+  }
+
+  public datosFija(){
+    if(this.fija==false){
+      this.fija=true;
+    }else{
+      this.fija=false;
+    }
+  }
+
+  public datosFlexible(){
+    if(this.flexible==false){
+      this.flexible=true;
+    }else{
+      this.flexible=false;
+    }
+  }
+
   extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
     try {
       const unsafeImg = window.URL.createObjectURL($event);
@@ -397,4 +431,6 @@ export class AdministrarPropiedadesComponent implements OnInit {
     }
 
   })
+
+
 }

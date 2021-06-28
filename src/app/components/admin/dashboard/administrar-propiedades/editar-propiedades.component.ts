@@ -21,6 +21,9 @@ export class EditarPropiedadesComponent implements OnInit {
     public filesToUpload: any = [];
     public img: Imagenes;
     public imagenesComprobar: Array<Imagenes>;
+    public privada: boolean = false;
+    public fija: boolean = false;
+    public flexible: boolean = false;
     //variable para previsualizar
     public previsualizacion: Array<string> = [];
     public barrios: Array<string> = [];
@@ -110,7 +113,14 @@ export class EditarPropiedadesComponent implements OnInit {
         comunidad_autonoma: new FormControl(''),
         telefono: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{9}$")]),
         lat: new FormControl(0.000000),
-        lng: new FormControl(0.000000)
+        lng: new FormControl(0.000000),
+
+        precio_oficina_privada: new FormControl(),
+        precio_oficina_fija: new FormControl(),
+        precio_puesto_flexible: new FormControl(),
+        rango_oficina_privada: new FormControl(''),
+        rango_oficina_fija: new FormControl(''),
+        rango_puesto_flexible: new FormControl(''),
     });
 
     constructor(private _route: ActivatedRoute, private _router: Router, private _propiedadService: PropiedadService,
@@ -239,16 +249,19 @@ export class EditarPropiedadesComponent implements OnInit {
                         }
                         if (this.propiedad[i].oficina_privada == "true") {
                             this.propertyForm.get('oficina_privada').setValue(true);
+                            this.privada=true;
                         } else {
                             this.propertyForm.get('oficina_privada').setValue(false);
                         }
                         if (this.propiedad[i].puesto_fijo == "true") {
                             this.propertyForm.get('puesto_fijo').setValue(true);
+                            this.fija=true;
                         } else {
                             this.propertyForm.get('puesto_fijo').setValue(false);
                         }
                         if (this.propiedad[i].puesto_flexible == "true") {
                             this.propertyForm.get('puesto_flexible').setValue(true);
+                            this.flexible=true;
                         } else {
                             this.propertyForm.get('puesto_flexible').setValue(false);
                         }
@@ -256,6 +269,13 @@ export class EditarPropiedadesComponent implements OnInit {
                         this.propertyForm.get('tarifa').setValue(this.propiedad[i].tarifa);
                         this.propertyForm.get('tipo_propiedad').setValue(this.propiedad[i].tipo_propiedad);
                         this.propertyForm.get('direccion').setValue(this.propiedad[i].direccion);
+
+                        this.propertyForm.get('precio_oficina_privada').setValue(this.propiedad[i].precio_oficina_privada);
+                        this.propertyForm.get('precio_oficina_fija').setValue(this.propiedad[i].precio_oficina_fija);
+                        this.propertyForm.get('precio_puesto_flexible').setValue(this.propiedad[i].precio_puesto_flexible);
+                        this.propertyForm.get('rango_oficina_privada').setValue(this.propiedad[i].rango_oficina_privada);
+                        this.propertyForm.get('rango_oficina_fija').setValue(this.propiedad[i].rango_oficina_fija);
+                        this.propertyForm.get('rango_puesto_flexible').setValue(this.propiedad[i].rango_puesto_flexible);
 
                         //recoger los barrios
                         //creamos un contador iniciado en 1, la posicion 0 va reservada al dato de la base de datos
@@ -577,6 +597,30 @@ export class EditarPropiedadesComponent implements OnInit {
             this.barrios = ['Sevilla'];
         } else if (ciudad.value == 'Bilbao') {
             this.barrios = ['Bilbao'];
+        }
+    }
+
+    public datosPrivada() {
+        if (this.privada == false) {
+            this.privada = true;
+        } else {
+            this.privada = false
+        }
+    }
+
+    public datosFija() {
+        if (this.fija == false) {
+            this.fija = true;
+        } else {
+            this.fija = false
+        }
+    }
+
+    public datosFlexible() {
+        if (this.flexible == false) {
+            this.flexible = true;
+        } else {
+            this.flexible = false
         }
     }
 

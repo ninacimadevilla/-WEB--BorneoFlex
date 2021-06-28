@@ -303,18 +303,18 @@
               <div class="widget-content prizes-component">
                 <div class="row-types" *ngIf="propiedad.oficina_privada=='true'">
                   <div class="name">Oficina privada</div>
-                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>1-5</div>
-                  <div class="price">Desde 220€ / mes</div>
+                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_oficina_privada}}</div>
+                  <div class="price">Desde {{propiedad.precio_oficina_privada}}/mes</div>
                 </div>
                 <div class="row-types mt-3" *ngIf="propiedad.puesto_fijo=='true'">
                   <div class="name">Puesto fijo en open space</div>
-                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>1-5</div>
-                  <div class="price">Desde 220€ / mes</div>
+                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_oficina_fija}}</div>
+                  <div class="price">Desde {{propiedad.precio_oficina_fija}}/mes</div>
                 </div>
                 <div class="row-types mt-3" *ngIf="propiedad.puesto_flexible=='true'">
                   <div class="name">Puesto flexible</div>
-                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>1-5</div>
-                  <div class="price">Desde 160€ / mes</div>
+                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_puesto_flexible}}</div>
+                  <div class="price">Desde {{propiedad.precio_puesto_flexible}}/mes</div>
                 </div>
               </div>
               <div class="nearby-widget ls-widget">
