@@ -270,12 +270,16 @@ export class EditarPropiedadesComponent implements OnInit {
                         this.propertyForm.get('tipo_propiedad').setValue(this.propiedad[i].tipo_propiedad);
                         this.propertyForm.get('direccion').setValue(this.propiedad[i].direccion);
 
-                        this.propertyForm.get('precio_oficina_privada').setValue(this.propiedad[i].precio_oficina_privada);
-                        this.propertyForm.get('precio_oficina_fija').setValue(this.propiedad[i].precio_oficina_fija);
-                        this.propertyForm.get('precio_puesto_flexible').setValue(this.propiedad[i].precio_puesto_flexible);
-                        this.propertyForm.get('rango_oficina_privada').setValue(this.propiedad[i].rango_oficina_privada);
-                        this.propertyForm.get('rango_oficina_fija').setValue(this.propiedad[i].rango_oficina_fija);
-                        this.propertyForm.get('rango_puesto_flexible').setValue(this.propiedad[i].rango_puesto_flexible);
+                        if(this.privada==true){
+                            this.propertyForm.get('precio_oficina_privada').setValue(this.propiedad[i].precio_oficina_privada);
+                            this.propertyForm.get('rango_oficina_privada').setValue(this.propiedad[i].rango_oficina_privada);
+                        }else if(this.fija==true){
+                            this.propertyForm.get('precio_oficina_fija').setValue(this.propiedad[i].precio_oficina_fija);
+                            this.propertyForm.get('rango_oficina_fija').setValue(this.propiedad[i].rango_oficina_fija);
+                        }else if(this.flexible==true){
+                            this.propertyForm.get('precio_puesto_flexible').setValue(this.propiedad[i].precio_puesto_flexible);
+                            this.propertyForm.get('rango_puesto_flexible').setValue(this.propiedad[i].rango_puesto_flexible);
+                        }
 
                         //recoger los barrios
                         //creamos un contador iniciado en 1, la posicion 0 va reservada al dato de la base de datos
@@ -600,29 +604,35 @@ export class EditarPropiedadesComponent implements OnInit {
         }
     }
 
-    public datosPrivada() {
-        if (this.privada == false) {
-            this.privada = true;
-        } else {
-            this.privada = false
+    public datosPrivada(){
+        if(this.privada==false){
+          this.privada=true;
+          this.propertyForm.get('precio_oficina_privada').setValue('');
+        }else{
+          this.privada=false;
+          this.propertyForm.get('precio_oficina_privada').setValue(0);
         }
-    }
-
-    public datosFija() {
-        if (this.fija == false) {
-            this.fija = true;
-        } else {
-            this.fija = false
+      }
+    
+      public datosFija(){
+        if(this.fija==false){
+          this.fija=true;
+          this.propertyForm.get('precio_oficina_fija').setValue('');
+        }else{
+          this.fija=false;
+          this.propertyForm.get('precio_oficina_fija').setValue(0);
         }
-    }
-
-    public datosFlexible() {
-        if (this.flexible == false) {
-            this.flexible = true;
-        } else {
-            this.flexible = false
+      }
+    
+      public datosFlexible(){
+        if(this.flexible==false){
+          this.flexible=true;
+          this.propertyForm.get('precio_puesto_flexible').setValue('');
+        }else{
+          this.flexible=false;
+          this.propertyForm.get('precio_puesto_flexible').setValue(0);
         }
-    }
+      }
 
     extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
         try {

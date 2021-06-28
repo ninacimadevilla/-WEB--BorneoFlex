@@ -387,24 +387,30 @@ export class AdministrarPropiedadesComponent implements OnInit {
   public datosPrivada(){
     if(this.privada==false){
       this.privada=true;
+      this.propertyForm.get('precio_oficina_privada').setValue('');
     }else{
       this.privada=false;
+      this.propertyForm.get('precio_oficina_privada').setValue(0);
     }
   }
 
   public datosFija(){
     if(this.fija==false){
       this.fija=true;
+      this.propertyForm.get('precio_oficina_fija').setValue('');
     }else{
       this.fija=false;
+      this.propertyForm.get('precio_oficina_fija').setValue(0);
     }
   }
 
   public datosFlexible(){
     if(this.flexible==false){
       this.flexible=true;
+      this.propertyForm.get('precio_puesto_flexible').setValue('');
     }else{
       this.flexible=false;
+      this.propertyForm.get('precio_puesto_flexible').setValue(0);
     }
   }
 
