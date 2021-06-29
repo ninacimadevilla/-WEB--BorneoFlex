@@ -53,8 +53,16 @@
                                                 <option value="null" id="opts">Todos</option>
                                             </select>
                                         </div>
-
                                         <div class="form-group col-lg-4 col-md-12 col-sm-12 location">
+                                            <select name="checkbox" [(ngModel)]='checkboxFilter'>
+                                                <option value="todos" id="opts">Todos</option>
+                                                <option value="oficinas-privadas" id="opts">Oficinas Privadas</option>
+                                                <option value="puestos-fijos-espacios-abiertos" id="opts">Puestos fijos en espacios abiertos</option>
+                                                <option value="puestos-flexibles" id="opts">Puestos flexibles no fijos</option>
+                                                <option value="reuniones" id="opts">Salas de reuniones</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-2 col-md-12 col-sm-12 location">
                                             <button (click)="search()" class="estilos">BUSCAR</button>
                                         </div>
                                     </div>
@@ -64,7 +72,7 @@
                             <div class="checkbox-outer">
                                 <!--<h4>Etiquetas</h4>-->
                                 <ul class="checkboxes inline">
-                                    <li>
+                                   <!-- <li>
                                         <input id="check-a" type="checkbox" name="check" (change)="search()">
                                         <label for="check-a">Oficinas privadas</label>
                                     </li>
@@ -79,7 +87,7 @@
                                     <li>
                                         <input id="check-d" type="checkbox" name="check" (change)="search()">
                                         <label for="check-d">Salas de reuniones</label>
-                                    </li>
+                                    </li>-->
                                     <!--<li>
                                         <input id="check-a" type="checkbox" name="check" (change)="search()">
                                         <label for="check-a">Acceso 24/7</label>

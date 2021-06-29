@@ -83,6 +83,7 @@ export class ListComponent implements OnInit {
       });
     });
   }
+  checkboxFilter: string = 'todos';
   public ngOnDestroy(): void {
     if (this.mapClickListener) {
       this.mapClickListener.remove();
@@ -95,17 +96,11 @@ export class ListComponent implements OnInit {
     this.contadorComprobador = 0;
     this.propiedadesFiltradas = [];
     this.arrayComprobador = [];
-
     //recogemos los check para guardarlos en un array
-    var oficinas = <HTMLInputElement>document.getElementById("check-a");
-    var fijos = <HTMLInputElement>document.getElementById("check-b");
-    var flexibles = <HTMLInputElement>document.getElementById("check-c");
-    var reuniones = <HTMLInputElement>document.getElementById("check-d");
-
-    this.arrayBooleanos[0] = oficinas.checked;
-    this.arrayBooleanos[1] = fijos.checked;
-    this.arrayBooleanos[2] = flexibles.checked;
-    this.arrayBooleanos[3] = reuniones.checked;
+    this.arrayBooleanos[0] = this.checkboxFilter === 'oficinas-privadas';
+    this.arrayBooleanos[1] = this.checkboxFilter === 'puestos-fijos-espacios-abiertos';
+    this.arrayBooleanos[2] = this.checkboxFilter === 'puestos-flexibles';
+    this.arrayBooleanos[3] = this.checkboxFilter === 'reuniones';
 
     //recorremos el array y le pasamos la posicion del check a otro array
     for (var i = 0; i < 4; i++) {
