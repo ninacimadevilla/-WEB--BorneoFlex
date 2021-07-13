@@ -4233,7 +4233,7 @@ section hr {
 .banner-section {
   position: relative;
   display: block;
-  height: 960px;
+  height: 80vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4270,7 +4270,7 @@ section hr {
   background: linear-gradient(135deg, #080e7b 0%, #3c1da8 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#080e7b', endColorstr='#3c1da8',GradientType=1 );
   content: "";
-  opacity: 0.85;
+  opacity: 0.70;
 }
 
 .background-layer.pink-gradient:before {
@@ -4549,10 +4549,6 @@ section hr {
 /*================================
  	Banner Section / Style Three
 ==================================*/
-.banner-section.style-three .content-box {
-  margin-top: 180px;
-}
-
 /*================================
  	Banner Section / Style Four
 ==================================*/
@@ -6770,8 +6766,8 @@ section hr {
   display: flex;
   margin-bottom: 30px;
   -webkit-box-pack: start;
-  -ms-flex-pack: start;
-      justify-content: flex-start;
+  -ms-flex-pack: end;
+      justify-content: flex-end;
   -webkit-box-align: center;
   -ms-flex-align: center;
       align-items: center;
