@@ -105,9 +105,9 @@
                   <li *ngIf="propiedad.oficina_privada=='true'"><i class="fas fa-building icon"></i>
                     Oficina privada</li>
                   <li *ngIf="propiedad.puesto_fijo=='true'"><i class="fas fa-toolbox icon"></i> Puesto
-                    fijo</li>
+                    permanente</li>
                   <li *ngIf="propiedad.puesto_flexible=='true'"><i class="far fa-building icon"></i>
-                    Puesto flexible</li>
+                    Puesto no fijo</li>
                 </ul>
               </div>
             </div>
@@ -301,20 +301,20 @@
                 <h4><span class="icon flaticon-map"></span> Espacios disponibles</h4>
               </div>
               <div class="widget-content prizes-component">
+                <div class="row-types mt-3" *ngIf="propiedad.puesto_flexible=='true'">
+                  <div class="name">Puesto no fijo</div>
+                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_puesto_flexible}}</div>
+                  <div class="price">Desde {{propiedad.precio_puesto_flexible}}/mes</div>
+                </div>
+                <div class="row-types mt-3" *ngIf="propiedad.puesto_fijo=='true'">
+                  <div class="name">Puesto permanente</div>
+                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_oficina_fija}}</div>
+                  <div class="price">Desde {{propiedad.precio_oficina_fija}}/mes</div>
+                </div>
                 <div class="row-types" *ngIf="propiedad.oficina_privada=='true'">
                   <div class="name">Oficina privada</div>
                   <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_oficina_privada}}</div>
                   <div class="price">Desde {{propiedad.precio_oficina_privada}}/mes</div>
-                </div>
-                <div class="row-types mt-3" *ngIf="propiedad.puesto_fijo=='true'">
-                  <div class="name">Puesto fijo en open space</div>
-                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_oficina_fija}}</div>
-                  <div class="price">Desde {{propiedad.precio_oficina_fija}}/mes</div>
-                </div>
-                <div class="row-types mt-3" *ngIf="propiedad.puesto_flexible=='true'">
-                  <div class="name">Puesto flexible</div>
-                  <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_puesto_flexible}}</div>
-                  <div class="price">Desde {{propiedad.precio_puesto_flexible}}/mes</div>
                 </div>
               </div>
               <div class="nearby-widget ls-widget">
