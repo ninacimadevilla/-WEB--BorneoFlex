@@ -56,4 +56,8 @@ export class PropiedadService{
     listarimagenes(id):Observable<any> {
         return this._http.get(this.url+'/images/owned/search/'+id);
     }
+
+    listadoCompletoImagenes(id):Observable<any> {
+        return this._http.get(this.url+'/images/owned/searchAll/'+id);
+    }
 }

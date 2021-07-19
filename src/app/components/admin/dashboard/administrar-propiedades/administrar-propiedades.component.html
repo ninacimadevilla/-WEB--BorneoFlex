@@ -22,10 +22,25 @@
                                 propiedad</label>
                             <span class="uploadButton-file-name"></span>
                         </div>
-                        <div *ngIf="previsualizacion">
-                            <img [src]="visualizar" alt="" class="previsualizar ml-2"
-                                *ngFor="let visualizar of previsualizacion">
+
+                        <div *ngIf="previsualizacion" id="previsualizar">
+                            <h5>IMAGENES A AÑADIR:</h5>
+                            <div *ngFor="let visualizar of previsualizacion; let i=index" class="d-inline">
+                                <img [src]="visualizar" alt="" class="previsualizar ml-2">
+                                <button type="button" class="posicion" (click)="borrar(i)"><i class="far fa-times-circle"></i></button>
+                            </div>
                         </div>
+
+                        <div *ngIf="imagenesguardadas!=0">
+                            <h5>IMAGENES AÑADIDAS:</h5>
+                            <div *ngFor="let imagenes of imagenesComprobar" class="d-inline">
+                                <img src="http://borneoflex.es/borneo/uploads/{{imagenes.imagen}}" alt=""
+                                    class="previsualizar ml-2">
+                                <button type="button" class="posicion1" (click)="borrarGuardadas(imagenes.id)"><i
+                                        class="far fa-times-circle"></i></button>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- Formulario -->
@@ -54,6 +69,14 @@
                                     placeholder="Capacidad" required>
                                 <small *ngIf="personasNoValido" class="text-danger">Sin letras ni caracteres
                                     especiales</small>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <label>Telefono</label>
+                                <input type="text" formControlName="telefono" class="form-control"
+                                    placeholder="Telefono" required>
+                                <small *ngIf="telefonoNoValido" class="text-danger">solo numeros y en total nueve
+                                    numeros</small>
                             </div>
 
                             <!--<div class="col-lg-2">
@@ -238,8 +261,8 @@
                                             <div class="col-md-6 col-12">
                                                 <label>Precio</label>
                                                 <input type="text" formControlName="precio_puesto_flexible"
-                                                    class="form-control" placeholder="Precio para puesto flexible no fijo"
-                                                    required>
+                                                    class="form-control"
+                                                    placeholder="Precio para puesto flexible no fijo" required>
                                             </div>
                                         </div>
                                     </div>
@@ -335,14 +358,6 @@
                                 <!--<input type="text" formControlName="barrio" class="form-control"
                                     placeholder="barrio de la ciudad" required>
                                 <small *ngIf="barrioNoValido" class="text-danger">No poner carácteres especiales</small>-->
-                            </div>
-
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <label>Telefono</label>
-                                <input type="text" formControlName="telefono" class="form-control"
-                                    placeholder="Telefono" required>
-                                <small *ngIf="telefonoNoValido" class="text-danger">solo numeros y en total nueve
-                                    numeros</small>
                             </div>
                         </div>
 

@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild,  TemplateRef } from '@angular/core';
-import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import {PropiedadService} from '../../../../services/propiedad.service';
-import {Owned} from '../../../../models/owned';
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { PropiedadService } from '../../../../services/propiedad.service';
+import { Owned } from '../../../../models/owned';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-listar-propiedades',
@@ -13,44 +13,43 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 })
 export class ListarPropiedadesComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-  public propiedades:Array<Owned>;
+  public propiedades: Array<Owned>;
   public idModal;
-  public page=1;
+  public page = 1;
 
-  constructor(private toastr: ToastrService, private _route:ActivatedRoute,private _router:Router, 
-    private _propiedadService: PropiedadService, private modal: NgbModal) {}
+  constructor(private toastr: ToastrService, private _route: ActivatedRoute, private _router: Router,
+    private _propiedadService: PropiedadService, private modal: NgbModal) { }
 
   abrirModal(id) {
     this.modal.open(this.modalContent, { size: 'lg' });
-    this.idModal=id;
+    this.idModal = id;
   }
 
-  acceptDelete(id){
+  acceptDelete(id) {
     this._propiedadService.deleteOwned(id).subscribe(
       response => {
         this.getOwned();
       },
-      error =>{
-          console.log(<any> error);
+      error => {
+        console.log(<any>error);
       }
     )
-    this.toastr.success('La propiedad ha sido eliminada','',{ "positionClass" : "toast-bottom-right"});
+    this.toastr.success('La propiedad ha sido eliminada', '', { "positionClass": "toast-bottom-right" });
     this.modal.dismissAll();
   }
 
-  getOwned(){
+  getOwned() {
     this._propiedadService.getOwned().subscribe(
-        result => {
-          console.log(result)
-            this.propiedades = result;
-        },
-        error => {
-            console.log(<any>error);
-        }
+      result => {
+        this.propiedades = result;
+      },
+      error => {
+        console.log(<any>error);
+      }
     );
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.getOwned();
   }
 

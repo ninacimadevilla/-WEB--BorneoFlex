@@ -29,6 +29,10 @@ export class EditarPropiedadesComponent implements OnInit {
     public barrios: Array<string> = [];
     public barrioBarcelona = ['Centro Ciudad', 'Alta Diagonal', 'Paseo de Gracia', 'Ciutat Vella', '22@', 'Extrarradio'];
     public barrioMadrid = ['Salamanca', 'Retiro', 'Chamberi', 'Moncloa', 'Chamartin', 'Cuzco-Cuatro Torres', 'Azca', 'Centro', 'Atocha', 'A1', 'A2', 'A6', 'Periferia'];
+    public archivo = [];
+    public rango = 0;
+    public imagenesguardadas = 0;
+    public submit: boolean = false;
 
     private geoCoder;
     @ViewChild("search") public searchElementRef: ElementRef;
@@ -249,19 +253,19 @@ export class EditarPropiedadesComponent implements OnInit {
                         }
                         if (this.propiedad[i].oficina_privada == "true") {
                             this.propertyForm.get('oficina_privada').setValue(true);
-                            this.privada=true;
+                            this.privada = true;
                         } else {
                             this.propertyForm.get('oficina_privada').setValue(false);
                         }
                         if (this.propiedad[i].puesto_fijo == "true") {
                             this.propertyForm.get('puesto_fijo').setValue(true);
-                            this.fija=true;
+                            this.fija = true;
                         } else {
                             this.propertyForm.get('puesto_fijo').setValue(false);
                         }
                         if (this.propiedad[i].puesto_flexible == "true") {
                             this.propertyForm.get('puesto_flexible').setValue(true);
-                            this.flexible=true;
+                            this.flexible = true;
                         } else {
                             this.propertyForm.get('puesto_flexible').setValue(false);
                         }
@@ -270,13 +274,13 @@ export class EditarPropiedadesComponent implements OnInit {
                         this.propertyForm.get('tipo_propiedad').setValue(this.propiedad[i].tipo_propiedad);
                         this.propertyForm.get('direccion').setValue(this.propiedad[i].direccion);
 
-                        if(this.privada==true){
+                        if (this.privada == true) {
                             this.propertyForm.get('precio_oficina_privada').setValue(this.propiedad[i].precio_oficina_privada);
                             this.propertyForm.get('rango_oficina_privada').setValue(this.propiedad[i].rango_oficina_privada);
-                        }else if(this.fija==true){
+                        } else if (this.fija == true) {
                             this.propertyForm.get('precio_oficina_fija').setValue(this.propiedad[i].precio_oficina_fija);
                             this.propertyForm.get('rango_oficina_fija').setValue(this.propiedad[i].rango_oficina_fija);
-                        }else if(this.flexible==true){
+                        } else if (this.flexible == true) {
                             this.propertyForm.get('precio_puesto_flexible').setValue(this.propiedad[i].precio_puesto_flexible);
                             this.propertyForm.get('rango_puesto_flexible').setValue(this.propiedad[i].rango_puesto_flexible);
                         }
@@ -320,6 +324,7 @@ export class EditarPropiedadesComponent implements OnInit {
                             this.propertyForm.get('lng').setValue(this.propiedad[i].lng);
                         }
                     }
+                    this.listarImagenesCompletas();
                 }, error => {
                     console.log(<any>error);
                 }
@@ -327,7 +332,145 @@ export class EditarPropiedadesComponent implements OnInit {
         });
     }
 
+    listarImagenesCompletas() {
+        this._route.params.forEach((params: Params) => {
+            let id = params['id'];
+            this._propiedadService.listadoCompletoImagenes(id).subscribe(
+                response => {
+                    this.imagenesComprobar = response;
+
+                    if (this.imagenesComprobar.length > 0) {
+                        this.imagenesguardadas = 1;
+                        this.imagenesComprobar.forEach(element => {
+                            element.imagen = element.imagen.slice(2, -2);
+                        });
+                    }
+
+                }, error => {
+                    console.log(<any>error);
+                }
+            );
+        });
+    }
+
+    borrarGuardadas(idImagen) {
+        this._propiedadService.deleteImagenes(idImagen).subscribe(
+            response => {
+                this.listarImagenesCompletas();
+
+            },
+            error => {
+                console.log(<any>error);
+            }
+        );
+
+    }
+
+    fileChangeEvent(fileInput: any) {
+        /*variable para guardar el nombre de las imagenes
+        var archivo = [];*/
+
+        //rellenamos la variable con las imagenes que se acaban de enlazar
+        if (this.archivo.length <= 0) {
+            for (let i = 0; i < fileInput.target.files.length; i++) {
+                this.archivo[i] = fileInput.target.files[i];
+            }
+        } else {
+            let contador = 0;
+            for (let i = this.rango; i < (fileInput.target.files.length + this.rango); i++) {
+                this.archivo[i] = fileInput.target.files[contador];
+                contador++;
+            }
+        }
+
+        if (this.rango == 0) {
+            this.rango = fileInput.target.files.length;
+        } else {
+            this.rango = fileInput.target.files.length + this.rango;
+        }
+
+        this.mostrarImagenes(this.archivo);
+    }
+
+    borrar(dato) {
+        for (let i = dato; i < this.archivo.length; i++) {
+            if (i == (this.archivo.length - 1)) {
+                this.archivo.splice(i);
+            } else {
+                this.archivo[i] = this.archivo[i + 1];
+            }
+        }
+        this.rango = this.rango - 1;
+
+        this.mostrarImagenes(this.archivo);
+    }
+
+    mostrarImagenes(archivo) {
+        //contador para recorrer el array vacio y llenarlo (el array donde se guardan las imagenes)
+        var contadorAyudaImagenes = 0;
+        this.previsualizacion = [];
+
+        this.archivo = archivo;
+        //recorremos este array y vamos leyendo imagen por imagen para ir previsualizandola
+        this.archivo.forEach(element => {
+            this.extraerBase64(element).then((imagen: any) => {
+                //guardamos la base de la imagen para previsualizarla
+                this.previsualizacion[contadorAyudaImagenes] = imagen.base;
+                //aumentamos el contador
+                contadorAyudaImagenes++;
+            });
+        });
+    }
+
+    cambiarBarrios() {
+        var ciudad = <HTMLInputElement>document.getElementById("ciudad");
+        if (ciudad.value == 'Barcelona') {
+            this.barrios = ['Centro Ciudad', 'Alta Diagonal', 'Paseo de Gracia', 'Ciutat Vella', '22@', 'Extrarradio'];
+        } else if (ciudad.value == 'Madrid') {
+            this.barrios = ['Salamanca', 'Retiro', 'Chamberi', 'Moncloa', 'Chamartin', 'Cuzco-Cuatro Torres', 'Azca', 'Centro', 'Atocha', 'A1', 'A2', 'A6', 'Periferia'];
+        } else if (ciudad.value == 'Oviedo') {
+            this.barrios = ['Oviedo'];
+        } else if (ciudad.value == 'Malaga') {
+            this.barrios = ['Malaga'];
+        } else if (ciudad.value == 'Valencia') {
+            this.barrios = ['Valencia'];
+        } else if (ciudad.value == 'Sevilla') {
+            this.barrios = ['Sevilla'];
+        } else if (ciudad.value == 'Bilbao') {
+            this.barrios = ['Bilbao'];
+        }
+    }
+
+    public datosPrivada() {
+        if (this.privada == false) {
+            this.privada = true;
+        } else {
+            this.privada = false;
+        }
+    }
+
+    public datosFija() {
+        if (this.fija == false) {
+            this.fija = true;
+        } else {
+            this.fija = false;
+        }
+    }
+
+    public datosFlexible() {
+        if (this.flexible == false) {
+            this.flexible = true;
+        } else {
+            this.flexible = false;
+        }
+    }
+
     onSubmit() {
+        //evento para capturar la imagen
+        for (let i = 0; i < this.archivo.length; i++) {
+            this.filesToUpload.push(this.archivo[i]);
+        }
+
         if (this.filesToUpload.length > 0) {
             this._propiedadService.makeFileRequest(this.filesToUpload).subscribe(
                 result => {
@@ -495,34 +638,15 @@ export class EditarPropiedadesComponent implements OnInit {
                     if (this.filesToUpload.length == 0) {
                         this._router.navigate(['admin/dashboard/listPropertys']);
                     } else {
-                        this.listarImagenes();
-                    }
-                },
-
-                error => {
-                    console.log(<any>error);
-                }
-            );
-        });
-    }
-
-    listarImagenes() {
-        this._route.params.forEach((params: Params) => {
-            let id = params['id'];
-            this._propiedadService.listarimagenes(id).subscribe(
-                response => {
-                    this.imagenesComprobar = response;
-
-                    if (this.imagenesComprobar.length == 0) {
                         for (let i = 0; i < this.filesToUpload.length; i++) {
                             var json = JSON.stringify(this.filesToUpload[i]);
                             this.img = new Imagenes(null, json, id);
                             this.guardarImagen();
                         }
-                    } else {
-                        this.borrarImagen();
                     }
-                }, error => {
+                },
+
+                error => {
                     console.log(<any>error);
                 }
             );
@@ -539,94 +663,6 @@ export class EditarPropiedadesComponent implements OnInit {
             }
         );
     }
-
-    borrarImagen() {
-        this._route.params.forEach((params: Params) => {
-            let id = params['id'];
-            this._propiedadService.deleteImagenes(id).subscribe(
-                result => {
-                    for (let i = 0; i < this.filesToUpload.length; i++) {
-                        var json = JSON.stringify(this.filesToUpload[i]);
-                        this.img = new Imagenes(null, json, id);
-                        this.guardarImagen();
-                    }
-                    this._router.navigate(['admin/dashboard/listPropertys']);
-                },
-                error => {
-                    console.log(<any>error);
-                }
-            );
-        });
-    }
-
-    fileChangeEvent(fileInput: any) {
-        //variable para guardar el nombre de las imagenes
-        var archivo = [];
-        //contador para recorrer el array vacio y llenarlo (el array donde se guardan las imagenes)
-        var contadorAyudaImagenes = 0;
-
-        //rellenamos la variable con las imagenes que se acaban de enlazar
-        for (let i = 0; i < fileInput.target.files.length; i++) {
-            archivo[i] = fileInput.target.files[i];
-        }
-
-        //recorremos este array y vamos leyendo imagen por imagen para ir previsualizandola
-        archivo.forEach(element => {
-            this.extraerBase64(element).then((imagen: any) => {
-                //guardamos la base de la imagen para previsualizarla
-                this.previsualizacion[contadorAyudaImagenes] = imagen.base;
-                //aumentamos el contador
-                contadorAyudaImagenes++;
-            });
-        });
-
-        for (let i = 0; i < fileInput.target.files.length; i++) {
-            this.filesToUpload.push(fileInput.target.files[i]);
-        }
-    }
-
-    cambiarBarrios() {
-        var ciudad = <HTMLInputElement>document.getElementById("ciudad");
-        if (ciudad.value == 'Barcelona') {
-            this.barrios = ['Centro Ciudad', 'Alta Diagonal', 'Paseo de Gracia', 'Ciutat Vella', '22@', 'Extrarradio'];
-        } else if (ciudad.value == 'Madrid') {
-            this.barrios = ['Salamanca', 'Retiro', 'Chamberi', 'Moncloa', 'Chamartin', 'Cuzco-Cuatro Torres', 'Azca', 'Centro', 'Atocha', 'A1', 'A2', 'A6', 'Periferia'];
-        } else if (ciudad.value == 'Oviedo') {
-            this.barrios = ['Oviedo'];
-        } else if (ciudad.value == 'Malaga') {
-            this.barrios = ['Malaga'];
-        } else if (ciudad.value == 'Valencia') {
-            this.barrios = ['Valencia'];
-        } else if (ciudad.value == 'Sevilla') {
-            this.barrios = ['Sevilla'];
-        } else if (ciudad.value == 'Bilbao') {
-            this.barrios = ['Bilbao'];
-        }
-    }
-
-    public datosPrivada(){
-        if(this.privada==false){
-          this.privada=true;
-        }else{
-          this.privada=false;
-        }
-      }
-    
-      public datosFija(){
-        if(this.fija==false){
-          this.fija=true;
-        }else{
-          this.fija=false;
-        }
-      }
-    
-      public datosFlexible(){
-        if(this.flexible==false){
-          this.flexible=true;
-        }else{
-          this.flexible=false;
-        }
-      }
 
     extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
         try {

@@ -23,10 +23,13 @@ export class AdministrarPropiedadesComponent implements OnInit {
   public img: Imagenes;
   public idPropiedades;
   public previsualizacion: Array<string> = [];
-  public barrios:Array<string>= ['Sin barrio'];
-  public privada:boolean=false;
-  public fija:boolean=false;
-  public flexible:boolean=false;
+  public barrios: Array<string> = ['Sin barrio'];
+  public privada: boolean = false;
+  public fija: boolean = false;
+  public flexible: boolean = false;
+  public archivo = [];
+  public rango = 0;
+  public imagenesguardadas=0;
 
   private geoCoder;
   @ViewChild("search") public searchElementRef: ElementRef;
@@ -119,18 +122,52 @@ export class AdministrarPropiedadesComponent implements OnInit {
   }
 
   fileChangeEvent(fileInput: any) {
-    //variable para guardar el nombre de las imagenes
-    var archivo = [];
-    //contador para recorrer el array vacio y llenarlo (el array donde se guardan las imagenes)
-    var contadorAyudaImagenes = 0;
+    /*variable para guardar el nombre de las imagenes
+    var archivo = [];*/
 
     //rellenamos la variable con las imagenes que se acaban de enlazar
-    for (let i = 0; i < fileInput.target.files.length; i++) {
-      archivo[i] = fileInput.target.files[i];
+    if (this.archivo.length <= 0) {
+      for (let i = 0; i < fileInput.target.files.length; i++) {
+        this.archivo[i] = fileInput.target.files[i];
+      }
+    } else {
+      let contador = 0;
+      for (let i = this.rango; i < (fileInput.target.files.length + this.rango); i++) {
+        this.archivo[i] = fileInput.target.files[contador];
+        contador++;
+      }
     }
 
+    if (this.rango == 0) {
+      this.rango = fileInput.target.files.length;
+    } else {
+      this.rango = fileInput.target.files.length + this.rango;
+    }
+
+    this.mostrarImagenes(this.archivo);
+  }
+
+  borrar(dato) {
+    for (let i = dato; i < this.archivo.length; i++) {
+      if (i == (this.archivo.length - 1)) {
+        this.archivo.splice(i);
+      } else {
+        this.archivo[i] = this.archivo[i + 1];
+      }
+    }
+    this.rango = this.rango - 1;
+
+    this.mostrarImagenes(this.archivo);
+  }
+
+  mostrarImagenes(archivo) {
+    //contador para recorrer el array vacio y llenarlo (el array donde se guardan las imagenes)
+    var contadorAyudaImagenes = 0;
+    this.previsualizacion = [];
+
+    this.archivo = archivo;
     //recorremos este array y vamos leyendo imagen por imagen para ir previsualizandola
-    archivo.forEach(element => {
+    this.archivo.forEach(element => {
       this.extraerBase64(element).then((imagen: any) => {
         //guardamos la base de la imagen para previsualizarla
         this.previsualizacion[contadorAyudaImagenes] = imagen.base;
@@ -138,14 +175,16 @@ export class AdministrarPropiedadesComponent implements OnInit {
         contadorAyudaImagenes++;
       });
     });
-
-    //evento para capturar la imagen
-    for (let i = 0; i < fileInput.target.files.length; i++) {
-      this.filesToUpload.push(fileInput.target.files[i]);
-    }
   }
 
   onSubmit() {
+    //evento para capturar la imagen
+    for (let i = 0; i < this.archivo.length; i++) {
+      this.filesToUpload.push(this.archivo[i]);
+    }
+
+    console.log(this.archivo.length);
+
     if (this.filesToUpload.length > 0) {
       this._propiedadService.makeFileRequest(this.filesToUpload).subscribe(
         result => {
@@ -358,56 +397,56 @@ export class AdministrarPropiedadesComponent implements OnInit {
     );
   }
 
-  cambiarBarrios(){
-    var ciudad= <HTMLInputElement>document.getElementById("ciudad");
-    if(ciudad.value=='Barcelona'){
-      this.barrios=['Centro Ciudad','Alta Diagonal','Paseo de Gracia','Ciutat Vella','22@','Extrarradio'];
+  cambiarBarrios() {
+    var ciudad = <HTMLInputElement>document.getElementById("ciudad");
+    if (ciudad.value == 'Barcelona') {
+      this.barrios = ['Centro Ciudad', 'Alta Diagonal', 'Paseo de Gracia', 'Ciutat Vella', '22@', 'Extrarradio'];
       this.propertyForm.get('barrio').setValue('Centro Ciudad');
-    }else if(ciudad.value=='Madrid'){
-      this.barrios=['Salamanca','Retiro','Chamberi','Moncloa','Chamartin','Cuzco-Cuatro Torres','Azca','Centro','Atocha','A1','A2','A6','Periferia'];
+    } else if (ciudad.value == 'Madrid') {
+      this.barrios = ['Salamanca', 'Retiro', 'Chamberi', 'Moncloa', 'Chamartin', 'Cuzco-Cuatro Torres', 'Azca', 'Centro', 'Atocha', 'A1', 'A2', 'A6', 'Periferia'];
       this.propertyForm.get('barrio').setValue('Salamanca');
-    }else if(ciudad.value=='Oviedo'){
-      this.barrios=['Oviedo'];
+    } else if (ciudad.value == 'Oviedo') {
+      this.barrios = ['Oviedo'];
       this.propertyForm.get('barrio').setValue('Oviedo');
-    }else if(ciudad.value=='Malaga'){
-      this.barrios=['Malaga'];
+    } else if (ciudad.value == 'Malaga') {
+      this.barrios = ['Malaga'];
       this.propertyForm.get('barrio').setValue('Malaga');
-    }else if(ciudad.value=='Valencia'){
-      this.barrios=['Valencia'];
+    } else if (ciudad.value == 'Valencia') {
+      this.barrios = ['Valencia'];
       this.propertyForm.get('barrio').setValue('Valencia');
-    }else if(ciudad.value=='Sevilla'){
-      this.barrios=['Sevilla'];
+    } else if (ciudad.value == 'Sevilla') {
+      this.barrios = ['Sevilla'];
       this.propertyForm.get('barrio').setValue('Sevilla');
-    }else if(ciudad.value=='Bilbao'){
-      this.barrios=['Bilbao'];
+    } else if (ciudad.value == 'Bilbao') {
+      this.barrios = ['Bilbao'];
       this.propertyForm.get('barrio').setValue('Bilbao');
     }
   }
 
-  public datosPrivada(){
-    if(this.privada==false){
-      this.privada=true;
-    }else{
-      this.privada=false;
+  public datosPrivada() {
+    if (this.privada == false) {
+      this.privada = true;
+    } else {
+      this.privada = false;
     }
   }
 
-  public datosFija(){
-    if(this.fija==false){
-      this.fija=true;
+  public datosFija() {
+    if (this.fija == false) {
+      this.fija = true;
       //this.propertyForm.get('precio_oficina_fija').setValue('');
-    }else{
-      this.fija=false;
+    } else {
+      this.fija = false;
       //this.propertyForm.get('precio_oficina_fija').setValue(0);
     }
   }
 
-  public datosFlexible(){
-    if(this.flexible==false){
-      this.flexible=true;
+  public datosFlexible() {
+    if (this.flexible == false) {
+      this.flexible = true;
       //this.propertyForm.get('precio_puesto_flexible').setValue('');
-    }else{
-      this.flexible=false;
+    } else {
+      this.flexible = false;
       //this.propertyForm.get('precio_puesto_flexible').setValue(0);
     }
   }

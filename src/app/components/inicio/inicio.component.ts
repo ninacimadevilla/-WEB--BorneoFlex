@@ -24,11 +24,10 @@ export class InicioComponent implements OnInit {
   public ciudad;
   public page: number = 1;
   public contador;
-  public contadorOviedo = 0;
-  public contadorSevilla = 0;
-  public contadorValencia = 0;
-  public contadorMalaga = 0;
-  public contadorBilbao = 0;
+  public contadorSalamanca = 0;
+  public contadorAtocha = 0;
+  public contadorExtrarradio = 0;
+  public contador22 = 0;
   public contadorMadrid = 0;
   public contadorBarcelona = 0;
   public images: Array<Imagenes>;
@@ -60,7 +59,11 @@ export class InicioComponent implements OnInit {
     this._router.navigate(['/view/list', "Madrid"]);
   }
 
-  buscarBilbao() {
+  buscarBarcelona() {
+    this._router.navigate(['/view/list', "Barcelona"]);
+  }
+
+  /*buscarBilbao() {
     this._router.navigate(['/view/list', "Bilbao"]);
   }
 
@@ -74,15 +77,13 @@ export class InicioComponent implements OnInit {
 
   buscarValencia() {
     this._router.navigate(['/view/list', "Valencia"]);
-  }
+  }*/
 
-  buscarSevilla() {
+  /*buscarSevilla() {
     this._router.navigate(['/view/list', "Sevilla"]);
-  }
+  }*/
 
-  buscarBarcelona() {
-    this._router.navigate(['/view/list', "Barcelona"]);
-  }
+
 
   Opciones(opc1) {
     this.opc = opc1;
@@ -94,20 +95,20 @@ export class InicioComponent implements OnInit {
       result => {
         this.propiedades = result;
         this.propiedades.forEach(element => {
-          if (element.ciudad == "Oviedo") {
-            this.contadorOviedo++;
-          } else if (element.ciudad == "Sevilla") {
-            this.contadorSevilla++;
-          } else if (element.ciudad == "Valencia") {
-            this.contadorValencia++;
-          } else if (element.ciudad == "Malaga") {
-            this.contadorMalaga++;
-          } else if (element.ciudad == "Bilbao") {
-            this.contadorBilbao++;
-          } else if (element.ciudad == "Madrid") {
+          if (element.ciudad == "Madrid") {
             this.contadorMadrid++;
+            if (element.barrio == "Salamanca") {
+              this.contadorSalamanca++;
+            } else if (element.barrio == "Atocha") {
+              this.contadorAtocha++;
+            }
           } else if (element.ciudad == "Barcelona") {
             this.contadorBarcelona++;
+            if (element.barrio == "Extrarradio") {
+              this.contadorExtrarradio++;
+            } if (element.barrio == "22@") {
+              this.contador22++;
+            }
           }
 
           if (this.contador < 3) {

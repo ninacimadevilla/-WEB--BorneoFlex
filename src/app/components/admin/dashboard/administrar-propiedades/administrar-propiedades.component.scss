@@ -128,13 +128,39 @@ section {
 }
 
 .previsualizar{
-    width: 100px;
+    width: 120px;
     height: 100px;
 }
 
-.previsualizar:hover{
-    transform: scale(1.2);
+.posicion{
+    position: absolute;
+    top: 171px;
+    margin-left: -25px;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
 }
+
+.posicion:hover{
+    color: red;
+}
+
+.posicion1{
+    position: relative;
+    top: -30px;
+    margin-left: -25px;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.posicion1:hover{
+    color: red;
+}
+
+/*.previsualizar:hover{
+    transform: scale(1.2);
+}*/
 
 .contener{
     height: 75vh;

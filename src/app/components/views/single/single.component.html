@@ -304,17 +304,41 @@
                 <div class="row-types mt-3" *ngIf="propiedad.puesto_flexible=='true'">
                   <div class="name">Puesto no fijo</div>
                   <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_puesto_flexible}}</div>
-                  <div class="price">Desde {{propiedad.precio_puesto_flexible}}/mes</div>
+
+                  <div *ngIf="propiedad.precio_puesto_flexible!=0">
+                    <div class="price">Desde {{propiedad.precio_puesto_flexible}}/mes</div>
+                  </div>
+
+                  <div *ngIf="propiedad.precio_puesto_flexible==0">
+                    <button class="btn btn-info" routerLink="/contacto">Consultar</button>
+                  </div>
+
                 </div>
                 <div class="row-types mt-3" *ngIf="propiedad.puesto_fijo=='true'">
                   <div class="name">Puesto permanente</div>
                   <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_oficina_fija}}</div>
-                  <div class="price">Desde {{propiedad.precio_oficina_fija}}/mes</div>
+
+                  <div *ngIf="propiedad.precio_oficina_fija!=0">
+                    <div class="price">Desde {{propiedad.precio_oficina_fija}}/mes</div>
+                  </div>
+                  
+                  <div *ngIf="propiedad.precio_oficina_fija==0">
+                    <button class="btn btn-info" routerLink="/contacto">Consultar</button>
+                  </div>
+
                 </div>
                 <div class="row-types" *ngIf="propiedad.oficina_privada=='true'">
                   <div class="name">Oficina privada</div>
                   <div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_oficina_privada}}</div>
-                  <div class="price">Desde {{propiedad.precio_oficina_privada}}/mes</div>
+
+                  <div *ngIf="propiedad.precio_oficina_privada!=0">
+                    <div class="price">Desde {{propiedad.precio_oficina_privada}}/mes</div>
+                  </div>
+                  
+                  <div *ngIf="propiedad.precio_oficina_privada==0">
+                    <button class="btn btn-info" routerLink="/contacto">Consultar</button>
+                  </div>
+
                 </div>
               </div>
               <div class="nearby-widget ls-widget">
