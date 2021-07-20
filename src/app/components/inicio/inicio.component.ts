@@ -35,6 +35,7 @@ export class InicioComponent implements OnInit {
   public id;
   public contadorImagenes = 0;
   public urlImage;
+  public contador1=0;
 
   constructor(private toastr: ToastrService, private _route: ActivatedRoute, private _router: Router,
     private _propiedadService: PropiedadService, private modal: NgbModal, config: NgbCarouselConfig) {
@@ -114,8 +115,8 @@ export class InicioComponent implements OnInit {
           if (this.contador < 3) {
             this.id = element.id;
             this.propiedadesFiltradas[this.contador] = element;
+            this.setImg(element.id, element);
           }
-          this.setImg(element.id, element);
 
           this.contador++;
         });
@@ -134,11 +135,24 @@ export class InicioComponent implements OnInit {
           if (response.length === 0) {
             element.imgUrl = urlDefault;
           } else {
-            // Revisar porque la imagen viene en este formato: ["imgurl"]
-            element.imgUrl = 'http://borneoflex.es/borneo/uploads/' + response[0].imagen.replace('[', '').replace(']', '').replace('"', '').replace('"', '');
-          }
+            for(let i=0; i<response.length; i++){
+              if(response[i].destacado!=1){
+                this.contador1++;
+              }else if(response[i].destacado==1){
+                break;
+              }
+            }
 
+            if(this.contador1==response.length && response[this.contador1].destacado!=1){
+              element.imgUrl = urlDefault;
+            }else{
+              element.imgUrl = 'http://borneoflex.es/borneo/uploads/' + response[this.contador1].imagen.replace('[', '').replace(']', '').replace('"', '').replace('"', '');
+            }
+            // Revisar porque la imagen viene en este formato: ["imgurl"]
+          }
+          this.contador1=0;
         }
+        
       },
       error => {
         console.log(<any>error);

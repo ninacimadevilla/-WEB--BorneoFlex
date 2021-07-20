@@ -84,7 +84,7 @@ export class EditarPropiedadesComponent implements OnInit {
     }
 
     propertyForm = new FormGroup({
-        nombre: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-ZñÑ]{3,50}$")]),
+        nombre: new FormControl(''),
         descripcion: new FormControl(''),
         personas: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{1,50}$")]),
         access: new FormControl(false),
@@ -496,12 +496,10 @@ export class EditarPropiedadesComponent implements OnInit {
             this.filesToUpload.push(this.archivo[i]);
         }
 
-        console.log(this.destacada);
-
-        if (this.destacada != []) {
+        if (this.destacada != undefined && this.destacada != "") {
             this.filesToUpload.push(this.destacada);
-            for(let i=0; i<this.imagenesComprobar.length; i++){
-                if(this.imagenesComprobar[i].destacado==1){
+            for (let i = 0; i < this.imagenesComprobar.length; i++) {
+                if (this.imagenesComprobar[i].destacado == 1) {
                     this.borrarGuardadas(this.imagenesComprobar[i].id);
                 }
             }
@@ -675,15 +673,22 @@ export class EditarPropiedadesComponent implements OnInit {
                         this._router.navigate(['admin/dashboard/listPropertys']);
                     } else {
                         for (let i = 0; i < this.filesToUpload.length; i++) {
-                            if (i < (this.filesToUpload.length - 1)) {
+                            if (this.destacada) {
+                                if (i < (this.filesToUpload.length - 1)) {
+                                    var json = JSON.stringify(this.filesToUpload[i]);
+                                    this.img = new Imagenes(null, json, 0, id);
+                                    this.guardarImagen();
+                                } else if (i == (this.filesToUpload.length - 1)) {
+                                    var json = JSON.stringify(this.filesToUpload[i]);
+                                    this.img = new Imagenes(null, json, 1, id);
+                                    this.guardarImagen();
+                                }
+                            } else {
                                 var json = JSON.stringify(this.filesToUpload[i]);
                                 this.img = new Imagenes(null, json, 0, id);
                                 this.guardarImagen();
-                            } else if (i == (this.filesToUpload.length - 1)) {
-                                var json = JSON.stringify(this.filesToUpload[i]);
-                                this.img = new Imagenes(null, json, 1, id);
-                                this.guardarImagen();
                             }
+
                         }
                     }
                 },

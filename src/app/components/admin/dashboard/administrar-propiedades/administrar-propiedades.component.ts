@@ -22,7 +22,7 @@ export class AdministrarPropiedadesComponent implements OnInit {
   public filesToUpload: any = [];
   public img: Imagenes;
   public idPropiedades;
-  public previsualizacion: Array<string>=[];
+  public previsualizacion: Array<string> = [];
   public previsualizacionDestaca: string;
   public barrios: Array<string> = ['Sin barrio'];
   public privada: boolean = false;
@@ -38,7 +38,7 @@ export class AdministrarPropiedadesComponent implements OnInit {
   locationInfo: LocationInfo;
 
   propertyForm = new FormGroup({
-    nombre: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-ZñÑ]{3,50}$")]),
+    nombre: new FormControl(''),
     descripcion: new FormControl(''),
     personas: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{1,50}$")]),
     access: new FormControl(false),
@@ -169,7 +169,7 @@ export class AdministrarPropiedadesComponent implements OnInit {
   }
 
   borrarDestacada() {
-    this.destacada=[];
+    this.destacada = "";
 
     this.mostrarImagenDestacada(this.destacada);
   }
@@ -177,7 +177,7 @@ export class AdministrarPropiedadesComponent implements OnInit {
   mostrarImagenes(archivo) {
     //contador para recorrer el array vacio y llenarlo (el array donde se guardan las imagenes)
     var contadorAyudaImagenes = 0;
-    this.previsualizacion=[];
+    this.previsualizacion = [];
 
     this.archivo = archivo;
     //recorremos este array y vamos leyendo imagen por imagen para ir previsualizandola
@@ -193,7 +193,7 @@ export class AdministrarPropiedadesComponent implements OnInit {
 
   mostrarImagenDestacada(imagenDestacada) {
     this.destacada = imagenDestacada;
-    this.previsualizacionDestaca="";
+    this.previsualizacionDestaca = "";
 
     this.extraerBase64(this.destacada).then((imagen: any) => {
       //guardamos la base de la imagen para previsualizarla
@@ -207,7 +207,7 @@ export class AdministrarPropiedadesComponent implements OnInit {
       this.filesToUpload.push(this.archivo[i]);
     }
 
-    if (this.destacada != []) {
+    if (this.destacada != undefined && this.destacada != "") {
       this.filesToUpload.push(this.destacada);
     }
 
@@ -398,16 +398,21 @@ export class AdministrarPropiedadesComponent implements OnInit {
             this.idPropiedades = element.id;
 
             for (let i = 0; i < this.filesToUpload.length; i++) {
-              if (i < (this.filesToUpload.length - 1)) {
+              if (this.destacada) {
+                if (i < (this.filesToUpload.length - 1)) {
+                  var json = JSON.stringify(this.filesToUpload[i]);
+                  this.img = new Imagenes(null, json, 0, this.idPropiedades);
+                  this.guardarImagen();
+                } else if (i == (this.filesToUpload.length - 1)) {
+                  var json = JSON.stringify(this.filesToUpload[i]);
+                  this.img = new Imagenes(null, json, 1, this.idPropiedades);
+                  this.guardarImagen();
+                }
+              } else {
                 var json = JSON.stringify(this.filesToUpload[i]);
                 this.img = new Imagenes(null, json, 0, this.idPropiedades);
                 this.guardarImagen();
-              } else if (i == (this.filesToUpload.length - 1)) {
-                var json = JSON.stringify(this.filesToUpload[i]);
-                this.img = new Imagenes(null, json, 1, this.idPropiedades);
-                this.guardarImagen();
               }
-
             }
           }
         });
