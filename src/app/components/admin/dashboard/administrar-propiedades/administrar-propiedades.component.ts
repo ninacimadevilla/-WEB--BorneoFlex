@@ -22,16 +22,18 @@ export class AdministrarPropiedadesComponent implements OnInit {
   public filesToUpload: any = [];
   public img: Imagenes;
   public idPropiedades;
-  public previsualizacion: Array<string> = [];
+  public previsualizacion: Array<string>=[];
+  public previsualizacionDestaca: string;
   public barrios: Array<string> = ['Sin barrio'];
   public privada: boolean = false;
   public fija: boolean = false;
   public flexible: boolean = false;
   public archivo = [];
   public rango = 0;
-  public imagenesguardadas=0;
-
+  public imagenesguardadas = 0;
+  public destacada;
   private geoCoder;
+
   @ViewChild("search") public searchElementRef: ElementRef;
   locationInfo: LocationInfo;
 
@@ -147,6 +149,12 @@ export class AdministrarPropiedadesComponent implements OnInit {
     this.mostrarImagenes(this.archivo);
   }
 
+  fileChangeEvent1(fileInput: any) {
+    this.destacada = fileInput.target.files[0];
+
+    this.mostrarImagenDestacada(this.destacada);
+  }
+
   borrar(dato) {
     for (let i = dato; i < this.archivo.length; i++) {
       if (i == (this.archivo.length - 1)) {
@@ -160,10 +168,16 @@ export class AdministrarPropiedadesComponent implements OnInit {
     this.mostrarImagenes(this.archivo);
   }
 
+  borrarDestacada() {
+    this.destacada=[];
+
+    this.mostrarImagenDestacada(this.destacada);
+  }
+
   mostrarImagenes(archivo) {
     //contador para recorrer el array vacio y llenarlo (el array donde se guardan las imagenes)
     var contadorAyudaImagenes = 0;
-    this.previsualizacion = [];
+    this.previsualizacion=[];
 
     this.archivo = archivo;
     //recorremos este array y vamos leyendo imagen por imagen para ir previsualizandola
@@ -177,13 +191,25 @@ export class AdministrarPropiedadesComponent implements OnInit {
     });
   }
 
+  mostrarImagenDestacada(imagenDestacada) {
+    this.destacada = imagenDestacada;
+    this.previsualizacionDestaca="";
+
+    this.extraerBase64(this.destacada).then((imagen: any) => {
+      //guardamos la base de la imagen para previsualizarla
+      this.previsualizacionDestaca = imagen.base;
+    });
+  }
+
   onSubmit() {
     //evento para capturar la imagen
     for (let i = 0; i < this.archivo.length; i++) {
       this.filesToUpload.push(this.archivo[i]);
     }
 
-    console.log(this.archivo.length);
+    if (this.destacada != []) {
+      this.filesToUpload.push(this.destacada);
+    }
 
     if (this.filesToUpload.length > 0) {
       this._propiedadService.makeFileRequest(this.filesToUpload).subscribe(
@@ -372,9 +398,16 @@ export class AdministrarPropiedadesComponent implements OnInit {
             this.idPropiedades = element.id;
 
             for (let i = 0; i < this.filesToUpload.length; i++) {
-              var json = JSON.stringify(this.filesToUpload[i]);
-              this.img = new Imagenes(null, json, this.idPropiedades);
-              this.guardarImagen();
+              if (i < (this.filesToUpload.length - 1)) {
+                var json = JSON.stringify(this.filesToUpload[i]);
+                this.img = new Imagenes(null, json, 0, this.idPropiedades);
+                this.guardarImagen();
+              } else if (i == (this.filesToUpload.length - 1)) {
+                var json = JSON.stringify(this.filesToUpload[i]);
+                this.img = new Imagenes(null, json, 1, this.idPropiedades);
+                this.guardarImagen();
+              }
+
             }
           }
         });

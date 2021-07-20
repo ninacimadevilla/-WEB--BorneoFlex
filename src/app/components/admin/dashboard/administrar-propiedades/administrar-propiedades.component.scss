@@ -76,8 +76,7 @@ section {
 }
 
 .uploadButton .uploadButton-button {
-    display: -webkit-box;
-    display: flex;
+    display: inline-flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;
@@ -134,8 +133,7 @@ section {
 
 .posicion{
     position: absolute;
-    top: 171px;
-    margin-left: -25px;
+    margin-left: -30px;
     color: white;
     font-weight: bold;
     font-size: 25px;
@@ -146,9 +144,8 @@ section {
 }
 
 .posicion1{
-    position: relative;
-    top: -30px;
-    margin-left: -25px;
+    position: absolute;
+    margin-left: -30px;
     color: white;
     font-weight: bold;
     font-size: 25px;

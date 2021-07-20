@@ -15,29 +15,56 @@
                     <!--PARTE DEL FORMULARIO PARA AÑADIR UNA IMÁGEN-->
                     <div class="uploading-outer">
                         <div class="uploadButton">
+                            <!--INPUT DE LAS FOTOS-->
                             <input class="uploadButton-input" type="file" (change)="fileChangeEvent($event)" id="upload"
                                 multiple />
 
                             <label class="uploadButton-button" for="upload">Subir foto de
                                 propiedad</label>
                             <span class="uploadButton-file-name"></span>
+
+                            <!--INPUT DE LAS FOTOS DESTACADAS-->
+                            <input class="uploadButton-input" type="file" (change)="fileChangeEvent1($event)"
+                                id="upload1" />
+
+                            <label class="uploadButton-button" for="upload1">Subir foto destacada</label>
+                            <span class="uploadButton-file-name"></span>
                         </div>
 
-                        <div *ngIf="previsualizacion" id="previsualizar">
+                        <div *ngIf="previsualizacion" id="previsualizar" class="my-2">
                             <h5>IMAGENES A AÑADIR:</h5>
                             <div *ngFor="let visualizar of previsualizacion; let i=index" class="d-inline">
                                 <img [src]="visualizar" alt="" class="previsualizar ml-2">
-                                <button type="button" class="posicion" (click)="borrar(i)"><i class="far fa-times-circle"></i></button>
+                                <button type="button" class="posicion" (click)="borrar(i)"><i
+                                        class="far fa-times-circle"></i></button>
                             </div>
                         </div>
 
-                        <div *ngIf="imagenesguardadas!=0">
+                        <div *ngIf="previsualizacionDestaca" id="previsualizar" class="my-2">
+                            <h5>IMAGEN DESTACADA A AÑADIR:</h5>
+
+                            <img [src]="previsualizacionDestaca" alt="" class="previsualizar ml-2">
+                            <button type="button" class="posicion" (click)="borrarDestacada()"><i
+                                    class="far fa-times-circle"></i></button>
+                        </div>
+
+                        <div *ngIf="imagenesguardadas!=0" class="my-2">
                             <h5>IMAGENES AÑADIDAS:</h5>
                             <div *ngFor="let imagenes of imagenesComprobar" class="d-inline">
                                 <img src="http://borneoflex.es/borneo/uploads/{{imagenes.imagen}}" alt=""
-                                    class="previsualizar ml-2">
+                                    class="previsualizar ml-2" *ngIf="imagenes.destacado==0">
                                 <button type="button" class="posicion1" (click)="borrarGuardadas(imagenes.id)"><i
-                                        class="far fa-times-circle"></i></button>
+                                        class="far fa-times-circle" *ngIf="imagenes.destacado==0"></i></button>
+                            </div>
+                        </div>
+
+                        <div *ngIf="imagenesguardadas!=0" class="my-2">
+                            <h5>IMAGEN DESTACADA</h5>
+                            <div *ngFor="let imagenes of imagenesComprobar" class="d-inline">
+                                <img src="http://borneoflex.es/borneo/uploads/{{imagenes.imagen}}" alt=""
+                                    class="previsualizar ml-2" *ngIf="imagenes.destacado==1">
+                                <button type="button" class="posicion1" (click)="borrarGuardadas(imagenes.id)"><i
+                                        class="far fa-times-circle" *ngIf="imagenes.destacado==1"></i></button>
                             </div>
                         </div>
 

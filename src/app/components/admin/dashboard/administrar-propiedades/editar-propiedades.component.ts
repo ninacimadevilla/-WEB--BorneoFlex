@@ -33,6 +33,8 @@ export class EditarPropiedadesComponent implements OnInit {
     public rango = 0;
     public imagenesguardadas = 0;
     public submit: boolean = false;
+    public previsualizacionDestaca: string;
+    public destacada;
 
     private geoCoder;
     @ViewChild("search") public searchElementRef: ElementRef;
@@ -354,10 +356,10 @@ export class EditarPropiedadesComponent implements OnInit {
     }
 
     borrarGuardadas(idImagen) {
+        console.log(idImagen);
         this._propiedadService.deleteImagenes(idImagen).subscribe(
             response => {
                 this.listarImagenesCompletas();
-
             },
             error => {
                 console.log(<any>error);
@@ -392,6 +394,13 @@ export class EditarPropiedadesComponent implements OnInit {
         this.mostrarImagenes(this.archivo);
     }
 
+    fileChangeEvent1(fileInput: any) {
+        this.destacada = fileInput.target.files[0];
+
+        this.mostrarImagenDestacada(this.destacada);
+
+    }
+
     borrar(dato) {
         for (let i = dato; i < this.archivo.length; i++) {
             if (i == (this.archivo.length - 1)) {
@@ -403,6 +412,12 @@ export class EditarPropiedadesComponent implements OnInit {
         this.rango = this.rango - 1;
 
         this.mostrarImagenes(this.archivo);
+    }
+
+    borrarDestacada() {
+        this.destacada = "";
+
+        this.mostrarImagenDestacada(this.destacada);
     }
 
     mostrarImagenes(archivo) {
@@ -419,6 +434,16 @@ export class EditarPropiedadesComponent implements OnInit {
                 //aumentamos el contador
                 contadorAyudaImagenes++;
             });
+        });
+    }
+
+    mostrarImagenDestacada(imagenDestacada) {
+        this.destacada = imagenDestacada;
+        this.previsualizacionDestaca = "";
+
+        this.extraerBase64(this.destacada).then((imagen: any) => {
+            //guardamos la base de la imagen para previsualizarla
+            this.previsualizacionDestaca = imagen.base;
         });
     }
 
@@ -469,6 +494,17 @@ export class EditarPropiedadesComponent implements OnInit {
         //evento para capturar la imagen
         for (let i = 0; i < this.archivo.length; i++) {
             this.filesToUpload.push(this.archivo[i]);
+        }
+
+        console.log(this.destacada);
+
+        if (this.destacada != []) {
+            this.filesToUpload.push(this.destacada);
+            for(let i=0; i<this.imagenesComprobar.length; i++){
+                if(this.imagenesComprobar[i].destacado==1){
+                    this.borrarGuardadas(this.imagenesComprobar[i].id);
+                }
+            }
         }
 
         if (this.filesToUpload.length > 0) {
@@ -639,9 +675,15 @@ export class EditarPropiedadesComponent implements OnInit {
                         this._router.navigate(['admin/dashboard/listPropertys']);
                     } else {
                         for (let i = 0; i < this.filesToUpload.length; i++) {
-                            var json = JSON.stringify(this.filesToUpload[i]);
-                            this.img = new Imagenes(null, json, id);
-                            this.guardarImagen();
+                            if (i < (this.filesToUpload.length - 1)) {
+                                var json = JSON.stringify(this.filesToUpload[i]);
+                                this.img = new Imagenes(null, json, 0, id);
+                                this.guardarImagen();
+                            } else if (i == (this.filesToUpload.length - 1)) {
+                                var json = JSON.stringify(this.filesToUpload[i]);
+                                this.img = new Imagenes(null, json, 1, id);
+                                this.guardarImagen();
+                            }
                         }
                     }
                 },
