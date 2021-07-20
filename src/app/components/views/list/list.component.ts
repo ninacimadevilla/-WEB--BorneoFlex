@@ -36,6 +36,7 @@ export class ListComponent implements OnInit {
   public mapTypeId: string;
   public markers: any[];
   public images: Array<Imagenes>;
+  public contador1 = 0;
   map: google.maps.Map;
   mapClickListener: google.maps.MapsEventListener;
   styles = [
@@ -173,7 +174,7 @@ export class ListComponent implements OnInit {
     });
     //fin del bucle forEach
   }
-  
+
   getOwned() {
     //metodo para sacar todas las propiedades las cuales filtramos por ciudad
     //es necesario porque lo llamamos al ngoninit asi cuando se entra a esta pagina por primera vez ya esta imprimiendo las propiedades que queremos
@@ -218,20 +219,44 @@ export class ListComponent implements OnInit {
   }
 
   listarImagenes() {
+    let urlDefault: string = 'assets/images/view/office3.png';
     this.propiedadesFiltradas.forEach(prop => {
       this._propiedadService.listarimagenes(prop.id).subscribe(
         response => {
           let images = response;
-          images.forEach(element => {
+
+          if (images.length === 0) {
+            prop.imgUrl = urlDefault;
+          } else {
+            for (let i = 0; i < images.length; i++) {
+              if (images[i].destacado != 1) {
+                this.contador1++
+              }else if(images[i].destacado == 1){
+                break;
+              }
+            }
+
+            if (this.contador1 == images.length && images[this.contador1].destacado != 1) {
+              prop.imgUrl = urlDefault;
+            } else {
+              prop.imgUrl = 'http://borneoflex.es/borneo/uploads/' + images[this.contador1].imagen.replace('[', '').replace(']', '').replace('"', '').replace('"', '');
+              console.log(images.imgUrl);
+            }
+          }
+
+          this.contador1=0;
+          /*images.forEach(element => {
             element.imagen = element.imagen.slice(2, -2);
           });
 
           prop.imgUrl = images[0] && images[0].imagen ? 'http://borneoflex.es/borneo/uploads/' + images[0].imagen : 'assets/images/view/office3.png';
 
+          this.contador1 = 0;*/
         }, error => {
           console.log(<any>error);
         }
       );
+
     });
 
   }

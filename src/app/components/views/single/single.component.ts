@@ -26,6 +26,7 @@ export class SingleComponent implements OnInit {
   public lat: number;
   public lng: number;
   public zoom: number = 17;
+  public urlImage="default";
   mapClickListener: google.maps.MapsEventListener;
   
   styles = [
@@ -75,6 +76,9 @@ export class SingleComponent implements OnInit {
         this.images = response;
         this.images.forEach(element => {
           element.imagen = element.imagen.slice(2, -2);
+          if(element.destacado==1){
+            this.urlImage='http://borneoflex.es/borneo/uploads/' +element.imagen;
+          }
         });
       }, error => {
         console.log(<any>error);

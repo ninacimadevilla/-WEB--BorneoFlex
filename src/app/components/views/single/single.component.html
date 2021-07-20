@@ -2,7 +2,8 @@
   <app-menu></app-menu>
 
   <section class="listing-banner">
-    <div class="background-layer" style="background-image: url(assets/images/view/office1.png);"></div>
+    <div class="background-layer" style="background-image: url(assets/images/view/office1.png);" *ngIf="urlImage=='default'"></div>
+    <div class="background-layer" style="background-image: url({{urlImage}});" *ngIf="urlImage!='default'"></div>
 
     <div class="auto-container">
       <!-- Content Box -->
