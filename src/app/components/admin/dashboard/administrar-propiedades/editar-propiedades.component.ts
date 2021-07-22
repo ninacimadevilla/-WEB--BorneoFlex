@@ -279,10 +279,12 @@ export class EditarPropiedadesComponent implements OnInit {
                         if (this.privada == true) {
                             this.propertyForm.get('precio_oficina_privada').setValue(this.propiedad[i].precio_oficina_privada);
                             this.propertyForm.get('rango_oficina_privada').setValue(this.propiedad[i].rango_oficina_privada);
-                        } else if (this.fija == true) {
+                        }
+                        if (this.fija == true) {
                             this.propertyForm.get('precio_oficina_fija').setValue(this.propiedad[i].precio_oficina_fija);
-                            this.propertyForm.get('rango_oficina_fija').setValue(this.propiedad[i].rango_oficina_fija);
-                        } else if (this.flexible == true) {
+                            this.propertyForm.get('rango_oficina_fija').setValue(this.propiedad[i].rango_oficina_fija);   
+                        }
+                        if (this.flexible == true) {
                             this.propertyForm.get('precio_puesto_flexible').setValue(this.propiedad[i].precio_puesto_flexible);
                             this.propertyForm.get('rango_puesto_flexible').setValue(this.propiedad[i].rango_puesto_flexible);
                         }
@@ -326,6 +328,7 @@ export class EditarPropiedadesComponent implements OnInit {
                             this.propertyForm.get('lng').setValue(this.propiedad[i].lng);
                         }
                     }
+
                     this.listarImagenesCompletas();
                 }, error => {
                     console.log(<any>error);
@@ -356,7 +359,6 @@ export class EditarPropiedadesComponent implements OnInit {
     }
 
     borrarGuardadas(idImagen) {
-        console.log(idImagen);
         this._propiedadService.deleteImagenes(idImagen).subscribe(
             response => {
                 this.listarImagenesCompletas();
