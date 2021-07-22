@@ -40,6 +40,7 @@
 .centrar{
     margin: auto;
     display: block;
+    max-height: 450px;
 }
 
 .posicionBoton{
@@ -49,4 +50,12 @@
     font-size: 20px;
     color: red;
     padding-right: 5px;
+}
+
+.modal-body{
+    background: lightgray;
+}
+
+.modal-header{
+    background: lightgray;
 }

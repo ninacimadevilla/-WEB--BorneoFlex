@@ -1,14 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwPaginationModule } from 'jw-angular-pagination';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxFileDropModule } from 'ngx-file-drop';
 
 // Componentes
@@ -31,7 +31,7 @@ import { ListarPropiedadesComponent } from './components/admin/dashboard/listar-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditarPropiedadesComponent } from './components/admin/dashboard/administrar-propiedades/editar-propiedades.component';
-import {AgmCoreModule} from '@agm/core';
+import { AgmCoreModule } from '@agm/core';
 import { ContactOwnedComponent } from './components/admin/dashboard/contact-owned/contact-owned.component';
 import { LoginComponent } from './components/admin/login/login.component';
 import { FaqsComponent } from './components/faqs/faqs.component';
@@ -75,8 +75,8 @@ import { FaqsComponent } from './components/faqs/faqs.component';
     NgxPaginationModule,
     NgxFileDropModule,
     AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyBr2ShaZkF8H8sUSqHXIvjOq344QSSUiT0',
-        libraries: ["places"]
+      apiKey: 'AIzaSyBr2ShaZkF8H8sUSqHXIvjOq344QSSUiT0',
+      libraries: ["places"]
     })
   ],
   providers: [],

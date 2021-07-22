@@ -3,7 +3,7 @@ import { Owned } from '../../../models/owned';
 import { PropiedadService } from '../../../services/propiedad.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Imagenes } from '../../../models/images';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-single',
@@ -45,8 +45,12 @@ export class SingleComponent implements OnInit {
     },
 
   ];
-  constructor(private _route: ActivatedRoute, private _router: Router, private _propiedadService: PropiedadService, 
-    private zone: NgZone, private modal: NgbModal) {
+  constructor(private _route: ActivatedRoute, private _router: Router, private _propiedadService: PropiedadService,
+    private zone: NgZone, private modal: NgbModal, config: NgbCarouselConfig) {
+    config.interval = 4000;
+    config.wrap = true;
+    config.keyboard = false;
+    config.pauseOnHover = false;
   }
 
   recogerDato() {
@@ -116,12 +120,12 @@ export class SingleComponent implements OnInit {
     el.scrollIntoView();
   }
 
-  abrirModal(url:string) {
+  abrirModal(url: string) {
     this.modal.open(this.modalContent, { size: 'xl' });
-    this.verImagen="http://borneoflex.es/borneo/uploads/"+url;
+    this.verImagen = "http://borneoflex.es/borneo/uploads/" + url;
   }
 
-  cerrarModal(){
+  cerrarModal() {
     this.modal.dismissAll();
   }
 

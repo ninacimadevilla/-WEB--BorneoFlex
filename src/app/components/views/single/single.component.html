@@ -374,12 +374,18 @@
 </div>
 
 <ng-template #modalContent let-close="close">
-  <div class="modal-header">
+  <!--<div class="modal-header">
     <button type="button" aria-label="Close" (click)="cerrarModal()" class="posicionBoton">
       <i class="far fa-times-circle coloresIcono"></i>
     </button>
-  </div>
+  </div>-->
   <div class="modal-body">
-    <img src="{{verImagen}}" alt="" class="centrar rounded">
+    <ngb-carousel>
+      <ng-template ngbSlide *ngFor="let imagen of images">
+        <div class="img-block w-100">
+          <img src="http://borneoflex.es/borneo/uploads/{{imagen.imagen}}" alt="Img 1" class="centrar rounded">
+        </div>
+      </ng-template>
+    </ngb-carousel>
   </div>
 </ng-template>
