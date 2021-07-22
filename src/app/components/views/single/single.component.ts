@@ -1,9 +1,9 @@
-import { Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Owned } from '../../../models/owned';
 import { PropiedadService } from '../../../services/propiedad.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Imagenes } from '../../../models/images';
-import { Fancybox } from "@fancyapps/ui";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-single',
@@ -14,6 +14,9 @@ import { Fancybox } from "@fancyapps/ui";
 
 
 export class SingleComponent implements OnInit {
+  //modal
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+
   public propiedad: Owned;
   public propiedades: Array<Owned>;
   public propiedadesFiltradas: Array<Owned> = [];
@@ -21,17 +24,18 @@ export class SingleComponent implements OnInit {
   public images: Array<Imagenes>;
   public contador = 0;
   showMaps: boolean;
-  public mapTypeId: string= 'roadmap';
+  public mapTypeId: string = 'roadmap';
   public markers: any[] = [];
   map: google.maps.Map;
   public lat: number;
   public lng: number;
   public zoom: number = 17;
-  public urlImage="default";
+  public urlImage = "default";
+  public verImagen;
   mapClickListener: google.maps.MapsEventListener;
-  
+
   styles = [
-    
+
     {
       featureType: "poi",
       elementType: "labels",
@@ -39,9 +43,10 @@ export class SingleComponent implements OnInit {
         { visibility: "off" }
       ]
     },
-   
+
   ];
-  constructor(private _route: ActivatedRoute, private _router: Router, private _propiedadService: PropiedadService, private zone: NgZone) {
+  constructor(private _route: ActivatedRoute, private _router: Router, private _propiedadService: PropiedadService, 
+    private zone: NgZone, private modal: NgbModal) {
   }
 
   recogerDato() {
@@ -57,7 +62,7 @@ export class SingleComponent implements OnInit {
           },
           label: ''
         });
-      
+
         this.showMaps = true;
       }, error => {
         console.log(<any>error);
@@ -77,8 +82,8 @@ export class SingleComponent implements OnInit {
         this.images = response;
         this.images.forEach(element => {
           element.imagen = element.imagen.slice(2, -2);
-          if(element.destacado==1){
-            this.urlImage='http://borneoflex.es/borneo/uploads/' +element.imagen;
+          if (element.destacado == 1) {
+            this.urlImage = 'http://borneoflex.es/borneo/uploads/' + element.imagen;
           }
         });
       }, error => {
@@ -107,8 +112,17 @@ export class SingleComponent implements OnInit {
     );
   }
 
-  scroll(el: HTMLElement){
+  scroll(el: HTMLElement) {
     el.scrollIntoView();
+  }
+
+  abrirModal(url:string) {
+    this.modal.open(this.modalContent, { size: 'xl' });
+    this.verImagen="http://borneoflex.es/borneo/uploads/"+url;
+  }
+
+  cerrarModal(){
+    this.modal.dismissAll();
   }
 
   ngOnInit() {

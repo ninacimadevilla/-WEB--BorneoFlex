@@ -69,7 +69,7 @@ Version: 1.0.0
 // @import url("assets/css/owl.css");
 // @import url("assets/css/jquery-ui.min.css");
 @import url("assets/css/select2.min.css");
-@import url("assets/css/jquery.modal.min.css");
+//@import url("assets/css/jquery.modal.min.css");
 @import url("assets/css/chosen.css");
 @import url("assets/css/line-awesome.css");
 @import url("assets/css/mmenu.css");
@@ -3926,15 +3926,16 @@ section hr {
 .modal {
   height: auto;
   padding: 0;
-  max-width: 420px;
+  //max-width: 1200px;
+  background: transparent;
   overflow: visible;
 }
 
-#login-modal {
+/*#login-modal {
   max-width: 420px;
   padding: 30px 30px 12px;
   overflow: visible;
-}
+}*/
 
 .login-from {
   position: relative;

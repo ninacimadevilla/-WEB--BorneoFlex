@@ -36,3 +36,17 @@
         }
     }
 }
+
+.centrar{
+    margin: auto;
+    display: block;
+}
+
+.posicionBoton{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    color: red;
+    padding-right: 5px;
+}
