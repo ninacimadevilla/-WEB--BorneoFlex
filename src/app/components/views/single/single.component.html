@@ -2,7 +2,8 @@
   <app-menu></app-menu>
 
   <section class="listing-banner">
-    <div class="background-layer" style="background-image: url(assets/images/view/office1.png);" *ngIf="urlImage=='default'"></div>
+    <div class="background-layer" style="background-image: url(assets/images/view/office1.png);"
+      *ngIf="urlImage=='default'"></div>
     <div class="background-layer" style="background-image: url({{urlImage}});" *ngIf="urlImage!='default'"></div>
 
     <div class="auto-container">
@@ -125,9 +126,11 @@
                     <div class="inner-box">
                       <figure class="image"><img src="http://borneoflex.es/borneo/uploads/{{imagen.imagen}}" alt="">
                       </figure>
-                      <div class="overlay"><a href="http://borneoflex.es/borneo/uploads/{{imagen.imagen}}"
-                          class="lightbox-image" data-fancybox="ls-gallery"><span
-                            class="icon flaticon-magnifying-glass"></span></a></div>
+                      <div class="overlay">
+                        <a href="http://borneoflex.es/borneo/uploads/{{imagen.imagen}}"
+                          class="lightbox-image"><span class="icon flaticon-magnifying-glass"></span>
+                        </a>
+                      </div>
                     </div>
                   </li>
                 </ul>
@@ -322,7 +325,7 @@
                   <div *ngIf="propiedad.precio_oficina_fija!=0">
                     <div class="price">Desde {{propiedad.precio_oficina_fija}}/mes</div>
                   </div>
-                  
+
                   <div *ngIf="propiedad.precio_oficina_fija==0">
                     <button class="btn btn-info" routerLink="/contacto">Consultar</button>
                   </div>
@@ -335,7 +338,7 @@
                   <div *ngIf="propiedad.precio_oficina_privada!=0">
                     <div class="price">Desde {{propiedad.precio_oficina_privada}}/mes</div>
                   </div>
-                  
+
                   <div *ngIf="propiedad.precio_oficina_privada==0">
                     <button class="btn btn-info" routerLink="/contacto">Consultar</button>
                   </div>

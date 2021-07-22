@@ -3,6 +3,7 @@ import { Owned } from '../../../models/owned';
 import { PropiedadService } from '../../../services/propiedad.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Imagenes } from '../../../models/images';
+import { FooterComponent } from '../../globales/footer/footer.component';
 
 @Component({
   selector: 'app-single',
