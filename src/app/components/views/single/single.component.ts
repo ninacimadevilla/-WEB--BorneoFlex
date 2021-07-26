@@ -16,6 +16,7 @@ import { NgbModal, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 export class SingleComponent implements OnInit {
   //modal
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @ViewChild('modalllamar', { static: true }) modalllamar: TemplateRef<any>;
 
   public propiedad: Owned;
   public propiedades: Array<Owned>;
@@ -32,6 +33,7 @@ export class SingleComponent implements OnInit {
   public zoom: number = 17;
   public urlImage = "default";
   public verImagen;
+  public llamar;
   mapClickListener: google.maps.MapsEventListener;
 
   styles = [
@@ -123,6 +125,11 @@ export class SingleComponent implements OnInit {
   abrirModal(url: string) {
     this.modal.open(this.modalContent, { size: 'xl' });
     this.verImagen = "http://borneoflex.es/borneo/uploads/" + url;
+  }
+
+  abrirModalcall(telefono){
+    this.llamar=telefono;
+    this.modal.open(this.modalllamar, { size: 'xl' });
   }
 
   cerrarModal() {

@@ -17,9 +17,9 @@
                     <span class="fa fa-star"></span>
                     <span class="fa fa-star"></span>
                 </div>-->
-        <h3>{{propiedad.nombre}}
+        <h1 class="display-4">{{propiedad.nombre}}
           <!--<span class="icon icon-verified"></span>-->
-        </h3>
+        </h1>
         <!--<div class="text">{{propiedad.descripcion}}</div>-->
       </div>
 
@@ -27,7 +27,8 @@
       <div class="listing-options">
         <ul class="options-list">
           <li><a (click)="scroll(target)"><span class="icon flaticon-compass"></span> Fotos</a></li>
-          <li><a href="#"><span class="icon flaticon-phone-call-1"></span> LLamar ahora</a></li>
+          <li><a (click)="abrirModalcall(propiedad.telefono)"><span class="icon flaticon-phone-call-1"></span> LLamar
+              ahora</a></li>
           <li><a href="/contacto"><span class="icon flaticon-unlink"></span> Contratar</a></li>
           <!--<li><a href="report-listing.html" class="call-modal"><span class="icon flaticon-flag"></span> Reportar </a></li>-->
         </ul>
@@ -390,5 +391,14 @@
         </div>
       </ng-template>
     </ngb-carousel>
+  </div>
+</ng-template>
+
+<ng-template #modalllamar let-close="close">
+  <div class="modal-header">
+    <h2 class="text-center">Contáctanos si tienes cualquier duda o consulta</h2>
+  </div>
+  <div class="modal-body">
+    <h4 class="text-center text-dark">{{llamar}}</h4>
   </div>
 </ng-template>
