@@ -17,6 +17,7 @@ var current_timestamp = moment().format("YYYY/MM/DD hh:mm:ss");
 })
 export class ContactoComponent{
   public contacto: Contact;
+  public politicas: boolean= false;
 
   contactGroup = new FormGroup({
     nombre: new FormControl(''),
@@ -34,15 +35,27 @@ export class ContactoComponent{
     private fb: FormBuilder) { 
   }
 
+  comprobador() {
+    if(this.politicas==false){
+      this.politicas=true;
+    }else{
+      this.politicas=false;
+    }
+  }
+
   onSubmit(){
-    this._contactService.addContact(this.contactGroup.value).subscribe(
-      result => {
-        this.contactGroup.reset();
-        this.toastr.success('Mensaje enviado correctamente, Gracias','',{ "positionClass" : "toast-bottom-right"});
-      },
-      error => {
-          console.log(<any>error);
-      }
-    );
+    if(this.politicas==true){
+      this._contactService.addContact(this.contactGroup.value).subscribe(
+        result => {
+          this.contactGroup.reset();
+          this.toastr.success('Mensaje enviado correctamente, Gracias','',{ "positionClass" : "toast-bottom-right"});
+        },
+        error => {
+            console.log(<any>error);
+        }
+      );
+    }else{
+      this.toastr.success('Acepte la politica de privacidad', '', { "positionClass": "toast-bottom-right" });
+    }
   }
 }

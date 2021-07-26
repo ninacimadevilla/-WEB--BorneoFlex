@@ -1,7 +1,7 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
-import {ContactOwnedService} from '../../services/contactOwned.service';
-import {Contact} from '../../models/contact';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ContactOwnedService } from '../../services/contactOwned.service';
+import { Contact } from '../../models/contact';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MapsAPILoader } from '@agm/core';
@@ -18,6 +18,7 @@ var current_timestamp = moment().format("YYYY/MM/DD hh:mm:ss");
 })
 export class SubmitComponent implements OnInit {
   public contacto: Contact;
+  public politicas: boolean= false;
 
   private geoCoder;
   @ViewChild("search") public searchElementRef: ElementRef;
@@ -45,21 +46,21 @@ export class SubmitComponent implements OnInit {
     return this.propertyForm.get("espacios").invalid && this.propertyForm.get("espacios").touched;
   }
 
-  constructor(private toastr: ToastrService,private _route:ActivatedRoute,private _router:Router, 
-    private _contactService: ContactOwnedService, private fb: FormBuilder, private mapsApi: MapsAPILoader, private ngZone: NgZone) { 
+  constructor(private toastr: ToastrService, private _route: ActivatedRoute, private _router: Router,
+    private _contactService: ContactOwnedService, private fb: FormBuilder, private mapsApi: MapsAPILoader, private ngZone: NgZone) {
   }
 
   ngOnInit(): void {
     this.mapsApi.load().then(() => {
       this.geoCoder = new google.maps.Geocoder;
-      
+
       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           //get the place result
           const place: google.maps.places.PlaceResult = autocomplete.getPlace();
-           //verify result
-           if (place.geometry === undefined || place.geometry === null) {
+          //verify result
+          if (place.geometry === undefined || place.geometry === null) {
             return;
           }
           let locationInfo: LocationInfo = GeoService.getProvince(place.formatted_address);
@@ -70,24 +71,36 @@ export class SubmitComponent implements OnInit {
       });
     });
   }
-  
-  onSubmit(){
-    if(this.locationInfo && this.locationInfo.lng && this.locationInfo.lat && this.locationInfo.provincia){
-      this.propertyForm.value.lat = this.locationInfo.lat;
-      this.propertyForm.value.lng = this.locationInfo.lng;
-      this.propertyForm.value.ciudad = this.locationInfo.provincia;
+
+  comprobador() {
+    if(this.politicas==false){
+      this.politicas=true;
+    }else{
+      this.politicas=false;
     }
-    
-    this._contactService.addContactOwned(this.propertyForm.value).subscribe(
-      result => {
-        this.propertyForm.reset();
-        this.toastr.success('Mensaje enviado correctamente, Gracias','',{ "positionClass" : "toast-bottom-right"});
-      },
-      error => {
-          console.log(<any>error);
+  }
+
+  onSubmit() {
+    if (this.politicas == true) {
+      if (this.locationInfo && this.locationInfo.lng && this.locationInfo.lat && this.locationInfo.provincia) {
+        this.propertyForm.value.lat = this.locationInfo.lat;
+        this.propertyForm.value.lng = this.locationInfo.lng;
+        this.propertyForm.value.ciudad = this.locationInfo.provincia;
       }
-    );
-    
+
+      this._contactService.addContactOwned(this.propertyForm.value).subscribe(
+        result => {
+          this.propertyForm.reset();
+          this.toastr.success('Mensaje enviado correctamente, Gracias', '', { "positionClass": "toast-bottom-right" });
+        },
+        error => {
+          console.log(<any>error);
+        }
+      );
+    }else{
+      this.toastr.success('Acepte la politica de privacidad', '', { "positionClass": "toast-bottom-right" });
+    }
+
   }
 
 }
