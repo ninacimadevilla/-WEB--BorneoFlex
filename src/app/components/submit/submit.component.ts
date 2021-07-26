@@ -98,7 +98,7 @@ export class SubmitComponent implements OnInit {
         }
       );
     }else{
-      this.toastr.success('Acepte la politica de privacidad', '', { "positionClass": "toast-bottom-right" });
+      this.toastr.error('Acepte la politica de privacidad', '', { "positionClass": "toast-bottom-right" });
     }
 
   }
