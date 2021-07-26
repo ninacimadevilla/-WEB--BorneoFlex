@@ -20,7 +20,7 @@
         <h3>{{propiedad.nombre}}
           <!--<span class="icon icon-verified"></span>-->
         </h3>
-        <div class="text">{{propiedad.descripcion}}</div>
+        <!--<div class="text">{{propiedad.descripcion}}</div>-->
       </div>
 
       <!-- Listing Options -->
@@ -305,6 +305,7 @@
               <div class="widget-title" #target>
                 <h4><span class="icon flaticon-map"></span> Espacios disponibles</h4>
               </div>
+
               <div class="widget-content prizes-component">
                 <div class="row-types mt-3" *ngIf="propiedad.puesto_flexible=='true'">
                   <div class="name">Puesto no fijo</div>
@@ -332,7 +333,7 @@
                   </div>
 
                 </div>
-                <div class="row-types" *ngIf="propiedad.oficina_privada=='true'">
+                <div class="row-types mt-3" *ngIf="propiedad.oficina_privada=='true'">
                   <div class="name">Oficina privada</div>
                   <!--<div class="range"><i class="fas fa-user-alt icon-mr"></i>{{propiedad.rango_oficina_privada}}</div>-->
 
@@ -346,6 +347,7 @@
 
                 </div>
               </div>
+
               <div class="nearby-widget ls-widget">
                 <div class="widget-title" #target>
                   <h4><span class="icon flaticon-map"></span> Oficinas similares</h4>
@@ -362,6 +364,7 @@
                 </div>
               </div>
             </div>
+
           </aside>
         </div>
       </div>

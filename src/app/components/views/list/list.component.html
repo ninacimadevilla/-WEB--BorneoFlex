@@ -24,7 +24,7 @@
                                                 <option value="Chamberi" id="opts">Chamberí</option>
                                                 <option value="Moncloa" id="opts">Moncloa</option>
                                                 <option value="Chamartin" id="opts">Chamartín</option>
-                                                <option value="Cuzco" id="opts">Cuzco-Cuatro Torres</option>
+                                                <option value="Cuzco-Cuatro Torres" id="opts">Cuzco-Cuatro Torres</option>
                                                 <option value="Azca" id="opts">Azca</option>
                                                 <option value="Centro" id="opts">Centro</option>
                                                 <option value="Atocha" id="opts">Atocha</option>
@@ -357,7 +357,7 @@
 
                             <div class="row">
                                 <div class="listing-block col-lg-3 col-md-6"
-                                    *ngFor="let propiedad of propiedadesFiltradas | paginate: { itemsPerPage: 4, currentPage: page }">
+                                    *ngFor="let propiedad of propiedadesFiltradas | paginate: { itemsPerPage: 8, currentPage: page }">
                                     <div class="inner-box">
                                         <div class="image-box">
                                             <figure class="image"><img [src]="propiedad.imgUrl" alt=""
