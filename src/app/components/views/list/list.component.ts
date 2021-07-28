@@ -201,16 +201,21 @@ export class ListComponent implements OnInit {
 
 
   }
-
+  redirectToPage(id: number){
+    this._router.navigate(['/view/office/' + id]);
+  }
   setMarkers(): void {
     this.markers = this.propiedadesFiltradas.map(prop => {
+      console.log(prop)
       if (prop.lat && prop.lng) {
         return {
           position: {
             lat: prop.lat,
             lng: prop.lng
           }
-          , label: ''
+          , label: '',
+          nameProp: prop.nombre,
+          idProp: prop.id
         };
 
       }
