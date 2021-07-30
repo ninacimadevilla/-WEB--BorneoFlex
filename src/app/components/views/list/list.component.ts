@@ -64,7 +64,7 @@ export class ListComponent implements OnInit {
     private _propiedadService: PropiedadService, private modal: NgbModal, private zone: NgZone) {
     this.lat = 40.4167;
     this.lng = -3.70325;
-    this.zoom = 15;
+    this.zoom = 13;
     this.markers;
     this.mapTypeId = 'roadmap';
   }
