@@ -4,12 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxFileDropModule } from 'ngx-file-drop';
+import { NgcCookieConsentModule, NgcCookieConsentConfig } from 'ngx-cookieconsent';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 // Componentes
 import { InicioComponent } from './components/inicio/inicio.component';
@@ -35,6 +39,22 @@ import { AgmCoreModule } from '@agm/core';
 import { ContactOwnedComponent } from './components/admin/dashboard/contact-owned/contact-owned.component';
 import { LoginComponent } from './components/admin/login/login.component';
 import { FaqsComponent } from './components/faqs/faqs.component';
+
+const cookieConfig: NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'localhost' // or 'your.domain.com' 
+  },
+  palette: {
+    popup: {
+      background: '#000'
+    },
+    button: {
+      background: '#f1d600'
+    }
+  },
+  theme: 'edgeless',
+  type: 'opt-out'
+};
 
 
 @NgModule({
@@ -72,14 +92,27 @@ import { FaqsComponent } from './components/faqs/faqs.component';
     BrowserAnimationsModule,
     NgbModalModule,
     JwPaginationModule,
+    NgcCookieConsentModule.forRoot(cookieConfig),
     NgxPaginationModule,
     NgxFileDropModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBr2ShaZkF8H8sUSqHXIvjOq344QSSUiT0',
       libraries: ["places"]
+    }),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
     })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
