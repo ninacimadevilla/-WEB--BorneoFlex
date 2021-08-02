@@ -13,6 +13,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import { NgcCookieConsentModule, NgcCookieConsentConfig } from 'ngx-cookieconsent';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { environment } from 'src/environments/environment';
 
 
 // Componentes
@@ -39,10 +40,13 @@ import { AgmCoreModule } from '@agm/core';
 import { ContactOwnedComponent } from './components/admin/dashboard/contact-owned/contact-owned.component';
 import { LoginComponent } from './components/admin/login/login.component';
 import { FaqsComponent } from './components/faqs/faqs.component';
+import { AvisoLegalComponent } from './components/aviso-legal/aviso-legal.component';
+import { PoliticaPrivacidadComponent } from './components/politica-privacidad/politica-privacidad.component';
+import { PoliticaCookiesComponent } from './components/politica-cookies/politica-cookies.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
-    domain: 'localhost' // or 'your.domain.com' 
+    domain: environment.cookieDomain // or 'your.domain.com' 
   },
   palette: {
     popup: {
@@ -80,6 +84,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     ContactOwnedComponent,
     LoginComponent,
     FaqsComponent,
+    AvisoLegalComponent,
+    PoliticaPrivacidadComponent,
+    PoliticaCookiesComponent,
   ],
   imports: [
     BrowserModule,

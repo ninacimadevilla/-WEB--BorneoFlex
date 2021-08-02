@@ -15,12 +15,18 @@ import { ListarPropiedadesComponent } from './components/admin/dashboard/listar-
 import { EditarPropiedadesComponent } from './components/admin/dashboard/administrar-propiedades/editar-propiedades.component';
 import { LoginComponent } from './components/admin/login/login.component';
 import { FaqsComponent } from './components/faqs/faqs.component';
+import { AvisoLegalComponent } from './components/aviso-legal/aviso-legal.component';
+import { PoliticaPrivacidadComponent } from './components/politica-privacidad/politica-privacidad.component';
+import { PoliticaCookiesComponent } from './components/politica-cookies/politica-cookies.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'nosotros', component: NosotrosComponent },
   { path: 'faqs', component: FaqsComponent},
+  { path: 'avisoLegal', component: AvisoLegalComponent},
+  { path: 'politicaPrivacidad', component: PoliticaPrivacidadComponent},
+  { path: 'politicaCookies', component: PoliticaCookiesComponent},
   { path: 'submit', component: SubmitComponent },
   { path: 'view/office/:id', component: SingleComponent },
   { path: 'view/list', component: ListComponent },

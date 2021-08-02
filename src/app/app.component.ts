@@ -9,10 +9,10 @@ import {TranslateService} from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent{
   title = 'borneoflex';
 
-  private popupOpenSubscription: Subscription;
+  /*private popupOpenSubscription: Subscription;
   private popupCloseSubscription: Subscription;
   private initializeSubscription: Subscription;
   private statusChangeSubscription: Subscription;
@@ -57,5 +57,5 @@ export class AppComponent implements OnInit, OnDestroy{
     this.statusChangeSubscription.unsubscribe();
     this.revokeChoiceSubscription.unsubscribe();
     this.noCookieLawSubscription.unsubscribe();
-  }
+  }*/
 }
