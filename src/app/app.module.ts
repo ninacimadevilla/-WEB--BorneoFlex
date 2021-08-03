@@ -46,7 +46,7 @@ import { PoliticaCookiesComponent } from './components/politica-cookies/politica
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
-    domain: environment.cookieDomain // or 'your.domain.com' 
+    domain: 'localhost' // or 'your.domain.com' 
   },
   palette: {
     popup: {
@@ -89,6 +89,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     PoliticaCookiesComponent,
   ],
   imports: [
+    NgcCookieConsentModule.forRoot(cookieConfig),
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -99,7 +100,6 @@ const cookieConfig: NgcCookieConsentConfig = {
     BrowserAnimationsModule,
     NgbModalModule,
     JwPaginationModule,
-    NgcCookieConsentModule.forRoot(cookieConfig),
     NgxPaginationModule,
     NgxFileDropModule,
     AgmCoreModule.forRoot({
