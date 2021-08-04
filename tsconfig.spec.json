@@ -9,9 +9,7 @@
   },
   "files": [
     "src/test.ts",
-    "src/polyfills.ts",
-    "node_modules / cookieconsent / build / cookieconsent.min.js " ,
-    "node_modules / cookieconsent / build / cookieconsent.min.css" 
+    "src/polyfills.ts"
   ],
   "include": [
     "src/**/*.spec.ts",

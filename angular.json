@@ -32,11 +32,9 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "./node_modules/font-awesome/css/font-awesome.css",
               "src/assets/css/fontawesome-all.css",
-              "./node_modules/ngx-toastr/toastr.css",
-              "./node_modules/cookieconsent/build/cookieconsent.min.css"
+              "./node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "./node_modules/cookieconsent/build/cookieconsent.min.js"
             ]
           },
           "configurations": {

@@ -10,7 +10,6 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxFileDropModule } from 'ngx-file-drop';
-import { NgcCookieConsentModule, NgcCookieConsentConfig } from 'ngx-cookieconsent';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from 'src/environments/environment';
@@ -44,22 +43,6 @@ import { AvisoLegalComponent } from './components/aviso-legal/aviso-legal.compon
 import { PoliticaPrivacidadComponent } from './components/politica-privacidad/politica-privacidad.component';
 import { PoliticaCookiesComponent } from './components/politica-cookies/politica-cookies.component';
 
-const cookieConfig: NgcCookieConsentConfig = {
-  cookie: {
-    domain: 'localhost' // or 'your.domain.com' 
-  },
-  palette: {
-    popup: {
-      background: '#000'
-    },
-    button: {
-      background: '#f1d600'
-    }
-  },
-  theme: 'edgeless',
-  type: 'opt-out'
-};
-
 
 @NgModule({
   declarations: [
@@ -89,7 +72,6 @@ const cookieConfig: NgcCookieConsentConfig = {
     PoliticaCookiesComponent,
   ],
   imports: [
-    NgcCookieConsentModule.forRoot(cookieConfig),
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
