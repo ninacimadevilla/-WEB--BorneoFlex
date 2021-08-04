@@ -13,6 +13,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from 'src/environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 
 // Componentes
@@ -96,7 +97,7 @@ import { PoliticaCookiesComponent } from './components/politica-cookies/politica
       }
     })
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 
