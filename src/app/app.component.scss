@@ -3,13 +3,23 @@
   background-color: white;
   color: black;
   padding: 10px;
-  margin-left: -5px;
-  margin-right: -5px;
   margin-bottom: 0px;
-  bottom: 0px;
+  bottom: 0;
   width: 100%;
 }
 
 #cajacookies button {
   color: black;
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#cajacookies button:hover {
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
 }
