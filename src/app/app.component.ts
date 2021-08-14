@@ -31,13 +31,13 @@ export class AppComponent implements OnInit{
     //this.compruebaAceptaCookies();
     let localWindow: any = window;
     localWindow.CookieConsent.init({
-      modalMainTextMoreLink:  'https://borneoflex.es/legal/',
+      modalMainTextMoreLink:  'https://borneoflex.es/politicaCookies',
       barTimeout: 0,
       theme: {
-          barColor: '#2C7CBF',
+          barColor: '#004E59',
           barTextColor: '#FFF',
           barMainButtonColor: '#FFF',
-          barMainButtonTextColor: '#2C7CBF',
+          barMainButtonTextColor: '#004E59',
           modalMainButtonColor: '#4285F4',
           modalMainButtonTextColor: '#FFF',
       },
