@@ -12,8 +12,7 @@
                     <h3>
                         ¿Necesitas un espacio de trabajo flexible?
                     </h3>
-                    <p>Encuentra tu oficina ideal para trabajar, aprender o enseñar
-                        por el tiempo que necesites y completamente equipada.</p>
+                    <p>Encuentra tu oficina ideal para trabajar, aprender o enseñar por el tiempo que necesites y completamente equipada.</p>
                 </div>
 
                 <!-- Listing Search Tabs -->
@@ -62,8 +61,7 @@
 
                                         <!-- Form Group -->
                                         <div class="form-group col-lg-4 col-md-4 col-sm-12 text-right">
-                                            <button type="submit" class="theme-btn btn-style-one bg-pink"
-                                                (click)="searchAction()">Buscar</button>
+                                            <button type="submit" class="theme-btn btn-style-one bg-pink" (click)="searchAction()">Buscar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -75,110 +73,14 @@
         </div>
     </section>
 
-    <section class="features-section style-two">
-        <div class="auto-container">
-            <div class="sec-title text-center">
-                <h2>¿Donde deseas buscar?</h2>
-                <span class="divider"></span>
-                <div class="text">Explore algunos de los mejores consejos de la ciudad de nuestros socios y amigos.
-                </div>
-            </div>
 
-            <div class="row">
-                <!-- Feature Block -->
-                <div class="feature-block col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <figure class="image"><img src="assets/images/inicio/donostia.png" alt=""></figure>
-                        <div class="overlay-box">
-                            <div class="content">
-                                <h5>Salamanca</h5>
-                                <span class="locations">{{contadorSalamanca}} Localizaciones</span>
-                                <a (click)="buscar()" class="overlay-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature Block -->
-                <div class="feature-block col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <figure class="image"><img src="assets/images/inicio/valencia.png" alt=""></figure>
-                        <div class="overlay-box">
-                            <div class="content">
-                                <h5>Atocha</h5>
-                                <span class="locations">{{contadorAtocha}} Localizaciones</span>
-                                <a (click)="buscar()" class="overlay-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature Block -->
-                <div class="feature-block col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <figure class="image"><img src="assets/images/inicio/malaga.png" alt=""></figure>
-                        <div class="overlay-box">
-                            <div class="content">
-                                <h5>Extrarradio</h5>
-                                <span class="locations">{{contadorExtrarradio}} Localizaciones</span>
-                                <a (click)="buscarBarcelona()" class="overlay-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="feature-block col-lg-3 col-md-6 col-sm-12">
-                    <div class="inner-box">
-                        <figure class="image"><img src="assets/images/inicio/donostia.png" alt=""></figure>
-                        <div class="overlay-box">
-                            <div class="content">
-                                <h5>22@</h5>
-                                <span class="locations">{{contador22}} Localizaciones</span>
-                                <a (click)="buscarBarcelona()" class="overlay-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature Block -->
-                <div class="feature-block col-lg-6 col-md-12 col-sm-12">
-                    <div class="inner-box">
-                        <figure class="image"><img src="assets/images/inicio/madrid.png" alt=""></figure>
-                        <div class="overlay-box">
-                            <div class="content">
-                                <h5>Madrid</h5>
-                                <span class="locations">{{contadorMadrid}} Localizaciones</span>
-                                <a (click)="buscar()" class="overlay-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Feature Block -->
-                <div class="feature-block col-lg-6 col-md-12 col-sm-12">
-                    <div class="inner-box">
-                        <figure class="image"><img src="assets/images/inicio/barcelona.png" alt=""></figure>
-                        <div class="overlay-box">
-                            <div class="content">
-                                <h5>Barcelona</h5>
-                                <span class="locations">{{contadorBarcelona}} Localizaciones</span>
-                                <a (click)="buscarBarcelona()" class="overlay-link"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="listing-section style-two" #redirect>
+    <section class="features-section style-two" #redirect>
         <div class="container-fluid">
             <div class="sec-title text-center">
                 <h2>Espacios destacados</h2>
                 <span class="divider"></span>
-                <div class="text">Explore algunos de los mejores consejos de la ciudad de nuestros socios y amigos.
-                </div>
+                <!-- <div class="text">Explore algunos de los mejores consejos de la ciudad de nuestros socios y amigos.
+                </div> -->
             </div>
 
             <div class="carousel-outer">
@@ -186,7 +88,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <!--<div class="col-12 col-md-4" *ngFor="let propiedad of propiedades | paginate: { itemsPerPage: 3, currentPage: page }">-->
-                            <div class="col-12 col-md-6 col-lg-4" *ngFor="let propiedad of propiedadesFiltradas">    
+                            <div class="col-12 col-md-6 col-lg-4" *ngFor="let propiedad of propiedadesFiltradas">
                                 <div class="listing-block">
                                     <div class="inner-box">
                                         <div class="image-box">
@@ -224,8 +126,7 @@
                                         </div>
                                         <div class="bottom-box">
                                             <div class="places">
-                                                <div class="place"><span class="icon flaticon-user"></span>
-                                                    +{{propiedad.personas}} personas
+                                                <div class="place"><span class="icon flaticon-user"></span> +{{propiedad.personas}} personas
                                                 </div>
                                             </div>
                                         </div>
@@ -237,6 +138,105 @@
 
                 </div>
                 <!--<pagination-controls (pageChange)="page = $event"></pagination-controls>-->
+            </div>
+        </div>
+    </section>
+
+
+    <section class="listing-section style-two">
+        <div class="auto-container">
+            <div class="sec-title text-center">
+                <h2>¿Dónde deseas buscar?</h2>
+                <span class="divider"></span>
+                <!-- <div class="text">Explore algunos de los mejores consejos de la ciudad de nuestros socios y amigos.
+                </div> -->
+            </div>
+
+            <div class="row">
+
+                <!-- Feature Block -->
+                <div class="feature-block col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-box">
+                        <figure class="image"><img src="assets/images/inicio/madrid.png" alt=""></figure>
+                        <div class="overlay-box">
+                            <div class="content">
+                                <h5>Madrid</h5>
+                                <span class="locations">{{contadorMadrid}} Localizaciones</span>
+                                <a (click)="buscar()" class="overlay-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Block -->
+                <div class="feature-block col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner-box">
+                        <figure class="image"><img src="assets/images/inicio/barcelona.png" alt=""></figure>
+                        <div class="overlay-box">
+                            <div class="content">
+                                <h5>Barcelona</h5>
+                                <span class="locations">{{contadorBarcelona}} Localizaciones</span>
+                                <a (click)="buscarBarcelona()" class="overlay-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Block -->
+                <div class="feature-block col-lg-3 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                        <figure class="image"><img src="assets/images/inicio/donostia.png" alt=""></figure>
+                        <div class="overlay-box">
+                            <div class="content">
+                                <h5>Bilbao</h5>
+                                <span class="locations">{{contadorBilbao}} Localizaciones</span>
+                                <a (click)="buscar()" class="overlay-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Block -->
+                <div class="feature-block col-lg-3 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                        <figure class="image"><img src="assets/images/inicio/valencia.png" alt=""></figure>
+                        <div class="overlay-box">
+                            <div class="content">
+                                <h5>Valencia</h5>
+                                <span class="locations">{{contadorValencia}} Localizaciones</span>
+                                <a (click)="buscar()" class="overlay-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Block -->
+                <div class="feature-block col-lg-3 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                        <figure class="image"><img src="assets/images/inicio/malaga.png" alt=""></figure>
+                        <div class="overlay-box">
+                            <div class="content">
+                                <h5>Malaga</h5>
+                                <span class="locations">{{contadorMalaga}} Localizaciones</span>
+                                <a (click)="buscarBarcelona()" class="overlay-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="feature-block col-lg-3 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                        <figure class="image imagenSevilla"><img src="assets/images/inicio/sevilla.jpg" alt=""></figure>
+                        <div class="overlay-box">
+                            <div class="content">
+                                <h5>Sevilla</h5>
+                                <span class="locations">{{contadorSevilla}} Localizaciones</span>
+                                <a (click)="buscarBarcelona()" class="overlay-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

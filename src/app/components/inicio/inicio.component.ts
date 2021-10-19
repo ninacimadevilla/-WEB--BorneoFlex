@@ -30,6 +30,11 @@ export class InicioComponent implements OnInit {
   public contador22 = 0;
   public contadorMadrid = 0;
   public contadorBarcelona = 0;
+  public contadorValencia = 0;
+  public contadorBilbao = 0;
+  public contadorMalaga = 0;
+  public contadorSevilla = 0;
+
   public images: Array<Imagenes>;
   public imagenesFiltradas: Array<Imagenes> = [];
   public id;
@@ -110,6 +115,14 @@ export class InicioComponent implements OnInit {
             } if (element.barrio == "22@") {
               this.contador22++;
             }
+          } else if (element.ciudad == "Valencia") {
+            this.contadorValencia++;
+          } else if (element.ciudad == "Bilbao") {
+            this.contadorBilbao++;
+          } else if (element.ciudad == "Malaga") {
+            this.contadorMalaga++;
+          } else if (element.ciudad == "Sevilla") {
+            this.contadorSevilla++;
           }
 
           if (this.contador < 3) {
