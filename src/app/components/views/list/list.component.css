@@ -71,7 +71,8 @@ agm-map {
 }
 
 .listing-features1 li:hover .icon {
-  background: #021f4a;
+ /* background: #021f4a;*/
+    background: rgb(0, 78, 89);
   color: #ffffff;
 }
 
